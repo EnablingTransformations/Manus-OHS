@@ -26,15 +26,14 @@ import {
   ArrowRight,
   Instagram,
   Facebook,
-  Linkedin,
   Youtube,
-  Twitter,
   Mail,
   Send,
   Phone,
   MessageSquare,
 } from "lucide-react";
 
+const LOGO_IMG = "https://d2xsxph8kpxj0f.cloudfront.net/310519663486084134/3RPVjQxNXJ7EgGkKFJaBsJ/logo_8918fb42.png";
 const HERO_IMG = "https://d2xsxph8kpxj0f.cloudfront.net/310519663486084134/3RPVjQxNXJ7EgGkKFJaBsJ/hero-indoor-event-KrrdMyWTYYS3XvJpxKsfmU.webp";
 const ABOUT_IMG = "https://d2xsxph8kpxj0f.cloudfront.net/310519663486084134/3RPVjQxNXJ7EgGkKFJaBsJ/about-section-FjfkLYDPAMLJEw2wv8icUB.webp";
 const VENDOR_IMG = "https://d2xsxph8kpxj0f.cloudfront.net/310519663486084134/3RPVjQxNXJ7EgGkKFJaBsJ/vendor-lounge-Lnf3VgZrMeCcZntU8h3i6k.webp";
@@ -76,9 +75,7 @@ function Navbar() {
     >
       <div className="container flex items-center justify-between py-4">
         <a href="#" className="flex items-center gap-2">
-          <div className="w-8 h-8 rounded-full bg-teal flex items-center justify-center">
-            <Sparkles className="w-4 h-4 text-charcoal" />
-          </div>
+          <img src={LOGO_IMG} alt="Optimal Health Summit" className="h-8 w-auto" />
           <span className="font-[family-name:var(--font-display)] text-lg font-bold tracking-tight text-white">
             Optimal Health <span className="text-teal">Summit</span>
           </span>
@@ -644,19 +641,15 @@ function Venue() {
             </div>
 
             <div className="rounded-xl overflow-hidden border border-white/5 bg-charcoal">
-              <div className="aspect-[16/7] bg-charcoal-lighter flex items-center justify-center">
-                <a
-                  href="https://maps.google.com/?q=UC+San+Diego+Park+%26+Market+1100+Market+St+San+Diego+CA+92101"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex flex-col items-center gap-3 text-white/40 hover:text-teal transition-colors"
-                >
-                  <MapPin className="w-10 h-10" />
-                  <span className="text-sm font-medium">View on Google Maps</span>
-                  <ExternalLink className="w-4 h-4" />
-                </a>
-              </div>
-              <div className="p-6 flex flex-wrap items-center justify-between gap-4">
+              <iframe
+                width="100%"
+                height="450"
+                style={{ border: 0 }}
+                loading="lazy"
+                allowFullScreen
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3355.1234567890!2d-117.1611!3d32.7157!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80d954e1d5e5e5e5%3A0x1234567890abcdef!2sUC%20San%20Diego%20Park%20%26%20Market!5e0!3m2!1sen!2sus!4v1234567890"
+              />
+              <div className="p-6 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
                 <div>
                   <h3 className="text-white font-bold text-lg">UC San Diego Park & Market</h3>
                   <p className="text-white/40 text-sm">1100 Market St, San Diego, CA 92101</p>
@@ -756,9 +749,7 @@ function ContactSection() {
                   {[
                     { icon: Instagram, href: "https://instagram.com/optimalhealthsummit", label: "Instagram" },
                     { icon: Facebook, href: "https://facebook.com/optimalhealthsummit", label: "Facebook" },
-                    { icon: Linkedin, href: "https://linkedin.com/company/optimalhealthsummit", label: "LinkedIn" },
                     { icon: Youtube, href: "https://youtube.com/@optimalhealthsummit", label: "YouTube" },
-                    { icon: Twitter, href: "https://x.com/optimalhealthsummit", label: "X (Twitter)" },
                   ].map((social, i) => (
                     <a
                       key={i}
@@ -851,9 +842,7 @@ function Footer() {
             {[
               { icon: Instagram, href: "https://instagram.com/optimalhealthsummit" },
               { icon: Facebook, href: "https://facebook.com/optimalhealthsummit" },
-              { icon: Linkedin, href: "https://linkedin.com/company/optimalhealthsummit" },
               { icon: Youtube, href: "https://youtube.com/@optimalhealthsummit" },
-              { icon: Twitter, href: "https://x.com/optimalhealthsummit" },
             ].map((social, i) => (
               <a
                 key={i}

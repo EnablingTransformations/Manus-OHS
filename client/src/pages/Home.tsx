@@ -26,7 +26,7 @@ import {
   ArrowRight,
 } from "lucide-react";
 
-const HERO_IMG = "https://d2xsxph8kpxj0f.cloudfront.net/310519663486084134/3RPVjQxNXJ7EgGkKFJaBsJ/hero-bg-88mhKRb9L6QxrjE7JBRuNN.webp";
+const HERO_IMG = "https://d2xsxph8kpxj0f.cloudfront.net/310519663486084134/3RPVjQxNXJ7EgGkKFJaBsJ/hero-indoor-event-KrrdMyWTYYS3XvJpxKsfmU.webp";
 const ABOUT_IMG = "https://d2xsxph8kpxj0f.cloudfront.net/310519663486084134/3RPVjQxNXJ7EgGkKFJaBsJ/about-section-FjfkLYDPAMLJEw2wv8icUB.webp";
 const VENDOR_IMG = "https://d2xsxph8kpxj0f.cloudfront.net/310519663486084134/3RPVjQxNXJ7EgGkKFJaBsJ/vendor-lounge-Lnf3VgZrMeCcZntU8h3i6k.webp";
 const NETWORK_IMG = "https://d2xsxph8kpxj0f.cloudfront.net/310519663486084134/3RPVjQxNXJ7EgGkKFJaBsJ/networking-U9Kbfvkn9i5po8BrKMyg9L.webp";
@@ -71,7 +71,7 @@ function Navbar() {
             <Sparkles className="w-4 h-4 text-charcoal" />
           </div>
           <span className="font-[family-name:var(--font-display)] text-lg font-bold tracking-tight text-white">
-            OHS <span className="text-teal">2026</span>
+            Optimal Health <span className="text-teal">Summit</span>
           </span>
         </a>
         <div className="hidden md:flex items-center gap-8 text-sm font-medium text-white/70">
@@ -101,8 +101,8 @@ function Hero() {
       {/* Background image */}
       <div className="absolute inset-0">
         <img src={HERO_IMG} alt="Optimal Health Summit" className="w-full h-full object-cover" />
-        <div className="absolute inset-0 bg-gradient-to-t from-charcoal via-charcoal/70 to-charcoal/30" />
-        <div className="absolute inset-0 bg-gradient-to-r from-charcoal/60 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-t from-charcoal via-charcoal/60 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-r from-charcoal/50 to-transparent" />
       </div>
 
       <div className="container relative z-10">
@@ -112,15 +112,6 @@ function Hero() {
           transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
           className="max-w-3xl"
         >
-          <div className="flex items-center gap-3 mb-6">
-            <span className="inline-block px-3 py-1 bg-teal/15 border border-teal/30 rounded-full text-teal text-xs font-semibold uppercase tracking-widest">
-              2nd Annual Event
-            </span>
-            <span className="inline-block px-3 py-1 bg-gold/15 border border-gold/30 rounded-full text-gold text-xs font-semibold uppercase tracking-widest">
-              San Diego, CA
-            </span>
-          </div>
-
           <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold text-white leading-[0.95] tracking-tight mb-6">
             Optimal<br />
             Health<br />
@@ -690,7 +681,7 @@ function FinalCTA() {
   return (
     <section className="py-20 md:py-28 relative overflow-hidden">
       {/* Subtle gradient background */}
-      <div className="absolute inset-0 bg-gradient-to-br from-teal/5 via-transparent to-gold/5" />
+      <div className="absolute inset-0 bg-gradient-to-br from-teal/8 via-transparent to-gold/5" />
 
       <div className="container relative z-10">
         <AnimatedSection>

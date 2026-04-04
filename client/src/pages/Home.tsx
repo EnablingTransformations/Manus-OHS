@@ -24,6 +24,15 @@ import {
   Star,
   Gift,
   ArrowRight,
+  Instagram,
+  Facebook,
+  Linkedin,
+  Youtube,
+  Twitter,
+  Mail,
+  Send,
+  Phone,
+  MessageSquare,
 } from "lucide-react";
 
 const HERO_IMG = "https://d2xsxph8kpxj0f.cloudfront.net/310519663486084134/3RPVjQxNXJ7EgGkKFJaBsJ/hero-indoor-event-KrrdMyWTYYS3XvJpxKsfmU.webp";
@@ -115,7 +124,7 @@ function Hero() {
           <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold text-white leading-[0.95] tracking-tight mb-6">
             Optimal<br />
             Health<br />
-            <span className="text-teal">Summit</span>
+            <span className="text-teal">Summit 2026</span>
           </h1>
 
           <p className="text-lg md:text-xl text-white/70 max-w-xl mb-8 leading-relaxed">
@@ -139,23 +148,11 @@ function Hero() {
             </span>
           </div>
 
-          <div className="flex flex-wrap gap-4">
-            <a
-              href={LUMA_LINK}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 bg-gold hover:bg-gold-dark text-charcoal font-bold text-base px-8 py-4 rounded-lg transition-all hover:scale-105 active:scale-95 shadow-lg shadow-gold/20"
-            >
-              Secure Your Seat
-              <ArrowRight className="w-5 h-5" />
-            </a>
-            <a
-              href="#about"
-              className="inline-flex items-center gap-2 border border-white/20 hover:border-teal/50 text-white/80 hover:text-teal font-medium text-base px-8 py-4 rounded-lg transition-all"
-            >
-              Learn More
-              <ChevronRight className="w-5 h-5" />
-            </a>
+          <div className="border-l-2 border-teal/50 pl-5">
+            <p className="text-xl md:text-2xl text-white/90 font-[family-name:var(--font-display)] italic leading-snug">
+              "One day can change the trajectory of your health forever."
+            </p>
+            <p className="text-sm text-teal mt-2 font-medium">150 seats only — Will you be one of them?</p>
           </div>
         </motion.div>
       </div>
@@ -713,12 +710,134 @@ function FinalCTA() {
   );
 }
 
+/* ─── Contact Form Section ─── */
+function ContactSection() {
+  const [formData, setFormData] = useState({ name: "", email: "", message: "" });
+  const [submitted, setSubmitted] = useState(false);
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    setSubmitted(true);
+    setFormData({ name: "", email: "", message: "" });
+    setTimeout(() => setSubmitted(false), 4000);
+  };
+
+  return (
+    <section id="contact" className="py-20 md:py-28 bg-charcoal-light">
+      <div className="container">
+        <div className="grid lg:grid-cols-2 gap-12 lg:gap-20">
+          <AnimatedSection>
+            <div>
+              <span className="text-teal text-sm font-semibold uppercase tracking-widest mb-4 block">
+                Get In Touch
+              </span>
+              <h2 className="text-4xl md:text-5xl font-bold text-white leading-tight mb-6">
+                Have a <span className="text-teal">Question?</span>
+              </h2>
+              <p className="text-white/60 text-lg leading-relaxed mb-8">
+                Whether you're interested in attending, speaking, sponsoring, or becoming a vendor — we'd love to hear from you.
+              </p>
+
+              <div className="space-y-5">
+                <a href="mailto:info@optimalhealthsummit.com" className="flex items-center gap-4 group">
+                  <div className="w-10 h-10 rounded-lg bg-teal/10 flex items-center justify-center group-hover:bg-teal/20 transition-colors">
+                    <Mail className="w-5 h-5 text-teal" />
+                  </div>
+                  <div>
+                    <p className="text-sm text-white/40">Email us</p>
+                    <p className="text-white/80 text-sm group-hover:text-teal transition-colors">info@optimalhealthsummit.com</p>
+                  </div>
+                </a>
+              </div>
+
+              <div className="mt-10">
+                <p className="text-sm text-white/40 mb-4 uppercase tracking-widest">Follow Us</p>
+                <div className="flex items-center gap-3">
+                  {[
+                    { icon: Instagram, href: "https://instagram.com/optimalhealthsummit", label: "Instagram" },
+                    { icon: Facebook, href: "https://facebook.com/optimalhealthsummit", label: "Facebook" },
+                    { icon: Linkedin, href: "https://linkedin.com/company/optimalhealthsummit", label: "LinkedIn" },
+                    { icon: Youtube, href: "https://youtube.com/@optimalhealthsummit", label: "YouTube" },
+                    { icon: Twitter, href: "https://x.com/optimalhealthsummit", label: "X (Twitter)" },
+                  ].map((social, i) => (
+                    <a
+                      key={i}
+                      href={social.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label={social.label}
+                      className="w-10 h-10 rounded-lg bg-white/5 border border-white/5 flex items-center justify-center text-white/50 hover:text-teal hover:border-teal/30 hover:bg-teal/10 transition-all"
+                    >
+                      <social.icon className="w-5 h-5" />
+                    </a>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </AnimatedSection>
+
+          <AnimatedSection delay={0.2}>
+            <form onSubmit={handleSubmit} className="bg-charcoal rounded-xl border border-white/5 p-6 md:p-8 space-y-5">
+              <div>
+                <label htmlFor="name" className="block text-sm font-medium text-white/60 mb-2">Your Name</label>
+                <input
+                  id="name"
+                  type="text"
+                  required
+                  value={formData.name}
+                  onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                  className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white text-sm placeholder:text-white/30 focus:outline-none focus:border-teal/50 focus:ring-1 focus:ring-teal/30 transition-all"
+                  placeholder="John Doe"
+                />
+              </div>
+              <div>
+                <label htmlFor="email" className="block text-sm font-medium text-white/60 mb-2">Email Address</label>
+                <input
+                  id="email"
+                  type="email"
+                  required
+                  value={formData.email}
+                  onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                  className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white text-sm placeholder:text-white/30 focus:outline-none focus:border-teal/50 focus:ring-1 focus:ring-teal/30 transition-all"
+                  placeholder="john@example.com"
+                />
+              </div>
+              <div>
+                <label htmlFor="message" className="block text-sm font-medium text-white/60 mb-2">Message</label>
+                <textarea
+                  id="message"
+                  required
+                  rows={4}
+                  value={formData.message}
+                  onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                  className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white text-sm placeholder:text-white/30 focus:outline-none focus:border-teal/50 focus:ring-1 focus:ring-teal/30 transition-all resize-none"
+                  placeholder="Tell us what you're interested in..."
+                />
+              </div>
+              <button
+                type="submit"
+                className="w-full inline-flex items-center justify-center gap-2 bg-teal hover:bg-teal-dark text-charcoal font-bold text-sm py-3.5 rounded-lg transition-all hover:scale-[1.02] active:scale-[0.98]"
+              >
+                {submitted ? "Message Sent!" : "Send Message"}
+                <Send className="w-4 h-4" />
+              </button>
+              {submitted && (
+                <p className="text-teal text-sm text-center">Thank you! We'll get back to you soon.</p>
+              )}
+            </form>
+          </AnimatedSection>
+        </div>
+      </div>
+    </section>
+  );
+}
+
 /* ─── Footer ─── */
 function Footer() {
   return (
     <footer className="border-t border-white/5 py-10">
       <div className="container">
-        <div className="flex flex-col md:flex-row items-center justify-between gap-4">
+        <div className="flex flex-col md:flex-row items-center justify-between gap-6">
           <div className="flex items-center gap-2">
             <div className="w-6 h-6 rounded-full bg-teal flex items-center justify-center">
               <Sparkles className="w-3 h-3 text-charcoal" />
@@ -727,19 +846,31 @@ function Footer() {
               Optimal Health Summit 2026
             </span>
           </div>
+
+          <div className="flex items-center gap-4">
+            {[
+              { icon: Instagram, href: "https://instagram.com/optimalhealthsummit" },
+              { icon: Facebook, href: "https://facebook.com/optimalhealthsummit" },
+              { icon: Linkedin, href: "https://linkedin.com/company/optimalhealthsummit" },
+              { icon: Youtube, href: "https://youtube.com/@optimalhealthsummit" },
+              { icon: Twitter, href: "https://x.com/optimalhealthsummit" },
+            ].map((social, i) => (
+              <a
+                key={i}
+                href={social.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-white/30 hover:text-teal transition-colors"
+              >
+                <social.icon className="w-4 h-4" />
+              </a>
+            ))}
+          </div>
+
           <div className="flex items-center gap-6 text-xs text-white/30">
             <span>Presented by Enabling Transformations</span>
             <span>Hosted by Sid King</span>
           </div>
-          <a
-            href={LUMA_LINK}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-teal text-sm hover:text-teal-dark transition-colors flex items-center gap-1"
-          >
-            View on Luma
-            <ExternalLink className="w-3 h-3" />
-          </a>
         </div>
       </div>
     </footer>
@@ -762,6 +893,7 @@ export default function Home() {
       <Impact />
       <Venue />
       <FinalCTA />
+      <ContactSection />
       <Footer />
     </div>
   );

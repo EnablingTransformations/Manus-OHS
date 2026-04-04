@@ -75,7 +75,7 @@ function Navbar() {
     >
       <div className="container flex items-center justify-between py-4">
         <a href="#" className="flex items-center gap-2">
-          <img src={LOGO_IMG} alt="Optimal Health Summit" className="h-8 w-auto" />
+          <img src={LOGO_IMG} alt="Optimal Health Summit" className="h-8 w-auto rounded-lg" />
           <span className="font-[family-name:var(--font-display)] text-lg font-bold tracking-tight text-white">
             Optimal Health <span className="text-teal">Summit</span>
           </span>
@@ -633,7 +633,7 @@ function Venue() {
                 The Venue
               </span>
               <h2 className="text-4xl md:text-5xl font-bold text-white leading-tight mb-4">
-                UC San Diego <span className="text-teal">Park & Market</span>
+                UC San Diego Park & Market, <span className="text-teal">San Diego, CA</span>
               </h2>
               <p className="text-white/50 text-lg">
                 1100 Market St, San Diego, CA 92101, USA
@@ -705,14 +705,24 @@ function FinalCTA() {
 
 /* ─── Contact Form Section ─── */
 function ContactSection() {
-  const [formData, setFormData] = useState({ name: "", email: "", message: "" });
+  const [formData, setFormData] = useState({ name: "", email: "", message: "", "_gotcha": "" });
   const [submitted, setSubmitted] = useState(false);
+  const [showRefundPolicy, setShowRefundPolicy] = useState(false);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    setSubmitted(true);
-    setFormData({ name: "", email: "", message: "" });
-    setTimeout(() => setSubmitted(false), 4000);
+    // Submit to Formspree
+    fetch('https://formspree.io/f/mzdkpgpw', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(formData),
+    }).then(() => {
+      setSubmitted(true);
+      setFormData({ name: "", email: "", message: "", "_gotcha": "" });
+      setTimeout(() => setSubmitted(false), 4000);
+    }).catch(() => {
+      alert('Error sending message. Please try again.');
+    });
   };
 
   return (
@@ -731,44 +741,20 @@ function ContactSection() {
                 Whether you're interested in attending, speaking, sponsoring, or becoming a vendor — we'd love to hear from you.
               </p>
 
-              <div className="space-y-5">
-                <a href="mailto:info@optimalhealthsummit.com" className="flex items-center gap-4 group">
-                  <div className="w-10 h-10 rounded-lg bg-teal/10 flex items-center justify-center group-hover:bg-teal/20 transition-colors">
-                    <Mail className="w-5 h-5 text-teal" />
-                  </div>
-                  <div>
-                    <p className="text-sm text-white/40">Email us</p>
-                    <p className="text-white/80 text-sm group-hover:text-teal transition-colors">info@optimalhealthsummit.com</p>
-                  </div>
-                </a>
-              </div>
 
-              <div className="mt-10">
-                <p className="text-sm text-white/40 mb-4 uppercase tracking-widest">Follow Us</p>
-                <div className="flex items-center gap-3">
-                  {[
-                    { icon: Instagram, href: "https://instagram.com/optimalhealthsummit", label: "Instagram" },
-                    { icon: Facebook, href: "https://facebook.com/optimalhealthsummit", label: "Facebook" },
-                    { icon: Youtube, href: "https://youtube.com/@optimalhealthsummit", label: "YouTube" },
-                  ].map((social, i) => (
-                    <a
-                      key={i}
-                      href={social.href}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      aria-label={social.label}
-                      className="w-10 h-10 rounded-lg bg-white/5 border border-white/5 flex items-center justify-center text-white/50 hover:text-teal hover:border-teal/30 hover:bg-teal/10 transition-all"
-                    >
-                      <social.icon className="w-5 h-5" />
-                    </a>
-                  ))}
-                </div>
-              </div>
             </div>
           </AnimatedSection>
 
           <AnimatedSection delay={0.2}>
             <form onSubmit={handleSubmit} className="bg-charcoal rounded-xl border border-white/5 p-6 md:p-8 space-y-5">
+              {/* Honeypot field for bot protection */}
+              <input
+                type="text"
+                name="_gotcha"
+                value={formData._gotcha}
+                onChange={(e) => setFormData({ ...formData, _gotcha: e.target.value })}
+                style={{ display: 'none' }}
+              />
               <div>
                 <label htmlFor="name" className="block text-sm font-medium text-white/60 mb-2">Your Name</label>
                 <input
@@ -825,14 +811,13 @@ function ContactSection() {
 
 /* ─── Footer ─── */
 function Footer() {
+  const [showRefundPolicy, setShowRefundPolicy] = useState(false);
   return (
     <footer className="border-t border-white/5 py-10">
       <div className="container">
         <div className="flex flex-col md:flex-row items-center justify-between gap-6">
           <div className="flex items-center gap-2">
-            <div className="w-6 h-6 rounded-full bg-teal flex items-center justify-center">
-              <Sparkles className="w-3 h-3 text-charcoal" />
-            </div>
+            <img src={LOGO_IMG} alt="Optimal Health Summit" className="h-6 w-auto rounded-lg" />
             <span className="font-[family-name:var(--font-display)] text-sm font-bold text-white/60">
               Optimal Health Summit 2026
             </span>
@@ -858,10 +843,37 @@ function Footer() {
 
           <div className="flex items-center gap-6 text-xs text-white/30">
             <span>Presented by Enabling Transformations</span>
-            <span>Hosted by Sid King</span>
+            <button
+              onClick={() => setShowRefundPolicy(true)}
+              className="hover:text-teal transition-colors cursor-pointer"
+            >
+              Refund and Cancellation Policy
+            </button>
           </div>
         </div>
       </div>
+
+      {/* Refund Policy Modal */}
+      {showRefundPolicy && (
+        <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+          <div className="bg-charcoal border border-white/10 rounded-xl max-w-2xl max-h-[80vh] overflow-y-auto p-8">
+            <h3 className="text-2xl font-bold text-white mb-4">Refund and Cancellation Policy</h3>
+            <div className="text-white/70 space-y-4 text-sm">
+              <p><strong>✨ All Tickets are refundable up to 7 days before the event and include a 100% Satisfaction Guarantee!</strong></p>
+              <p>You can request a full refund up to 7 days before the event, but once lower-price tickets are gone, they will not return.</p>
+              <p>Refund requests must be submitted in writing to info@optimalhealthsummit.com with your ticket confirmation number.</p>
+              <p>Refunds will be processed within 5-7 business days after the refund request is approved.</p>
+              <p>No refunds will be issued for cancellations made within 7 days of the event date.</p>
+            </div>
+            <button
+              onClick={() => setShowRefundPolicy(false)}
+              className="mt-6 w-full bg-teal hover:bg-teal-dark text-charcoal font-bold py-2 rounded-lg transition-all"
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      )}
     </footer>
   );
 }

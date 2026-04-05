@@ -116,7 +116,7 @@ function Hero() {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
-          className="max-w-3xl"
+          className="max-w-3xl pt-12 md:pt-24"
         >
           <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold text-white leading-[0.95] tracking-tight mb-6">
             Optimal<br />
@@ -817,7 +817,7 @@ function Footer() {
               <div className="flex gap-3">
                 <button
                   type="submit"
-                  className="flex-1 inline-flex items-center justify-center gap-2 bg-teal hover:bg-teal-dark text-charcoal font-bold text-sm py-3.5 rounded-lg transition-all hover:scale-[1.02] active:scale-[0.98]"
+                  className="flex-1 inline-flex items-center justify-center gap-2 bg-teal hover:bg-teal-dark text-charcoal font-bold text-sm py-3.5 px-8 rounded-lg transition-all hover:scale-[1.02] active:scale-[0.98]"
                 >
                   {submitted ? "Message Sent!" : "Send Message"}
                   <Send className="w-4 h-4" />

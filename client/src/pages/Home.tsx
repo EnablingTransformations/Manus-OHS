@@ -743,7 +743,7 @@ function Footer() {
           <div className="flex items-center gap-4">
             {[
               { icon: Instagram, href: "https://instagram.com/OptimalHealthSummit" },
-              { icon: Facebook, href: "https://facebook.com/optimalhealthsummit" },
+              { icon: Facebook, href: "https://www.facebook.com/people/The-Optimal-Health-Summit/61578602961603/" },
               { icon: Youtube, href: "https://youtube.com/@EnablingTransformations" },
             ].map((social, i) => (
               <a

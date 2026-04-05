@@ -41,7 +41,123 @@ const ABOUT_IMG = "https://d2xsxph8kpxj0f.cloudfront.net/310519663486084134/3RPV
 const VENDOR_IMG = "https://d2xsxph8kpxj0f.cloudfront.net/310519663486084134/3RPVjQxNXJ7EgGkKFJaBsJ/vendor-lounge-Lnf3VgZrMeCcZntU8h3i6k.webp";
 const NETWORK_IMG = "https://d2xsxph8kpxj0f.cloudfront.net/310519663486084134/3RPVjQxNXJ7EgGkKFJaBsJ/networking-U9Kbfvkn9i5po8BrKMyg9L.webp";
 
-const LUMA_LINK = "https://luma.com/bbp4hd1g";
+/* ─── Ticket Modal ─── */
+function TicketModal({ open, onClose }: { open: boolean; onClose: () => void }) {
+  const tiers = [
+    {
+      name: "Virtual Ticket",
+      id: "virtual" as const,
+      price: "$49",
+      badge: "7 Left",
+      highlight: false,
+      note: "Available until Jun 26",
+      features: ["Live stream and recordings", "Ask questions during sessions via chat"],
+    },
+    {
+      name: "General Admission",
+      id: "general" as const,
+      price: "$97",
+      badge: "5 Left",
+      highlight: true,
+      note: "Early access pricing until Apr 24",
+      features: ["Nutritious breakfast, lunch & snacks", "All keynote presentations & panels", "Expo hall access", "Networking with 120+ attendees", "After-event networking social"],
+    },
+    {
+      name: "VIP Admission",
+      id: "vip" as const,
+      price: "$247",
+      badge: "2 Left",
+      highlight: false,
+      note: "Early access pricing until Apr 24",
+      features: ["Everything in General Admission", "Reserved front-row seating", "Private lunch with speakers", "PCM blood test (valued at $200)", "Microbiome assessment kit (save $90)", "Complimentary premium supplement"],
+    },
+  ];
+
+  const [loadingId, setLoadingId] = useState<string | null>(null);
+  const createCheckout = trpc.stripe.createCheckoutSession.useMutation();
+
+  const handleBuy = async (ticketId: "virtual" | "general" | "vip") => {
+    setLoadingId(ticketId);
+    try {
+      const result = await createCheckout.mutateAsync({ ticketId, origin: window.location.origin });
+      if (result.url) {
+        window.open(result.url, "_blank");
+        onClose();
+      }
+    } catch (err) {
+      console.error("Checkout error:", err);
+      alert("Unable to start checkout. Please try again.");
+    } finally {
+      setLoadingId(null);
+    }
+  };
+
+  if (!open) return null;
+
+  return (
+    <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-[100] flex items-center justify-center p-4" onClick={onClose}>
+      <div
+        className="bg-charcoal border border-white/10 rounded-2xl w-full max-w-4xl max-h-[90vh] overflow-y-auto p-6 md:p-8 shadow-2xl"
+        onClick={e => e.stopPropagation()}
+      >
+        <div className="flex items-center justify-between mb-6">
+          <div>
+            <h2 className="text-2xl md:text-3xl font-bold text-white">Choose Your Experience</h2>
+            <p className="text-white/50 text-sm mt-1">Secure your seat — prices increase as the event approaches</p>
+          </div>
+          <button onClick={onClose} className="text-white/40 hover:text-white transition-colors text-2xl leading-none">&times;</button>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          {tiers.map(tier => (
+            <div
+              key={tier.id}
+              className={`relative rounded-xl p-5 border flex flex-col gap-4 ${
+                tier.highlight
+                  ? "border-teal/50 bg-teal/5 ring-1 ring-teal/30"
+                  : "border-white/10 bg-white/3"
+              }`}
+            >
+              {tier.highlight && (
+                <span className="absolute -top-3 left-1/2 -translate-x-1/2 bg-teal text-charcoal text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">Most Popular</span>
+              )}
+              <div className="flex items-start justify-between">
+                <div>
+                  <h3 className="text-white font-semibold text-base">{tier.name}</h3>
+                  <p className="text-white/40 text-xs mt-0.5">{tier.note}</p>
+                </div>
+                <span className="text-xs font-medium bg-white/10 text-white/60 px-2 py-0.5 rounded-full">{tier.badge}</span>
+              </div>
+              <div className="text-3xl font-bold text-white">{tier.price}</div>
+              <ul className="space-y-1.5 flex-1">
+                {tier.features.map(f => (
+                  <li key={f} className="flex items-start gap-2 text-white/60 text-xs">
+                    <span className="text-teal mt-0.5">✓</span> {f}
+                  </li>
+                ))}
+              </ul>
+              <button
+                onClick={() => handleBuy(tier.id)}
+                disabled={loadingId !== null}
+                className={`w-full text-center font-semibold text-sm py-3 rounded-lg transition-all hover:scale-[1.02] active:scale-[0.98] disabled:opacity-60 disabled:cursor-not-allowed ${
+                  tier.highlight
+                    ? "bg-gold hover:bg-gold-dark text-charcoal shadow-lg shadow-gold/15"
+                    : "bg-white/5 hover:bg-white/10 text-white border border-white/10"
+                }`}
+              >
+                {loadingId === tier.id ? "Redirecting..." : "Get Ticket — " + tier.price}
+              </button>
+            </div>
+          ))}
+        </div>
+
+        <p className="text-center text-white/30 text-xs mt-5">
+          Standard pricing begins April 25 — General at $127 and VIP at $297. Group discounts available with code "group".
+        </p>
+      </div>
+    </div>
+  );
+}
 
 const TICKET_ID_MAP: Record<string, "virtual" | "general" | "vip"> = {
   "Virtual Ticket": "virtual",
@@ -107,7 +223,7 @@ function AnimatedSection({ children, className = "", delay = 0 }: { children: Re
 }
 
 /* ─── Navigation ─── */
-function Navbar() {
+function Navbar({ onOpenTickets }: { onOpenTickets: () => void }) {
   const [scrolled, setScrolled] = useState(false);
   useEffect(() => {
     const handler = () => setScrolled(window.scrollY > 60);
@@ -135,14 +251,12 @@ function Navbar() {
           <a href="#tickets" className="hover:text-teal transition-colors">Tickets</a>
           <a href="#venue" className="hover:text-teal transition-colors">Venue</a>
         </div>
-        <a
-          href={LUMA_LINK}
-          target="_blank"
-          rel="noopener noreferrer"
+        <button
+          onClick={onOpenTickets}
           className="bg-gold hover:bg-gold-dark text-charcoal font-semibold text-sm px-5 py-2.5 rounded-lg transition-all hover:scale-105 active:scale-95"
         >
           Get Tickets
-        </a>
+        </button>
       </div>
     </nav>
   );
@@ -703,10 +817,10 @@ function Venue() {
   );
 }
 
-/* ─── CTA Section ─── */
+/* ─── FinalCTA Section ─── */
 function FinalCTA() {
-  return (
-    <section className="py-20 md:py-28 relative overflow-hidden">
+  const [finalCtaTicketOpen, setFinalCtaTicketOpen] = useState(false);
+  return (<section className="py-20 md:py-28 relative overflow-hidden">
       {/* Subtle gradient background */}
       <div className="absolute inset-0 bg-gradient-to-br from-teal/8 via-transparent to-gold/5" />
 
@@ -724,15 +838,14 @@ function FinalCTA() {
               Full refund available up to 7 days before the event.
             </p>
 
-            <a
-              href={LUMA_LINK}
-              target="_blank"
-              rel="noopener noreferrer"
+            <button
+              onClick={() => setFinalCtaTicketOpen(true)}
               className="inline-flex items-center gap-3 bg-gold hover:bg-gold-dark text-charcoal font-bold text-lg px-10 py-5 rounded-xl transition-all hover:scale-105 active:scale-95 shadow-xl shadow-gold/20"
             >
               Get Your Tickets Now
               <ArrowRight className="w-6 h-6" />
-            </a>
+            </button>
+            <TicketModal open={finalCtaTicketOpen} onClose={() => setFinalCtaTicketOpen(false)} />
           </div>
         </AnimatedSection>
       </div>
@@ -957,9 +1070,11 @@ function Footer() {
 
 /* ─── Main Page ─── */
 export default function Home() {
+  const [ticketModalOpen, setTicketModalOpen] = useState(false);
   return (
     <div className="min-h-screen bg-charcoal">
-      <Navbar />
+      <TicketModal open={ticketModalOpen} onClose={() => setTicketModalOpen(false)} />
+      <Navbar onOpenTickets={() => setTicketModalOpen(true)} />
       <Hero />
       <StatsBar />
       <About />

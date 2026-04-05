@@ -7,6 +7,7 @@
 import { useEffect, useRef, useState } from "react";
 import { Turnstile } from "@marsidev/react-turnstile";
 import { motion, useInView } from "framer-motion";
+import { trpc } from "@/lib/trpc";
 import {
   Calendar,
   Clock,
@@ -41,6 +42,52 @@ const VENDOR_IMG = "https://d2xsxph8kpxj0f.cloudfront.net/310519663486084134/3RP
 const NETWORK_IMG = "https://d2xsxph8kpxj0f.cloudfront.net/310519663486084134/3RPVjQxNXJ7EgGkKFJaBsJ/networking-U9Kbfvkn9i5po8BrKMyg9L.webp";
 
 const LUMA_LINK = "https://luma.com/bbp4hd1g";
+
+const TICKET_ID_MAP: Record<string, "virtual" | "general" | "vip"> = {
+  "Virtual Ticket": "virtual",
+  "General Admission": "general",
+  "VIP Admission": "vip",
+};
+
+/* ─── Ticket Buy Button with Stripe Checkout ─── */
+function TicketButton({ tier }: { tier: { name: string; highlight: boolean } }) {
+  const [loading, setLoading] = useState(false);
+  const createCheckout = trpc.stripe.createCheckoutSession.useMutation();
+
+  const handleBuy = async () => {
+    const ticketId = TICKET_ID_MAP[tier.name];
+    if (!ticketId) return;
+    setLoading(true);
+    try {
+      const result = await createCheckout.mutateAsync({
+        ticketId,
+        origin: window.location.origin,
+      });
+      if (result.url) {
+        window.open(result.url, "_blank");
+      }
+    } catch (err) {
+      console.error("Checkout error:", err);
+      alert("Unable to start checkout. Please try again.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  return (
+    <button
+      onClick={handleBuy}
+      disabled={loading}
+      className={`w-full text-center font-semibold text-sm py-3.5 rounded-lg transition-all hover:scale-[1.02] active:scale-[0.98] disabled:opacity-60 disabled:cursor-not-allowed ${
+        tier.highlight
+          ? "bg-gold hover:bg-gold-dark text-charcoal shadow-lg shadow-gold/15"
+          : "bg-white/5 hover:bg-white/10 text-white border border-white/10"
+      }`}
+    >
+      {loading ? "Redirecting..." : "Get Ticket"}
+    </button>
+  );
+}
 
 /* ─── Reusable animated section wrapper ─── */
 function AnimatedSection({ children, className = "", delay = 0 }: { children: React.ReactNode; className?: string; delay?: number }) {
@@ -456,18 +503,7 @@ function Tickets() {
                   ))}
                 </ul>
 
-                <a
-                  href={LUMA_LINK}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className={`block text-center font-semibold text-sm py-3.5 rounded-lg transition-all hover:scale-[1.02] active:scale-[0.98] ${
-                    tier.highlight
-                      ? "bg-gold hover:bg-gold-dark text-charcoal shadow-lg shadow-gold/15"
-                      : "bg-white/5 hover:bg-white/10 text-white border border-white/10"
-                  }`}
-                >
-                  Get Ticket
-                </a>
+                <TicketButton tier={tier} />
               </div>
             </AnimatedSection>
           ))}

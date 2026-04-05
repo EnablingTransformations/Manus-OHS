@@ -5,6 +5,7 @@
  */
 
 import { useEffect, useRef, useState } from "react";
+import { Turnstile } from "@marsidev/react-turnstile";
 import { motion, useInView } from "framer-motion";
 import {
   Calendar,
@@ -116,7 +117,7 @@ function Hero() {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
-          className="max-w-3xl pt-12 md:pt-24"
+          className="max-w-3xl pt-16 md:pt-24"
         >
           <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold text-white leading-[0.95] tracking-tight mb-6">
             Optimal<br />
@@ -709,18 +710,31 @@ function FinalCTA() {
 function Footer() {
   const [showRefundPolicy, setShowRefundPolicy] = useState(false);
   const [showContactModal, setShowContactModal] = useState(false);
-  const [formData, setFormData] = useState({ name: "", email: "", message: "", "_gotcha": "" });
+  const [formData, setFormData] = useState({ name: "", email: "", emailConfirm: "", message: "", "_gotcha": "" });
   const [submitted, setSubmitted] = useState(false);
+  const [turnstileToken, setTurnstileToken] = useState("");
+  const [emailError, setEmailError] = useState("");
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    if (formData.email !== formData.emailConfirm) {
+      setEmailError("Email addresses do not match.");
+      return;
+    }
+    setEmailError("");
+    if (!turnstileToken) {
+      alert("Please complete the CAPTCHA verification.");
+      return;
+    }
+    const { emailConfirm, ...submitData } = formData;
     fetch('https://formspree.io/f/mzdkpgpw', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(formData),
+      body: JSON.stringify({ ...submitData, "cf-turnstile-response": turnstileToken }),
     }).then(() => {
       setSubmitted(true);
-      setFormData({ name: "", email: "", message: "", "_gotcha": "" });
+      setFormData({ name: "", email: "", emailConfirm: "", message: "", "_gotcha": "" });
+      setTurnstileToken("");
       setTimeout(() => {
         setSubmitted(false);
         setShowContactModal(false);
@@ -733,11 +747,19 @@ function Footer() {
     <footer className="border-t border-white/5 py-10">
       <div className="container">
         <div className="flex flex-col md:flex-row items-center justify-between gap-6">
-          <div className="flex items-center gap-2">
-            <img src={LOGO_IMG} alt="Optimal Health Summit" className="h-6 w-auto rounded-lg" />
-            <span className="font-[family-name:var(--font-display)] text-sm font-bold text-white/60">
-              Optimal Health Summit
-            </span>
+          <div className="flex flex-col items-center md:items-start gap-2">
+            <button
+              onClick={() => setShowRefundPolicy(true)}
+              className="md:hidden text-xs text-white/30 hover:text-teal transition-colors cursor-pointer mb-1"
+            >
+              Refund and Cancellation Policy
+            </button>
+            <div className="flex items-center gap-2">
+              <img src={LOGO_IMG} alt="Optimal Health Summit" className="h-6 w-auto rounded-lg" />
+              <span className="font-[family-name:var(--font-display)] text-sm font-bold text-white/60">
+                Optimal Health Summit
+              </span>
+            </div>
           </div>
 
           <div className="flex items-center gap-4">
@@ -803,6 +825,21 @@ function Footer() {
                 />
               </div>
               <div>
+                <label htmlFor="emailConfirm" className="block text-sm font-medium text-white/60 mb-2">Verify Email Address</label>
+                <input
+                  id="emailConfirm"
+                  type="email"
+                  required
+                  value={formData.emailConfirm}
+                  onChange={(e) => { setFormData({ ...formData, emailConfirm: e.target.value }); setEmailError(""); }}
+                  className={`w-full bg-white/5 border rounded-lg px-4 py-3 text-white text-sm placeholder:text-white/30 focus:outline-none focus:ring-1 transition-all ${
+                    emailError ? "border-red-500/60 focus:border-red-500/60 focus:ring-red-500/30" : "border-white/10 focus:border-teal/50 focus:ring-teal/30"
+                  }`}
+                  placeholder="Confirm your email"
+                />
+                {emailError && <p className="text-red-400 text-xs mt-1">{emailError}</p>}
+              </div>
+              <div>
                 <label htmlFor="message" className="block text-sm font-medium text-white/60 mb-2">Message</label>
                 <textarea
                   id="message"
@@ -812,6 +849,14 @@ function Footer() {
                   onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                   className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white text-sm placeholder:text-white/30 focus:outline-none focus:border-teal/50 focus:ring-1 focus:ring-teal/30 transition-all resize-none"
                   placeholder="Tell us what you're interested in..."
+                />
+              </div>
+              <div className="flex justify-center">
+                <Turnstile
+                  siteKey="0x4AAAAAABkMGHqP7rHSMkpD"
+                  onSuccess={(token) => setTurnstileToken(token)}
+                  onExpire={() => setTurnstileToken("")}
+                  options={{ theme: "dark", size: "normal" }}
                 />
               </div>
               <div className="flex gap-3">

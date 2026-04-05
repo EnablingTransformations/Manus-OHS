@@ -860,7 +860,6 @@ function Footer() {
               <p>All tickets are fully refundable up to 7 days before the event. However, if you have any concerns or need assistance, please contact us by responding to the ticket purchase confirmation email. Take advantage of the lower ticket prices now before they sell out or go up — completely risk free.</p>
               <p><strong>All tickets include a 100% satisfaction guarantee:</strong></p>
               <p>Check in on time and attend at least the first 3 hours to experience enough of the event to fairly evaluate its value. And if you feel the event isn't worth your time, you must speak with Sid (the host) in person before leaving, and before the lunch break or 1pm, and you will receive a full refund.</p>
-              <p>The refund policy is specified by the presenting calendar. If you have any questions, please contact the event host.</p>
             </div>
             <button
               onClick={() => setShowRefundPolicy(false)}

@@ -423,11 +423,11 @@ function About() {
                 alt="Keynote speaker on stage"
                 className="rounded-xl w-full aspect-[16/10] object-cover shadow-2xl"
               />
-              <button onClick={() => setShowSatisfactionGuarantee(true)} className="absolute -bottom-6 -left-6 bg-charcoal-light border border-teal/20 rounded-xl p-5 shadow-xl max-w-[260px] hover:border-teal/40 transition-colors cursor-pointer text-left">
-                <div className="text-gold font-bold text-lg font-[family-name:var(--font-display)]">
+              <button onClick={() => setShowSatisfactionGuarantee(true)} className="absolute top-0 left-0 right-0 bg-charcoal-light/95 border-b border-teal/20 px-6 py-3 hover:border-teal/40 transition-colors cursor-pointer text-left">
+                <div className="text-gold font-bold text-sm font-[family-name:var(--font-display)]">
                   100% Satisfaction Guarantee
                 </div>
-                <p className="text-white/50 text-sm mt-1">
+                <p className="text-white/50 text-xs mt-0.5">
                   And all tickets are refundable up to 7 days before the event.
                 </p>
               </button>

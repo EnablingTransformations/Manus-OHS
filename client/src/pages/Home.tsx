@@ -325,11 +325,12 @@ function Hero() {
 
 /* ─── Stats Bar ─── */
 function StatsBar() {
+  const [showSatisfactionGuarantee, setShowSatisfactionGuarantee] = useState(false);
   const stats = [
     { value: "120+", label: "Attendees & Experts" },
     { value: "8+", label: "Expert Speakers" },
     { value: "9", label: "Hours of Content" },
-    { value: "100%", label: "Satisfaction Guarantee" },
+    { value: "100%", label: "Satisfaction Guarantee", clickable: true },
   ];
   return (
     <section className="relative bg-charcoal-light border-y border-white/5">
@@ -337,16 +338,41 @@ function StatsBar() {
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
           {stats.map((stat, i) => (
             <AnimatedSection key={i} delay={i * 0.1}>
-              <div className="text-center">
+              <div 
+                className={`text-center ${stat.clickable ? 'cursor-pointer' : ''}`}
+                onClick={() => stat.clickable && setShowSatisfactionGuarantee(true)}
+              >
                 <div className="text-3xl md:text-4xl font-bold text-teal font-[family-name:var(--font-display)]">
                   {stat.value}
                 </div>
-                <div className="text-sm text-white/50 mt-1">{stat.label}</div>
+                <div className={`text-sm mt-1 ${stat.clickable ? 'text-white/70 hover:text-white transition-colors' : 'text-white/50'}`}>
+                  {stat.label}
+                </div>
               </div>
             </AnimatedSection>
           ))}
         </div>
       </div>
+
+      {/* Satisfaction Guarantee Modal */}
+      {showSatisfactionGuarantee && (
+        <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+          <div className="bg-charcoal border border-white/10 rounded-xl max-w-2xl max-h-[80vh] overflow-y-auto p-8">
+            <h3 className="text-2xl font-bold text-white mb-4">100% Satisfaction Guarantee</h3>
+            <div className="text-white/70 space-y-4 text-sm">
+              <p>All tickets are refundable up to 7 days before the event. However, if you have any concerns or need assistance, please contact us by responding to the ticket purchase confirmation email. Take advantage of the lower ticket prices now before they sell out or go up — completely risk free.</p>
+              <p><strong>All tickets include a 100% satisfaction guarantee:</strong></p>
+              <p>Check in on time and attend at least the first 3 hours to experience enough of the event to fairly evaluate its value. And if you feel the event isn't worth your time, you must speak with Sid (the host) in person before leaving, and before the lunch break or 1pm, and you will receive a full refund.</p>
+            </div>
+            <button
+              onClick={() => setShowSatisfactionGuarantee(false)}
+              className="mt-6 w-full bg-teal hover:bg-teal-dark text-charcoal font-bold py-2 rounded-lg transition-all"
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      )}
     </section>
   );
 }

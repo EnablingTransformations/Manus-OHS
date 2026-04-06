@@ -798,7 +798,7 @@ function Venue() {
                 style={{ border: 0 }}
                 loading="lazy"
                 allowFullScreen
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3355.1234567890!2d-117.1611!3d32.7157!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80d954e1d5e5e5e5%3A0x1234567890abcdef!2sUC%20San%20Diego%20Park%20%26%20Market!5e0!3m2!1sen!2sus!4v1234567890"
+                src="https://www.google.com/maps/embed/v1/place?key=AIzaSyBFw0Qbyq9zTFTd-tUY6dZWTgaQzuU17R8&q=UC+San+Diego+Park+%26+Market,+San+Diego,+CA&zoom=15"
               />
               <div className="p-6 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
                 <div>

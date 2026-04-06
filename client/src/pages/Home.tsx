@@ -427,7 +427,7 @@ function About() {
                 <div className="text-gold font-bold text-sm font-[family-name:var(--font-display)]">
                   100% Satisfaction Guarantee
                 </div>
-                <p className="text-white/50 text-xs mt-0.5">
+                <p className="text-white/50 text-xs mt-0.5" style={{fontSize: '14px'}}>
                   And all tickets are refundable up to 7 days before the event.
                 </p>
               </button>

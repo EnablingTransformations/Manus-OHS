@@ -514,10 +514,10 @@ function Topics() {
 /* ─── Speakers Section ─── */
 function Speakers() {
   const speakers = [
-    { name: "Jill Wheaton", role: "Tony Robbins Director of Biz Solutions", description: "Bringing world-class business and peak performance strategies from the Tony Robbins organization.", photo: "https://d2xsxph8kpxj0f.cloudfront.net/310519663486084134/3RPVjQxNXJ7EgGkKFJaBsJ/jill_orig_66011278.jpg", objectPosition: "center 75%", scale: 1.4 },
+    { name: "Jill Wheaton", role: "Tony Robbins Director of Biz Solutions", description: "Bringing world-class business and peak performance strategies from the Tony Robbins organization.", photo: "https://d2xsxph8kpxj0f.cloudfront.net/310519663486084134/3RPVjQxNXJ7EgGkKFJaBsJ/jill_orig_66011278.jpg" },
     { name: "Dr. Neville Campbell", role: "MD, MBA, CEO, Philanthropist, Author, Professor & IFBB Pro Athlete", description: "A powerhouse at the intersection of medicine, business, and elite athletic performance.", photo: "https://d2xsxph8kpxj0f.cloudfront.net/310519663486084134/3RPVjQxNXJ7EgGkKFJaBsJ/neville_orig_1d65cb31.png" },
-    { name: "Dr. Nick Delgado", role: "Bestselling Author & Performance Expert", description: "Pioneering expert in hormones, longevity, and peak human performance with decades of research.", photo: "https://d2xsxph8kpxj0f.cloudfront.net/310519663486084134/3RPVjQxNXJ7EgGkKFJaBsJ/nick_orig_5e4d9c47.jpg", objectPosition: "85% center", scale: 1.3 },
-    { name: "Dr. Chelsea Grow", role: "Board Certified Neurologist", description: "Specializing in brain health, cognitive performance, and neurological wellness strategies.", photo: "https://d2xsxph8kpxj0f.cloudfront.net/310519663486084134/3RPVjQxNXJ7EgGkKFJaBsJ/chelsea_orig_32d9a244.png", scale: 0.9 },
+    { name: "Dr. Nick Delgado", role: "Bestselling Author & Performance Expert", description: "Pioneering expert in hormones, longevity, and peak human performance with decades of research.", photo: "https://d2xsxph8kpxj0f.cloudfront.net/310519663486084134/3RPVjQxNXJ7EgGkKFJaBsJ/nick_orig_5e4d9c47.jpg" },
+    { name: "Dr. Chelsea Grow", role: "Board Certified Neurologist", description: "Specializing in brain health, cognitive performance, and neurological wellness strategies.", photo: "https://d2xsxph8kpxj0f.cloudfront.net/310519663486084134/3RPVjQxNXJ7EgGkKFJaBsJ/chelsea_orig_32d9a244.png" },
     { name: "Joel Huizenga", role: "CEO at EgaCeutical & Longevity Scientist", description: "Cutting-edge longevity science and breakthrough pharmaceutical solutions for age reversal.", photo: "https://d2xsxph8kpxj0f.cloudfront.net/310519663486084134/3RPVjQxNXJ7EgGkKFJaBsJ/joel_orig_a0eaf0a8.jpg" },
     { name: "Dr. Elena Eustache", role: "Love Doctor, Global Matchmaker, TV Host & Bestselling Author", description: "World-renowned expert in relationships, love, and the mind-body-soul connection.", photo: "https://d2xsxph8kpxj0f.cloudfront.net/310519663486084134/3RPVjQxNXJ7EgGkKFJaBsJ/elena_orig_d56f8765.jpg" },
     { name: "Dr. Karolina Pras", role: "Root-Cause Medicine", description: "Functional medicine physician uncovering the root causes of chronic illness for lasting health transformation.", photo: "https://d2xsxph8kpxj0f.cloudfront.net/310519663486084134/3RPVjQxNXJ7EgGkKFJaBsJ/karolina_orig_df8b24e4.png" },
@@ -550,7 +550,7 @@ function Speakers() {
                     src={speaker.photo}
                     alt={speaker.name}
                     className="w-full h-full object-cover"
-                    style={{ objectPosition: speaker.objectPosition || 'center', transform: speaker.scale ? `scale(${speaker.scale})` : 'scale(1)' }}
+                    style={{ objectPosition: (speaker as any).objectPosition || 'center', transform: (speaker as any).scale ? `scale(${ (speaker as any).scale})` : 'scale(1)' }}
                     onError={(e) => {
                       const target = e.currentTarget as HTMLImageElement;
                       target.style.display = 'none';

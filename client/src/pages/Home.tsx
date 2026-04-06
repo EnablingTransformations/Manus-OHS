@@ -555,17 +555,6 @@ function Speakers() {
 function Tickets() {
   const tiers = [
     {
-      name: "Virtual Ticket",
-      price: "$49",
-      badge: "7 Left",
-      highlight: false,
-      features: [
-        "Live stream and recordings",
-        "Ask questions during sessions via chat",
-      ],
-      available: "Available until Jun 26",
-    },
-    {
       name: "General Admission",
       price: "$97",
       badge: "5 Left",
@@ -593,6 +582,17 @@ function Tickets() {
         "Complimentary premium supplement",
       ],
       available: "Early access pricing until Apr 24",
+    },
+    {
+      name: "Virtual Ticket",
+      price: "$49",
+      badge: "7 Left",
+      highlight: false,
+      features: [
+        "Live stream and recordings",
+        "Ask questions during sessions via chat",
+      ],
+      available: "Available until Jun 26",
     },
   ];
 
@@ -665,7 +665,7 @@ function Tickets() {
 
         <AnimatedSection delay={0.4}>
           <p className="text-center text-white/40 text-sm mt-10 max-w-lg mx-auto">
-            Standard pricing begins April 25 — General at $127 and VIP at $297. Group discounts available with code "group".
+            Standard pricing begins April 25 — General at $127 and VIP at $297. Contact us for group discounts.
           </p>
         </AnimatedSection>
       </div>

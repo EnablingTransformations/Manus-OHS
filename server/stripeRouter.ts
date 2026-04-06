@@ -46,7 +46,7 @@ export const stripeRouter = router({
             quantity: 1,
           },
         ],
-        success_url: `${input.origin}/?payment=success&ticket=${encodeURIComponent(product.id)}`,
+        success_url: `${input.origin}/thank-you?session_id={CHECKOUT_SESSION_ID}`,
         cancel_url: `${input.origin}/?payment=cancelled`,
         allow_promotion_codes: true,
         metadata: {

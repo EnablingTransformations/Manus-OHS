@@ -1002,7 +1002,7 @@ function Footer() {
               </div>
               <div className="flex justify-center">
                 <Turnstile
-                  siteKey="0x4AAAAAABkMGHqP7rHSMkpD"
+                  siteKey="0x4AAAAAAC1NXhyA5llaeS7t"
                   onSuccess={(token) => setTurnstileToken(token)}
                   onExpire={() => setTurnstileToken("")}
                   options={{ theme: "dark", size: "normal" }}

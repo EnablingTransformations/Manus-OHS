@@ -519,7 +519,7 @@ function Speakers() {
     { name: "Dr. Nick Delgado", role: "Bestselling Author & Performance Expert", description: "Pioneering expert in hormones, longevity, and peak human performance with decades of research.", photo: "https://d2xsxph8kpxj0f.cloudfront.net/310519663486084134/3RPVjQxNXJ7EgGkKFJaBsJ/nick_orig_5e4d9c47.jpg" },
     { name: "Dr. Chelsea Grow", role: "Board Certified Neurologist", description: "Specializing in brain health, cognitive performance, and neurological wellness strategies.", photo: "https://d2xsxph8kpxj0f.cloudfront.net/310519663486084134/3RPVjQxNXJ7EgGkKFJaBsJ/chelsea_orig_32d9a244.png" },
     { name: "Joel Huizenga", role: "CEO at EgaCeutical & Longevity Scientist", description: "Cutting-edge longevity science and breakthrough pharmaceutical solutions for age reversal.", photo: "https://d2xsxph8kpxj0f.cloudfront.net/310519663486084134/3RPVjQxNXJ7EgGkKFJaBsJ/joel_orig_a0eaf0a8.jpg" },
-    { name: "Dr. Elena Eustache", role: "Love Doctor, Global Matchmaker, TV Host & Bestselling Author", description: "World-renowned expert in relationships, love, and the mind-body-soul connection.", photo: "https://d2xsxph8kpxj0f.cloudfront.net/310519663486084134/3RPVjQxNXJ7EgGkKFJaBsJ/elena_orig_d56f8765.jpg" },
+    { name: "Dr. Elena Eustache", role: "Love Doctor, Global Matchmaker, TV Host & Bestselling Author", description: "World-renowned expert in relationships, love, and the mind-body-soul connection.", photo: "https://d2xsxph8kpxj0f.cloudfront.net/310519663486084134/3RPVjQxNXJ7EgGkKFJaBsJ/elena_orig_d56f8765.jpg", objectPosition: "center top" },
     { name: "Dr. Karolina Pras", role: "Root-Cause Medicine", description: "Functional medicine physician uncovering the root causes of chronic illness for lasting health transformation.", photo: "https://d2xsxph8kpxj0f.cloudfront.net/310519663486084134/3RPVjQxNXJ7EgGkKFJaBsJ/karolina_orig_df8b24e4.png" },
     { name: "Surprise Speaker", role: "To Be Announced", description: "A very special guest will be revealed at the event — you won't want to miss it!", photo: "https://d2xsxph8kpxj0f.cloudfront.net/310519663486084134/3RPVjQxNXJ7EgGkKFJaBsJ/surprise_orig_c13178f5.jpg" },
   ];
@@ -549,7 +549,8 @@ function Speakers() {
                   <img
                     src={speaker.photo}
                     alt={speaker.name}
-                    className="w-full h-full object-cover object-center"
+                    className="w-full h-full object-cover"
+                    style={{ objectPosition: speaker.objectPosition || 'center' }}
                     onError={(e) => {
                       const target = e.currentTarget as HTMLImageElement;
                       target.style.display = 'none';

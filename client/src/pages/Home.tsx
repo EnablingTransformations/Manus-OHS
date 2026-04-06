@@ -467,14 +467,14 @@ function Topics() {
 /* ─── Speakers Section ─── */
 function Speakers() {
   const speakers = [
-    { name: "Jill Wheaton", role: "Tony Robbins Director of Biz Solutions", photo: "https://d2xsxph8kpxj0f.cloudfront.net/310519663486084134/3RPVjQxNXJ7EgGkKFJaBsJ/jill_orig_66011278.jpg" },
-    { name: "Dr. Neville Campbell", role: "MD, MBA, CEO, Author, IFBB Pro Athlete", photo: "https://d2xsxph8kpxj0f.cloudfront.net/310519663486084134/3RPVjQxNXJ7EgGkKFJaBsJ/neville_orig_1d65cb31.png" },
-    { name: "Dr. Nick Delgado", role: "Bestselling Author, Performance Expert", photo: "https://d2xsxph8kpxj0f.cloudfront.net/310519663486084134/3RPVjQxNXJ7EgGkKFJaBsJ/nick_orig_5e4d9c47.jpg" },
-    { name: "Dr. Chelsea Grow", role: "Board Certified Neurologist", photo: "https://d2xsxph8kpxj0f.cloudfront.net/310519663486084134/3RPVjQxNXJ7EgGkKFJaBsJ/chelsea_orig_32d9a244.png" },
-    { name: "Joel Huizenga", role: "CEO at EgaCeutical, Longevity Scientist", photo: "https://d2xsxph8kpxj0f.cloudfront.net/310519663486084134/3RPVjQxNXJ7EgGkKFJaBsJ/joel_orig_a0eaf0a8.jpg" },
-    { name: "Dr. Elena Eustache", role: "Love Doctor, Global Matchmaker, TV Host", photo: "https://d2xsxph8kpxj0f.cloudfront.net/310519663486084134/3RPVjQxNXJ7EgGkKFJaBsJ/elena_orig_d56f8765.jpg" },
-    { name: "Dr. Karolina Pras", role: "Root-Cause Medicine", photo: "https://d2xsxph8kpxj0f.cloudfront.net/310519663486084134/3RPVjQxNXJ7EgGkKFJaBsJ/karolina_orig_df8b24e4.png" },
-    { name: "Surprise Speaker", role: "To Be Announced", photo: "https://d2xsxph8kpxj0f.cloudfront.net/310519663486084134/3RPVjQxNXJ7EgGkKFJaBsJ/surprise_orig_c13178f5.jpg" },
+    { name: "Jill Wheaton", role: "Tony Robbins Director of Biz Solutions", description: "Bringing world-class business and peak performance strategies from the Tony Robbins organization.", photo: "https://d2xsxph8kpxj0f.cloudfront.net/310519663486084134/3RPVjQxNXJ7EgGkKFJaBsJ/jill_orig_66011278.jpg" },
+    { name: "Dr. Neville Campbell", role: "MD, MBA, CEO, Philanthropist, Author, Professor & IFBB Pro Athlete", description: "A powerhouse at the intersection of medicine, business, and elite athletic performance.", photo: "https://d2xsxph8kpxj0f.cloudfront.net/310519663486084134/3RPVjQxNXJ7EgGkKFJaBsJ/neville_orig_1d65cb31.png" },
+    { name: "Dr. Nick Delgado", role: "Bestselling Author & Performance Expert", description: "Pioneering expert in hormones, longevity, and peak human performance with decades of research.", photo: "https://d2xsxph8kpxj0f.cloudfront.net/310519663486084134/3RPVjQxNXJ7EgGkKFJaBsJ/nick_orig_5e4d9c47.jpg" },
+    { name: "Dr. Chelsea Grow", role: "Board Certified Neurologist", description: "Specializing in brain health, cognitive performance, and neurological wellness strategies.", photo: "https://d2xsxph8kpxj0f.cloudfront.net/310519663486084134/3RPVjQxNXJ7EgGkKFJaBsJ/chelsea_orig_32d9a244.png" },
+    { name: "Joel Huizenga", role: "CEO at EgaCeutical & Longevity Scientist", description: "Cutting-edge longevity science and breakthrough pharmaceutical solutions for age reversal.", photo: "https://d2xsxph8kpxj0f.cloudfront.net/310519663486084134/3RPVjQxNXJ7EgGkKFJaBsJ/joel_orig_a0eaf0a8.jpg" },
+    { name: "Dr. Elena Eustache", role: "Love Doctor, Global Matchmaker, TV Host & Bestselling Author", description: "World-renowned expert in relationships, love, and the mind-body-soul connection.", photo: "https://d2xsxph8kpxj0f.cloudfront.net/310519663486084134/3RPVjQxNXJ7EgGkKFJaBsJ/elena_orig_d56f8765.jpg" },
+    { name: "Dr. Karolina Pras", role: "Root-Cause Medicine", description: "Functional medicine physician uncovering the root causes of chronic illness for lasting health transformation.", photo: "https://d2xsxph8kpxj0f.cloudfront.net/310519663486084134/3RPVjQxNXJ7EgGkKFJaBsJ/karolina_orig_df8b24e4.png" },
+    { name: "Surprise Speaker", role: "To Be Announced", description: "A very special guest will be revealed at the event — you won't want to miss it!", photo: "https://d2xsxph8kpxj0f.cloudfront.net/310519663486084134/3RPVjQxNXJ7EgGkKFJaBsJ/surprise_orig_c13178f5.jpg" },
   ];
 
   return (
@@ -514,7 +514,8 @@ function Speakers() {
                   />
                 </div>
                 <h3 className="text-sm md:text-base font-bold text-white mb-1">{speaker.name}</h3>
-                <p className="text-white/40 text-xs leading-relaxed">{speaker.role}</p>
+                <p className="text-white/50 text-xs font-medium leading-relaxed mb-2">{speaker.role}</p>
+                <p className="text-white/40 text-xs leading-relaxed">{speaker.description}</p>
               </div>
             </AnimatedSection>
           ))}

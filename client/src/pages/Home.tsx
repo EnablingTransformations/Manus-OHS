@@ -6,6 +6,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { Turnstile } from "@marsidev/react-turnstile";
+import { useForm, ValidationError } from '@formspree/react';
 import { motion, useInView } from "framer-motion";
 import { trpc } from "@/lib/trpc";
 import {
@@ -856,17 +857,16 @@ function FinalCTA() {
 
 
 /* ─── Footer ─── */
-function Footer() {
-  const [showRefundPolicy, setShowRefundPolicy] = useState(false);
-  const [showContactModal, setShowContactModal] = useState(false);
-  const [formData, setFormData] = useState({ name: "", email: "", emailConfirm: "", message: "", "_gotcha": "" });
-  const [submitted, setSubmitted] = useState(false);
-  const [turnstileToken, setTurnstileToken] = useState("");
+function ContactModal({ onClose }: { onClose: () => void }) {
+  const [state, handleFormspreeSubmit] = useForm('mzdkpgpw');
+  const [emailConfirm, setEmailConfirm] = useState("");
   const [emailError, setEmailError] = useState("");
+  const [turnstileToken, setTurnstileToken] = useState("");
+  const [email, setEmail] = useState("");
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (formData.email !== formData.emailConfirm) {
+    if (email !== emailConfirm) {
       setEmailError("Email addresses do not match.");
       return;
     }
@@ -875,23 +875,71 @@ function Footer() {
       alert("Please complete the CAPTCHA verification.");
       return;
     }
-    const { emailConfirm, ...submitData } = formData;
-    fetch('https://formspree.io/f/mzdkpgpw', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ ...submitData, "cf-turnstile-response": turnstileToken }),
-    }).then(() => {
-      setSubmitted(true);
-      setFormData({ name: "", email: "", emailConfirm: "", message: "", "_gotcha": "" });
-      setTurnstileToken("");
-      setTimeout(() => {
-        setSubmitted(false);
-        setShowContactModal(false);
-      }, 2000);
-    }).catch(() => {
-      alert('Error sending message. Please try again.');
-    });
+    const form = e.currentTarget;
+    const data = new FormData(form);
+    data.set('cf-turnstile-response', turnstileToken);
+    await handleFormspreeSubmit(data);
   };
+
+  if (state.succeeded) {
+    return (
+      <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+        <div className="bg-charcoal border border-white/10 rounded-xl max-w-md p-8 text-center">
+          <div className="text-teal text-5xl mb-4">✓</div>
+          <h3 className="text-2xl font-bold text-white mb-2">Message Sent!</h3>
+          <p className="text-white/60 mb-6">Thank you! We'll get back to you soon.</p>
+          <button onClick={onClose} className="w-full bg-teal hover:bg-teal-dark text-charcoal font-bold py-3 rounded-lg transition-all">Close</button>
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+      <div className="bg-charcoal border border-white/10 rounded-xl max-w-2xl w-full max-h-[90vh] overflow-y-auto p-8">
+        <h3 className="text-2xl font-bold text-white mb-4">Get In Touch</h3>
+        <form onSubmit={handleSubmit} className="space-y-5">
+          {/* Honeypot */}
+          <input type="text" name="_gotcha" style={{ display: 'none' }} />
+          <div>
+            <label htmlFor="name" className="block text-sm font-medium text-white/60 mb-2">Your Name</label>
+            <input id="name" type="text" name="name" required className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white text-sm placeholder:text-white/30 focus:outline-none focus:border-teal/50 focus:ring-1 focus:ring-teal/30 transition-all" placeholder="John Doe" />
+            <ValidationError prefix="Name" field="name" errors={state.errors} className="text-red-400 text-xs mt-1" />
+          </div>
+          <div>
+            <label htmlFor="email" className="block text-sm font-medium text-white/60 mb-2">Email Address</label>
+            <input id="email" type="email" name="email" required value={email} onChange={e => setEmail(e.target.value)} className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white text-sm placeholder:text-white/30 focus:outline-none focus:border-teal/50 focus:ring-1 focus:ring-teal/30 transition-all" placeholder="john@example.com" />
+            <ValidationError prefix="Email" field="email" errors={state.errors} className="text-red-400 text-xs mt-1" />
+          </div>
+          <div>
+            <label htmlFor="emailConfirm" className="block text-sm font-medium text-white/60 mb-2">Verify Email Address</label>
+            <input id="emailConfirm" type="email" required value={emailConfirm} onChange={e => { setEmailConfirm(e.target.value); setEmailError(""); }} className={`w-full bg-white/5 border rounded-lg px-4 py-3 text-white text-sm placeholder:text-white/30 focus:outline-none focus:ring-1 transition-all ${emailError ? "border-red-500/60 focus:border-red-500/60 focus:ring-red-500/30" : "border-white/10 focus:border-teal/50 focus:ring-teal/30"}`} placeholder="Confirm your email" />
+            {emailError && <p className="text-red-400 text-xs mt-1">{emailError}</p>}
+          </div>
+          <div>
+            <label htmlFor="message" className="block text-sm font-medium text-white/60 mb-2">Message</label>
+            <textarea id="message" name="message" required rows={4} className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white text-sm placeholder:text-white/30 focus:outline-none focus:border-teal/50 focus:ring-1 focus:ring-teal/30 transition-all resize-none" placeholder="Tell us what you're interested in..." />
+            <ValidationError prefix="Message" field="message" errors={state.errors} className="text-red-400 text-xs mt-1" />
+          </div>
+          <div className="flex justify-center">
+            <Turnstile siteKey="0x4AAAAAAC1NXhyA5llaeS7t" onSuccess={(token) => setTurnstileToken(token)} onExpire={() => setTurnstileToken("")} options={{ theme: "dark", size: "normal" }} />
+          </div>
+          <div className="flex gap-3">
+            <button type="submit" disabled={state.submitting} className="flex-1 inline-flex items-center justify-center gap-2 bg-teal hover:bg-teal-dark text-charcoal font-bold text-sm py-3.5 px-8 rounded-lg transition-all hover:scale-[1.02] active:scale-[0.98] disabled:opacity-60 disabled:cursor-not-allowed">
+              {state.submitting ? "Sending..." : "Send Message"}
+              <Send className="w-4 h-4" />
+            </button>
+            <button type="button" onClick={onClose} className="px-6 bg-white/5 hover:bg-white/10 text-white font-bold text-sm py-3.5 rounded-lg transition-all">Close</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  );
+}
+
+function Footer() {
+  const [showRefundPolicy, setShowRefundPolicy] = useState(false);
+  const [showContactModal, setShowContactModal] = useState(false);
   return (
     <footer className="border-t border-white/5 py-10">
       <div className="container">
@@ -936,101 +984,7 @@ function Footer() {
             </button>
           </div>
 
-      {/* Contact Modal */}
-      {showContactModal && (
-        <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-          <div className="bg-charcoal border border-white/10 rounded-xl max-w-2xl max-h-[80vh] overflow-y-auto p-8">
-            <h3 className="text-2xl font-bold text-white mb-4">Get In Touch</h3>
-            <form onSubmit={handleSubmit} className="space-y-5">
-              <input
-                type="text"
-                name="_gotcha"
-                value={formData._gotcha}
-                onChange={(e) => setFormData({ ...formData, _gotcha: e.target.value })}
-                style={{ display: 'none' }}
-              />
-              <div>
-                <label htmlFor="name" className="block text-sm font-medium text-white/60 mb-2">Your Name</label>
-                <input
-                  id="name"
-                  type="text"
-                  required
-                  value={formData.name}
-                  onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                  className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white text-sm placeholder:text-white/30 focus:outline-none focus:border-teal/50 focus:ring-1 focus:ring-teal/30 transition-all"
-                  placeholder="John Doe"
-                />
-              </div>
-              <div>
-                <label htmlFor="email" className="block text-sm font-medium text-white/60 mb-2">Email Address</label>
-                <input
-                  id="email"
-                  type="email"
-                  required
-                  value={formData.email}
-                  onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                  className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white text-sm placeholder:text-white/30 focus:outline-none focus:border-teal/50 focus:ring-1 focus:ring-teal/30 transition-all"
-                  placeholder="john@example.com"
-                />
-              </div>
-              <div>
-                <label htmlFor="emailConfirm" className="block text-sm font-medium text-white/60 mb-2">Verify Email Address</label>
-                <input
-                  id="emailConfirm"
-                  type="email"
-                  required
-                  value={formData.emailConfirm}
-                  onChange={(e) => { setFormData({ ...formData, emailConfirm: e.target.value }); setEmailError(""); }}
-                  className={`w-full bg-white/5 border rounded-lg px-4 py-3 text-white text-sm placeholder:text-white/30 focus:outline-none focus:ring-1 transition-all ${
-                    emailError ? "border-red-500/60 focus:border-red-500/60 focus:ring-red-500/30" : "border-white/10 focus:border-teal/50 focus:ring-teal/30"
-                  }`}
-                  placeholder="Confirm your email"
-                />
-                {emailError && <p className="text-red-400 text-xs mt-1">{emailError}</p>}
-              </div>
-              <div>
-                <label htmlFor="message" className="block text-sm font-medium text-white/60 mb-2">Message</label>
-                <textarea
-                  id="message"
-                  required
-                  rows={4}
-                  value={formData.message}
-                  onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                  className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white text-sm placeholder:text-white/30 focus:outline-none focus:border-teal/50 focus:ring-1 focus:ring-teal/30 transition-all resize-none"
-                  placeholder="Tell us what you're interested in..."
-                />
-              </div>
-              <div className="flex justify-center">
-                <Turnstile
-                  siteKey="0x4AAAAAAC1NXhyA5llaeS7t"
-                  onSuccess={(token) => setTurnstileToken(token)}
-                  onExpire={() => setTurnstileToken("")}
-                  options={{ theme: "dark", size: "normal" }}
-                />
-              </div>
-              <div className="flex gap-3">
-                <button
-                  type="submit"
-                  className="flex-1 inline-flex items-center justify-center gap-2 bg-teal hover:bg-teal-dark text-charcoal font-bold text-sm py-3.5 px-8 rounded-lg transition-all hover:scale-[1.02] active:scale-[0.98]"
-                >
-                  {submitted ? "Message Sent!" : "Send Message"}
-                  <Send className="w-4 h-4" />
-                </button>
-                <button
-                  type="button"
-                  onClick={() => setShowContactModal(false)}
-                  className="px-6 bg-white/5 hover:bg-white/10 text-white font-bold text-sm py-3.5 rounded-lg transition-all"
-                >
-                  Close
-                </button>
-              </div>
-              {submitted && (
-                <p className="text-teal text-sm text-center">Thank you! We'll get back to you soon.</p>
-              )}
-            </form>
-          </div>
-        </div>
-      )}
+      {showContactModal && <ContactModal onClose={() => setShowContactModal(false)} />}
 
           <div className="flex items-center gap-6 text-xs text-white/30">
             <span>Presented by Enabling Transformations</span>

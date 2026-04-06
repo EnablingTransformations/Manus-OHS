@@ -466,14 +466,14 @@ function Topics() {
 /* ─── Speakers Section ─── */
 function Speakers() {
   const speakers = [
-    { name: "Jill Wheaton", role: "Tony Robbins Director of Biz Solutions" },
-    { name: "Dr. Neville Campbell", role: "MD, MBA, CEO, Author, IFBB Pro Athlete" },
-    { name: "Dr. Nick Delgado", role: "Bestselling Author, Performance Expert" },
-    { name: "Dr. Chelsea Grow", role: "Board Certified Neurologist" },
-    { name: "Joel Huizenga", role: "CEO at EgaCeutical, Longevity Scientist" },
-    { name: "Dr. Elena Eustache", role: "Love Doctor, Global Matchmaker, TV Host" },
-    { name: "Dr. Karolina Pras", role: "Root-Cause Medicine" },
-    { name: "Surprise Speaker", role: "To Be Announced" },
+    { name: "Jill Wheaton", role: "Tony Robbins Director of Biz Solutions", photo: "https://d2xsxph8kpxj0f.cloudfront.net/310519663486084134/3RPVjQxNXJ7EgGkKFJaBsJ/jill_orig_66011278.jpg" },
+    { name: "Dr. Neville Campbell", role: "MD, MBA, CEO, Author, IFBB Pro Athlete", photo: "https://d2xsxph8kpxj0f.cloudfront.net/310519663486084134/3RPVjQxNXJ7EgGkKFJaBsJ/neville_orig_1d65cb31.png" },
+    { name: "Dr. Nick Delgado", role: "Bestselling Author, Performance Expert", photo: "https://d2xsxph8kpxj0f.cloudfront.net/310519663486084134/3RPVjQxNXJ7EgGkKFJaBsJ/nick_orig_5e4d9c47.jpg" },
+    { name: "Dr. Chelsea Grow", role: "Board Certified Neurologist", photo: "https://d2xsxph8kpxj0f.cloudfront.net/310519663486084134/3RPVjQxNXJ7EgGkKFJaBsJ/chelsea_orig_32d9a244.png" },
+    { name: "Joel Huizenga", role: "CEO at EgaCeutical, Longevity Scientist", photo: "https://d2xsxph8kpxj0f.cloudfront.net/310519663486084134/3RPVjQxNXJ7EgGkKFJaBsJ/joel_orig_a0eaf0a8.jpg" },
+    { name: "Dr. Elena Eustache", role: "Love Doctor, Global Matchmaker, TV Host", photo: "https://d2xsxph8kpxj0f.cloudfront.net/310519663486084134/3RPVjQxNXJ7EgGkKFJaBsJ/elena_orig_d56f8765.jpg" },
+    { name: "Dr. Karolina Pras", role: "Root-Cause Medicine", photo: "https://d2xsxph8kpxj0f.cloudfront.net/310519663486084134/3RPVjQxNXJ7EgGkKFJaBsJ/karolina_orig_df8b24e4.png" },
+    { name: "Surprise Speaker", role: "To Be Announced", photo: "https://d2xsxph8kpxj0f.cloudfront.net/310519663486084134/3RPVjQxNXJ7EgGkKFJaBsJ/surprise_orig_c13178f5.jpg" },
   ];
 
   return (
@@ -497,8 +497,20 @@ function Speakers() {
           {speakers.map((speaker, i) => (
             <AnimatedSection key={i} delay={i * 0.06}>
               <div className="group text-center p-5 rounded-xl bg-charcoal-light border border-white/5 hover:border-teal/20 transition-all duration-300">
-                <div className="w-20 h-20 mx-auto rounded-full bg-gradient-to-br from-teal/20 to-gold/10 flex items-center justify-center mb-4 border border-white/10 group-hover:border-teal/30 transition-colors">
-                  <Mic2 className="w-8 h-8 text-teal/60" />
+                <div className="w-24 h-24 mx-auto rounded-full mb-4 border-2 border-white/10 group-hover:border-teal/40 transition-colors overflow-hidden">
+                  <img
+                    src={speaker.photo}
+                    alt={speaker.name}
+                    className="w-full h-full object-cover object-top"
+                    onError={(e) => {
+                      const target = e.currentTarget as HTMLImageElement;
+                      target.style.display = 'none';
+                      const parent = target.parentElement;
+                      if (parent) {
+                        parent.classList.add('bg-gradient-to-br', 'from-teal/20', 'to-gold/10', 'flex', 'items-center', 'justify-center');
+                      }
+                    }}
+                  />
                 </div>
                 <h3 className="text-sm md:text-base font-bold text-white mb-1">{speaker.name}</h3>
                 <p className="text-white/40 text-xs leading-relaxed">{speaker.role}</p>

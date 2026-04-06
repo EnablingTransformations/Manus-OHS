@@ -310,7 +310,7 @@ function Hero() {
 
           <div className="border-l-2 border-teal/50 pl-5">
             <p className="text-xl md:text-2xl text-white/90 font-[family-name:var(--font-display)] italic leading-snug">
-              "One day can change the trajectory of your health forever."
+              "One day can change the trajectory of your PRECIOUS health forever."
             </p>
             <p className="text-sm text-teal mt-2 font-medium">150 seats only — Will you be one of them?</p>
           </div>
@@ -629,7 +629,8 @@ function Tickets() {
               Choose Your <span className="text-gold">Experience</span>
             </h2>
             <p className="text-white/50 text-lg">
-              Ticket prices increase as the event date approaches. Secure your seat early for the best price.
+              Ticket prices increase as the event date approaches. 
+Secure your seat early for the best price.
             </p>
           </div>
         </AnimatedSection>
@@ -686,7 +687,8 @@ function Tickets() {
 
         <AnimatedSection delay={0.4}>
           <p className="text-center text-white/40 text-sm mt-10 max-w-lg mx-auto">
-            Standard pricing begins April 25 — General at $127 and VIP at $297. Contact us for group discounts.
+            Standard pricing begins April 25 — General at $127 and VIP at $297. 
+Contact us for group discounts.
           </p>
         </AnimatedSection>
       </div>

@@ -287,7 +287,8 @@ function Hero() {
           </h1>
 
           <p className="text-lg md:text-xl text-white/70 max-w-xl mb-8 leading-relaxed">
-            A powerful, immersive, full-day wellness experience designed to elevate your health physically, mentally, emotionally, and spiritually.
+            Most people accept fatigue, aging, and chronic illness as inevitable.<br />
+            They're wrong — and one day can change everything.
           </p>
 
           <div className="flex flex-wrap items-center gap-4 mb-10 text-white/60 text-sm">
@@ -501,7 +502,7 @@ function Speakers() {
                   <img
                     src={speaker.photo}
                     alt={speaker.name}
-                    className="w-full h-full object-cover object-top"
+                    className="w-full h-full object-cover object-center"
                     onError={(e) => {
                       const target = e.currentTarget as HTMLImageElement;
                       target.style.display = 'none';
@@ -991,6 +992,12 @@ function Footer() {
 
           <div className="flex flex-col items-center md:items-end gap-2 text-xs text-white/30">
             <div className="flex gap-4">
+              <button
+                onClick={() => setShowRefundPolicy(true)}
+                className="hover:text-teal transition-colors cursor-pointer"
+              >
+                Refund and Cancellation Policy
+              </button>
               <button
                 onClick={() => setShowPrivacyPolicy(true)}
                 className="hover:text-teal transition-colors cursor-pointer"

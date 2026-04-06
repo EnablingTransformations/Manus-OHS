@@ -988,7 +988,7 @@ function Footer() {
       {showContactModal && <ContactModal onClose={() => setShowContactModal(false)} />}
 
           <div className="flex items-center gap-6 text-xs text-white/30">
-            <span>Presented by Enabling Transformations</span>
+            <span>Enabling Transformations</span>
             <button
               onClick={() => setShowRefundPolicy(true)}
               className="hover:text-teal transition-colors cursor-pointer"

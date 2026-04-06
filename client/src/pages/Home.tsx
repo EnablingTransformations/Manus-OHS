@@ -861,6 +861,7 @@ function ContactModal({ onClose }: { onClose: () => void }) {
   const [state, handleFormspreeSubmit] = useForm('mzdkpgpw');
   const [emailConfirm, setEmailConfirm] = useState("");
   const [emailError, setEmailError] = useState("");
+  const [captchaError, setCaptchaError] = useState("");
   const [turnstileToken, setTurnstileToken] = useState("");
   const [email, setEmail] = useState("");
 
@@ -872,9 +873,10 @@ function ContactModal({ onClose }: { onClose: () => void }) {
     }
     setEmailError("");
     if (!turnstileToken) {
-      alert("Please complete the CAPTCHA verification.");
+      setCaptchaError("Please complete the CAPTCHA verification above.");
       return;
     }
+    setCaptchaError("");
     const form = e.currentTarget;
     const data = new FormData(form);
     data.set('cf-turnstile-response', turnstileToken);
@@ -921,8 +923,18 @@ function ContactModal({ onClose }: { onClose: () => void }) {
             <textarea id="message" name="message" required rows={4} className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white text-sm placeholder:text-white/30 focus:outline-none focus:border-teal/50 focus:ring-1 focus:ring-teal/30 transition-all resize-none" placeholder="Tell us what you're interested in..." />
             <ValidationError prefix="Message" field="message" errors={state.errors} className="text-red-400 text-xs mt-1" />
           </div>
-          <div className="flex justify-center">
-            <Turnstile siteKey="0x4AAAAAAC1NXhyA5llaeS7t" onSuccess={(token) => setTurnstileToken(token)} onExpire={() => setTurnstileToken("")} options={{ theme: "dark", size: "normal" }} />
+          <div className="flex flex-col items-center gap-2">
+            <Turnstile
+              siteKey="0x4AAAAAAC1NXhyA5llaeS7t"
+              onSuccess={(token) => { setTurnstileToken(token); setCaptchaError(""); }}
+              onExpire={() => setTurnstileToken("")}
+              onError={() => setCaptchaError("CAPTCHA failed to load. Please refresh the page and try again.")}
+              options={{ theme: "dark", size: "normal" }}
+            />
+            {captchaError && <p className="text-red-400 text-xs text-center">{captchaError}</p>}
+            {!turnstileToken && !captchaError && (
+              <p className="text-white/40 text-xs text-center">Please complete the verification above before sending</p>
+            )}
           </div>
           <div className="flex gap-3">
             <button type="submit" disabled={state.submitting} className="flex-1 inline-flex items-center justify-center gap-2 bg-teal hover:bg-teal-dark text-charcoal font-bold text-sm py-3.5 px-8 rounded-lg transition-all hover:scale-[1.02] active:scale-[0.98] disabled:opacity-60 disabled:cursor-not-allowed">

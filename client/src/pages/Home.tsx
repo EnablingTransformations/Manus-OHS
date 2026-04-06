@@ -634,13 +634,13 @@ function Tickets() {
           </div>
         </AnimatedSection>
 
-        <div className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+        <div className="grid grid-cols-2 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
           {tiers.map((tier, i) => (
             <AnimatedSection key={i} delay={i * 0.12}>
               <div
                 className={`relative rounded-xl p-6 md:p-8 border transition-all duration-300 hover:-translate-y-1 h-full flex flex-col ${
                   tier.highlight
-                    ? "bg-gradient-to-b from-teal/10 to-charcoal border-teal/30 shadow-lg shadow-teal/5"
+                    ? `bg-gradient-to-b from-teal/10 to-charcoal border-teal/30 shadow-lg shadow-teal/5 ${i === 0 ? 'md:col-start-2' : ''}`
                     : "bg-charcoal border-white/5 hover:border-white/10"
                 }`}
               >

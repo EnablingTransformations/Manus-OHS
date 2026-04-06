@@ -379,6 +379,7 @@ function StatsBar() {
 
 /* ─── About Section ─── */
 function About() {
+  const [showSatisfactionGuarantee, setShowSatisfactionGuarantee] = useState(false);
   return (
     <section id="about" className="py-20 md:py-28">
       <div className="container">
@@ -422,18 +423,38 @@ function About() {
                 alt="Keynote speaker on stage"
                 className="rounded-xl w-full aspect-[16/10] object-cover shadow-2xl"
               />
-              <div className="absolute -bottom-6 -left-6 bg-charcoal-light border border-teal/20 rounded-xl p-5 shadow-xl max-w-[260px]">
+              <button onClick={() => setShowSatisfactionGuarantee(true)} className="absolute -bottom-6 -left-6 bg-charcoal-light border border-teal/20 rounded-xl p-5 shadow-xl max-w-[260px] hover:border-teal/40 transition-colors cursor-pointer text-left">
                 <div className="text-gold font-bold text-lg font-[family-name:var(--font-display)]">
-                  100% Satisfaction
+                  100% Satisfaction Guarantee
                 </div>
                 <p className="text-white/50 text-sm mt-1">
-                  All tickets are refundable up to 7 days before the event.
+                  And all tickets are refundable up to 7 days before the event.
                 </p>
-              </div>
+              </button>
             </div>
           </AnimatedSection>
         </div>
       </div>
+
+      {/* Satisfaction Guarantee Modal */}
+      {showSatisfactionGuarantee && (
+        <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+          <div className="bg-charcoal border border-white/10 rounded-xl max-w-2xl max-h-[80vh] overflow-y-auto p-8">
+            <h3 className="text-2xl font-bold text-white mb-4">100% Satisfaction Guarantee</h3>
+            <div className="text-white/70 space-y-4 text-sm">
+              <p>All tickets are refundable up to 7 days before the event. However, if you have any concerns or need assistance, please contact us by responding to the ticket purchase confirmation email. Take advantage of the lower ticket prices now before they sell out or go up — completely risk free.</p>
+              <p><strong>All tickets include a 100% satisfaction guarantee:</strong></p>
+              <p>Check in on time and attend at least the first 3 hours to experience enough of the event to fairly evaluate its value. And if you feel the event isn't worth your time, you must speak with Sid (the host) in person before leaving, and before the lunch break or 1pm, and you will receive a full refund.</p>
+            </div>
+            <button
+              onClick={() => setShowSatisfactionGuarantee(false)}
+              className="mt-6 w-full bg-teal hover:bg-teal-dark text-charcoal font-bold py-2 rounded-lg transition-all"
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      )}
     </section>
   );
 }
@@ -770,7 +791,7 @@ function VendorLounge() {
               className="rounded-xl w-full aspect-[16/10] object-cover shadow-2xl"
             />
           </AnimatedSection>
-        </div>
+          </div>
       </div>
     </section>
   );
@@ -1173,8 +1194,8 @@ export default function Home() {
       <Hero />
       <StatsBar />
       <About />
-      <Topics />
       <Speakers />
+      <Topics />
       <Tickets />
       <WhyAttend />
       <VendorLounge />

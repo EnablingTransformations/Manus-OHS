@@ -940,6 +940,8 @@ function ContactModal({ onClose }: { onClose: () => void }) {
 
 function Footer() {
   const [showRefundPolicy, setShowRefundPolicy] = useState(false);
+  const [showPrivacyPolicy, setShowPrivacyPolicy] = useState(false);
+  const [showTermsOfService, setShowTermsOfService] = useState(false);
   const [showContactModal, setShowContactModal] = useState(false);
   return (
     <footer className="border-t border-white/5 py-10">
@@ -988,12 +990,20 @@ function Footer() {
       {showContactModal && <ContactModal onClose={() => setShowContactModal(false)} />}
 
           <div className="flex flex-col items-center md:items-end gap-2 text-xs text-white/30">
-            <button
-              onClick={() => setShowRefundPolicy(true)}
-              className="hover:text-teal transition-colors cursor-pointer"
-            >
-              Refund and Cancellation Policy
-            </button>
+            <div className="flex gap-4">
+              <button
+                onClick={() => setShowPrivacyPolicy(true)}
+                className="hover:text-teal transition-colors cursor-pointer"
+              >
+                Privacy Policy
+              </button>
+              <button
+                onClick={() => setShowTermsOfService(true)}
+                className="hover:text-teal transition-colors cursor-pointer"
+              >
+                Terms of Service
+              </button>
+            </div>
             <span>Enabling Transformations</span>
           </div>
         </div>
@@ -1012,6 +1022,102 @@ function Footer() {
             </div>
             <button
               onClick={() => setShowRefundPolicy(false)}
+              className="mt-6 w-full bg-teal hover:bg-teal-dark text-charcoal font-bold py-2 rounded-lg transition-all"
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      )}
+
+      {/* Privacy Policy Modal */}
+      {showPrivacyPolicy && (
+        <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+          <div className="bg-charcoal border border-white/10 rounded-xl max-w-2xl max-h-[80vh] overflow-y-auto p-8">
+            <h3 className="text-2xl font-bold text-white mb-4">Privacy Policy</h3>
+            <div className="text-white/70 space-y-4 text-sm">
+              <p><strong>1. Introduction</strong></p>
+              <p>We are committed to protecting your privacy. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you visit our website and use our services.</p>
+              
+              <p><strong>2. Information We Collect</strong></p>
+              <p>We may collect information about you in a variety of ways. The information we may collect on the site includes:</p>
+              <ul className="list-disc list-inside space-y-1 ml-2">
+                <li><strong>Personal Data:</strong> Name, email address, phone number, and other information you voluntarily provide when registering for events or contacting us.</li>
+                <li><strong>Payment Information:</strong> Credit card and billing information processed securely through our payment processor.</li>
+                <li><strong>Usage Data:</strong> Information about how you interact with our website, including IP address, browser type, pages visited, and time spent on pages.</li>
+              </ul>
+              
+              <p><strong>3. How We Use Your Information</strong></p>
+              <p>We use the information we collect to:</p>
+              <ul className="list-disc list-inside space-y-1 ml-2">
+                <li>Process your ticket purchases and event registrations</li>
+                <li>Send you event updates, confirmations, and related communications</li>
+                <li>Respond to your inquiries and customer service requests</li>
+                <li>Improve our website and services</li>
+                <li>Comply with legal obligations</li>
+              </ul>
+              
+              <p><strong>4. Information Sharing</strong></p>
+              <p>We do not sell, trade, or rent your personal information to third parties. We may share information with trusted service providers who assist us in operating our website and conducting our business, subject to confidentiality agreements.</p>
+              
+              <p><strong>5. Security</strong></p>
+              <p>We implement appropriate security measures to protect your personal information. However, no method of transmission over the Internet is 100% secure.</p>
+              
+              <p><strong>6. Your Rights</strong></p>
+              <p>You have the right to access, update, or delete your personal information. Contact us at the email provided below to exercise these rights.</p>
+              
+              <p><strong>7. Contact Us</strong></p>
+              <p>If you have questions about this Privacy Policy, please contact us at info@enablingtransformations.com</p>
+            </div>
+            <button
+              onClick={() => setShowPrivacyPolicy(false)}
+              className="mt-6 w-full bg-teal hover:bg-teal-dark text-charcoal font-bold py-2 rounded-lg transition-all"
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      )}
+
+      {/* Terms of Service Modal */}
+      {showTermsOfService && (
+        <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+          <div className="bg-charcoal border border-white/10 rounded-xl max-w-2xl max-h-[80vh] overflow-y-auto p-8">
+            <h3 className="text-2xl font-bold text-white mb-4">Terms of Service</h3>
+            <div className="text-white/70 space-y-4 text-sm">
+              <p><strong>1. Acceptance of Terms</strong></p>
+              <p>By accessing and using this website and purchasing tickets to the Optimal Health Summit 2026, you accept and agree to be bound by the terms and provision of this agreement.</p>
+              
+              <p><strong>2. Use License</strong></p>
+              <p>Permission is granted to temporarily download one copy of the materials (information or software) on our website for personal, non-commercial transitory viewing only. This is the grant of a license, not a transfer of title, and under this license you may not:</p>
+              <ul className="list-disc list-inside space-y-1 ml-2">
+                <li>Modify or copy the materials</li>
+                <li>Use the materials for any commercial purpose or for any public display</li>
+                <li>Attempt to decompile or reverse engineer any software contained on the website</li>
+                <li>Remove any copyright or other proprietary notations from the materials</li>
+                <li>Transfer the materials to another person or "mirror" the materials on any other server</li>
+              </ul>
+              
+              <p><strong>3. Disclaimer</strong></p>
+              <p>The materials on our website are provided on an 'as is' basis. We make no warranties, expressed or implied, and hereby disclaim and negate all other warranties including, without limitation, implied warranties or conditions of merchantability, fitness for a particular purpose, or non-infringement of intellectual property or other violation of rights.</p>
+              
+              <p><strong>4. Limitations</strong></p>
+              <p>In no event shall our company or its suppliers be liable for any damages (including, without limitation, damages for loss of data or profit, or due to business interruption) arising out of the use or inability to use the materials on our website.</p>
+              
+              <p><strong>5. Accuracy of Materials</strong></p>
+              <p>The materials appearing on our website could include technical, typographical, or photographic errors. We do not warrant that any of the materials on our website are accurate, complete, or current.</p>
+              
+              <p><strong>6. Ticket Terms</strong></p>
+              <p>All ticket purchases are final. Refunds are available up to 7 days before the event. Tickets are non-transferable and valid only for the named attendee.</p>
+              
+              <p><strong>7. Modifications</strong></p>
+              <p>We may revise these terms of service for our website at any time without notice. By using this website, you are agreeing to be bound by the then current version of these terms of service.</p>
+              
+              <p><strong>8. Governing Law</strong></p>
+              <p>These terms and conditions are governed by and construed in accordance with the laws of the State of California, and you irrevocably submit to the exclusive jurisdiction of the courts in that location.</p>
+            </div>
+            <button
+              onClick={() => setShowTermsOfService(false)}
               className="mt-6 w-full bg-teal hover:bg-teal-dark text-charcoal font-bold py-2 rounded-lg transition-all"
             >
               Close

@@ -1006,7 +1006,7 @@ function Footer() {
             </div>
           </div>
 
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-8">
             {[
               { icon: Instagram, href: "https://instagram.com/OptimalHealthSummit" },
               { icon: Facebook, href: "https://facebook.com/events/s/optimal-health-summit-2nd-annu/1257572565745799/" },
@@ -1020,7 +1020,7 @@ function Footer() {
                 rel="noopener noreferrer"
                 className="text-white/30 hover:text-teal transition-colors"
               >
-                <social.icon className="w-4 h-4" />
+                <social.icon className="w-6 h-6" />
               </a>
             ))}
             <button
@@ -1028,7 +1028,7 @@ function Footer() {
               className="text-white/30 hover:text-teal transition-colors"
               title="Send us an email"
             >
-              <Mail className="w-4 h-4" />
+              <Mail className="w-6 h-6" />
             </button>
           </div>
 

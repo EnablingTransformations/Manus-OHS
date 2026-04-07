@@ -163,7 +163,7 @@ export default function ThankYou() {
           </div>
 
           <p className="text-xs text-white/50 mt-4 text-center">
-            More details about our referral program coming soon!
+            More details about our referral program via email.
           </p>
         </div>
       </div>

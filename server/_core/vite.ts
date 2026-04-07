@@ -58,6 +58,27 @@ export function serveStatic(app: Express) {
     );
   }
 
+  // Explicitly serve sitemap.xml and robots.txt with correct content types
+  app.get("/sitemap.xml", (_req, res) => {
+    const sitemapPath = path.resolve(distPath, "sitemap.xml");
+    if (fs.existsSync(sitemapPath)) {
+      res.setHeader("Content-Type", "application/xml");
+      res.sendFile(sitemapPath);
+    } else {
+      res.status(404).send("Sitemap not found");
+    }
+  });
+
+  app.get("/robots.txt", (_req, res) => {
+    const robotsPath = path.resolve(distPath, "robots.txt");
+    if (fs.existsSync(robotsPath)) {
+      res.setHeader("Content-Type", "text/plain");
+      res.sendFile(robotsPath);
+    } else {
+      res.status(404).send("Robots.txt not found");
+    }
+  });
+
   app.use(express.static(distPath));
 
   // fall through to index.html if the file doesn't exist

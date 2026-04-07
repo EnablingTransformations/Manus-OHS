@@ -8,6 +8,13 @@
       "when": 1775363995734,
       "tag": "0000_young_bastion",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "5",
+      "when": 1775530099746,
+      "tag": "0001_certain_mantis",
+      "breakpoints": true
     }
   ]
 }

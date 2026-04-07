@@ -25,4 +25,32 @@ export const users = mysqlTable("users", {
 export type User = typeof users.$inferSelect;
 export type InsertUser = typeof users.$inferInsert;
 
-// TODO: Add your tables here
+/**
+ * Email verification codes for discount popup.
+ * Stores pending verification codes with expiration.
+ */
+export const emailVerifications = mysqlTable("emailVerifications", {
+  id: int("id").autoincrement().primaryKey(),
+  email: varchar("email", { length: 320 }).notNull(),
+  code: varchar("code", { length: 6 }).notNull(),
+  verified: int("verified").default(0).notNull(),
+  attempts: int("attempts").default(0).notNull(),
+  expiresAt: timestamp("expiresAt").notNull(),
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+});
+
+export type EmailVerification = typeof emailVerifications.$inferSelect;
+export type InsertEmailVerification = typeof emailVerifications.$inferInsert;
+
+/**
+ * Discount leads — verified emails that received the discount code.
+ */
+export const discountLeads = mysqlTable("discountLeads", {
+  id: int("id").autoincrement().primaryKey(),
+  email: varchar("email", { length: 320 }).notNull().unique(),
+  discountCode: varchar("discountCode", { length: 50 }).notNull(),
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+});
+
+export type DiscountLead = typeof discountLeads.$inferSelect;
+export type InsertDiscountLead = typeof discountLeads.$inferInsert;

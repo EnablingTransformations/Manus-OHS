@@ -49,7 +49,7 @@ export const TICKET_PRODUCTS: TicketProduct[] = [
       "Reserved front-row seating",
       "Private lunch with speakers",
       "PCM blood test (valued at $200)",
-      "Microbiome assessment kit (save $90)",
+      "Microbiome assessment kit (save $100)",
       "Complimentary premium supplement",
     ],
   },

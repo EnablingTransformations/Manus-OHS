@@ -69,7 +69,7 @@ function TicketModal({ open, onClose }: { open: boolean; onClose: () => void }) 
       badge: "2 Left",
       highlight: false,
       note: "Early access pricing until Apr 24",
-      features: ["Everything in Advanced Access General", "Reserved front-row seating", "Private lunch with speakers", "PCM blood test (valued at $200)", "Microbiome assessment kit (save $90)", "Complimentary premium supplement"],
+      features: ["Everything in Advanced Access General", "Reserved front-row seating", "Private lunch with speakers", "PCM blood test (valued at $200)", "Microbiome assessment kit (save $100)", "Complimentary premium supplement"],
     },
   ];
 
@@ -288,7 +288,7 @@ function Hero() {
 
           <p className="text-lg md:text-xl text-white/70 max-w-xl mb-8 leading-relaxed">
             Most people accept fatigue, aging, and chronic illness as inevitable.<br />
-            They're wrong — and one day can change everything.
+            They're wrong — and this one day event can change everything.
           </p>
 
           <div className="flex flex-wrap items-center gap-4 mb-10 text-white/60 text-sm">
@@ -304,7 +304,7 @@ function Hero() {
             <span className="hidden sm:inline text-white/20">|</span>
             <span className="flex items-center gap-2">
               <MapPin className="w-4 h-4 text-teal" />
-              UC San Diego Park & Market
+              UC San Diego Park & Market, San Diego, CA
             </span>
           </div>
 
@@ -312,7 +312,7 @@ function Hero() {
             <p className="text-xl md:text-2xl text-white/90 font-[family-name:var(--font-display)] italic leading-snug">
               "One day can change the trajectory of your PRECIOUS health forever."
             </p>
-            <p className="text-sm text-teal mt-2 font-medium">150 seats only — Will you be one of them?</p>
+            <p className="text-sm text-teal mt-2 font-medium">Limited to 150 seats only — Will you be one of them?</p>
           </div>
         </motion.div>
       </div>
@@ -421,7 +421,7 @@ function About() {
               <img
                 src={ABOUT_IMG}
                 alt="Keynote speaker on stage"
-                className="rounded-xl w-full aspect-[16/10] object-cover shadow-2xl"
+                className="rounded-xl w-full aspect-[16/10] object-cover shadow-2xl" style={{width: '485px', height: '300px'}}
               />
               <button onClick={() => setShowSatisfactionGuarantee(true)} className="absolute top-0 left-0 right-0 bg-charcoal-light/95 border-b border-teal/20 px-6 py-3 hover:border-teal/40 transition-colors cursor-pointer text-left">
                 <div className="text-gold font-bold text-sm font-[family-name:var(--font-display)]">
@@ -600,7 +600,7 @@ function Tickets() {
         "Reserved front-row seating",
         "Private lunch with speakers",
         "PCM blood test (valued at $200)",
-        "Microbiome assessment kit (save $90)",
+        "Microbiome assessment kit (save $100)",
         "Complimentary premium supplement",
       ],
       available: "Early access pricing until Apr 24",

@@ -25,19 +25,19 @@ export default function ThankYou() {
     {
       name: "Instagram",
       icon: Instagram,
-      url: "https://instagram.com/optimalhealthsummit",
+      url: "https://instagram.com/OptimalHealthSummit",
       color: "hover:text-pink-500",
     },
     {
       name: "Facebook",
       icon: Facebook,
-      url: "https://facebook.com/optimalhealthsummit",
+      url: "https://facebook.com/events/s/optimal-health-summit-2nd-annu/1257572565745799/",
       color: "hover:text-blue-600",
     },
     {
       name: "YouTube",
       icon: Youtube,
-      url: "https://youtube.com/@optimalhealthsummit",
+      url: "https://youtube.com/@EnablingTransformations",
       color: "hover:text-red-600",
     },
     {
@@ -55,13 +55,28 @@ export default function ThankYou() {
   ];
 
   const handleShare = () => {
+    const shareData = {
+      title: "Optimal Health Summit 2026",
+      text: "Join me at the Optimal Health Summit 2026! Transform your health in one day. Limited to 150 seats only.",
+      url: window.location.origin,
+    };
+
     if (navigator.share) {
-      navigator.share({
-        title: "Optimal Health Summit 2026",
-        text: "Join me at the Optimal Health Summit 2026! Transform your health in one day.",
-        url: window.location.origin,
+      navigator.share(shareData).catch(() => {
+        fallbackShare(shareData);
       });
+    } else {
+      fallbackShare(shareData);
     }
+  };
+
+  const fallbackShare = (shareData: any) => {
+    const shareText = `${shareData.title}\n${shareData.text}\n${shareData.url}`;
+    navigator.clipboard.writeText(shareText).then(() => {
+      alert("Event details copied to clipboard!");
+    }).catch(() => {
+      alert("Please share: " + shareData.url);
+    });
   };
 
   return (

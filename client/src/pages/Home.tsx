@@ -81,8 +81,7 @@ function TicketModal({ open, onClose }: { open: boolean; onClose: () => void }) 
     try {
       const result = await createCheckout.mutateAsync({ ticketId, origin: window.location.origin });
       if (result.url) {
-        window.open(result.url, "_blank");
-        onClose();
+        window.location.href = result.url;
       }
     } catch (err) {
       console.error("Checkout error:", err);
@@ -180,7 +179,7 @@ function TicketButton({ tier }: { tier: { name: string; highlight: boolean } }) 
         origin: window.location.origin,
       });
       if (result.url) {
-        window.open(result.url, "_blank");
+        window.location.href = result.url;
       }
     } catch (err) {
       console.error("Checkout error:", err);

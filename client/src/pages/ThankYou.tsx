@@ -8,6 +8,9 @@ export default function ThankYou() {
   const [sessionId, setSessionId] = useState<string | null>(null);
 
   useEffect(() => {
+    // Update page title for SEO
+    document.title = "Thank You — Optimal Health Summit 2026";
+
     // Extract session ID from URL query params
     const params = new URLSearchParams(window.location.search);
     const session = params.get("session_id");
@@ -17,6 +20,10 @@ export default function ThankYou() {
     if (!session) {
       setTimeout(() => setLocation("/"), 3000);
     }
+
+    return () => {
+      document.title = "Optimal Health Summit 2026 — San Diego Health & Wellness Conference";
+    };
   }, [setLocation]);
 
   const socialLinks = [

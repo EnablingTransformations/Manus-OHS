@@ -3,6 +3,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import NotFound from "@/pages/NotFound";
 import ThankYou from "@/pages/ThankYou";
 import { Route, Switch } from "wouter";
+import DiscountPopup from "./components/DiscountPopup";
 import ErrorBoundary from "./components/ErrorBoundary";
 import { ThemeProvider } from "./contexts/ThemeContext";
 import Home from "./pages/Home";
@@ -26,6 +27,7 @@ function App() {
         <TooltipProvider>
           <Toaster />
           <Router />
+          <DiscountPopup />
         </TooltipProvider>
       </ThemeProvider>
     </ErrorBoundary>

@@ -292,7 +292,7 @@ function Hero() {
           <div className="flex flex-wrap items-center gap-4 mb-10 text-white/60 text-sm">
             <span className="flex items-center gap-2">
               <Calendar className="w-4 h-4 text-teal" />
-              Saturday, June 27, 2026
+              Saturday, June 20, 2026
             </span>
             <span className="hidden sm:inline text-white/20">|</span>
             <span className="flex items-center gap-2">

@@ -121,12 +121,9 @@ function TicketModal({ open, onClose }: { open: boolean; onClose: () => void }) 
               {tier.highlight && (
                 <span className="absolute -top-3 left-1/2 -translate-x-1/2 bg-teal text-charcoal text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">Most Popular</span>
               )}
-              <div className="flex items-start justify-between">
-                <div>
-                  <h3 className="text-white font-semibold text-base">{tier.name}</h3>
-                  <p className="text-white/40 text-xs mt-0.5">{tier.note}</p>
-                </div>
-                <span className="text-xs font-medium bg-white/10 text-white/60 px-2 py-0.5 rounded-full">{tier.badge}</span>
+              <div>
+                <h3 className="text-white font-semibold text-base">{tier.name}</h3>
+                <p className="text-white/40 text-xs mt-0.5">{tier.note}</p>
               </div>
               <div className="text-3xl font-bold text-white">{tier.price}</div>
               <ul className="space-y-1.5 flex-1">
@@ -1194,9 +1191,9 @@ export default function Home() {
       <About />
       <Speakers />
       <Topics />
-      <Tickets />
-      <WhyAttend />
       <VendorLounge />
+      <WhyAttend />
+      <Tickets />
       <Impact />
       <Venue />
       <FinalCTA />

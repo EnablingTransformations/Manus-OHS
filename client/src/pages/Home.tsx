@@ -650,13 +650,8 @@ Secure your seat early for the best price.
                 )}
 
                 <div className="mb-6">
-                  <div className="flex items-center justify-between mb-2">
+                  <div className="mb-2">
                     <h3 className="text-lg font-bold text-white">{tier.name}</h3>
-                    {tier.badge && (
-                      <span className="text-xs font-semibold text-gold bg-gold/10 px-2 py-0.5 rounded-full">
-                        {tier.badge}
-                      </span>
-                    )}
                   </div>
                   <div className="flex items-baseline gap-1">
                     <span className="text-4xl font-bold text-white font-[family-name:var(--font-display)]">
@@ -706,17 +701,7 @@ function WhyAttend() {
   return (
     <section className="py-20 md:py-28">
       <div className="container">
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
-          <AnimatedSection delay={0.1}>
-            <div className="relative">
-              <img
-                src={NETWORK_IMG}
-                alt="Networking at the summit"
-                className="rounded-xl w-full aspect-[3/2] object-cover shadow-2xl"
-              />
-            </div>
-          </AnimatedSection>
-
+        <div className="grid lg:grid-cols-1 gap-12 lg:gap-20">
           <AnimatedSection>
             <div>
               <span className="text-teal text-sm font-semibold uppercase tracking-widest mb-4 block">
@@ -740,6 +725,16 @@ function WhyAttend() {
                   </div>
                 ))}
               </div>
+            </div>
+          </AnimatedSection>
+
+          <AnimatedSection delay={0.1}>
+            <div className="relative">
+              <img
+                src={NETWORK_IMG}
+                alt="Networking at the summit"
+                className="rounded-xl w-full aspect-[3/2] object-cover shadow-2xl"
+              />
             </div>
           </AnimatedSection>
         </div>

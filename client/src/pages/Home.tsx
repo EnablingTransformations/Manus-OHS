@@ -423,7 +423,7 @@ function About() {
                 alt="Keynote speaker on stage"
                 className="rounded-xl w-full aspect-[16/10] object-cover shadow-2xl" style={{width: '485px', height: '300px'}}
               />
-              <button onClick={() => setShowSatisfactionGuarantee(true)} className="absolute top-0 left-0 right-0 bg-charcoal-light/95 border-b border-teal/20 px-6 py-3 hover:border-teal/40 transition-colors cursor-pointer text-left">
+              <button onClick={() => setShowSatisfactionGuarantee(true)} className="absolute top-0 left-0 right-0 bg-charcoal-light/95 border-b border-teal/20 px-6 py-3 hover:border-teal/40 transition-colors cursor-pointer text-left" style={{width: '484px', height: '57px'}}>
                 <div className="text-gold font-bold text-sm font-[family-name:var(--font-display)]">
                   100% Satisfaction Guarantee
                 </div>

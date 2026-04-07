@@ -1,0 +1,28 @@
+# Project TODO
+
+- [x] Landing page with hero, about, speakers, topics, tickets, venue, footer
+- [x] Stripe integration for ticket purchases
+- [x] Contact form with Formspree
+- [x] Refund and cancellation policy modal
+- [x] Privacy Policy and Terms of Service modals
+- [x] Speaker descriptions and headshot alignment
+- [x] Hook line in hero section
+- [x] Ticket reordering (General → VIP → Virtual)
+- [x] Group discount text update
+- [x] Section reordering (Speakers before Topics)
+- [x] 100% Satisfaction Guarantee clickable with modal
+- [x] Mobile spacing optimization
+- [x] Ticket rename (Advanced Access General / VIP)
+- [x] Thank you page after Stripe checkout
+- [x] Checkout redirect fix (same tab instead of new tab)
+- [x] SEO optimization (meta tags, Open Graph, JSON-LD, sitemap, robots.txt)
+- [x] Sitemap.xml explicit route fix for production
+- [x] Discount popup - collect email, save to DB, display code
+- [x] LinkedIn icon added to footer and thank you page social links
+- [x] Discount popup tRPC backend with database persistence
+- [ ] Facebook Pixel integration
+- [ ] Google Analytics integration
+- [ ] Countdown timer in hero section
+- [ ] FAQ section
+- [ ] Testimonials section
+- [ ] Referral system backend

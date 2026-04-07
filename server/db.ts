@@ -1,6 +1,6 @@
-import { eq } from "drizzle-orm";
+import { eq, and, gt, desc } from "drizzle-orm";
 import { drizzle } from "drizzle-orm/mysql2";
-import { InsertUser, users } from "../drizzle/schema";
+import { InsertUser, users, emailVerifications, discountLeads } from "../drizzle/schema";
 import { ENV } from './_core/env';
 
 let _db: ReturnType<typeof drizzle> | null = null;
@@ -89,4 +89,60 @@ export async function getUserByOpenId(openId: string) {
   return result.length > 0 ? result[0] : undefined;
 }
 
-// TODO: add feature queries here as your schema grows.
+// ─── Email Verification & Discount Leads ───
+
+export async function createEmailVerification(email: string, code: string, expiresAt: Date) {
+  const db = await getDb();
+  if (!db) throw new Error("Database not available");
+  await db.insert(emailVerifications).values({ email, code, expiresAt });
+}
+
+export async function getLatestVerification(email: string) {
+  const db = await getDb();
+  if (!db) return undefined;
+  const result = await db
+    .select()
+    .from(emailVerifications)
+    .where(eq(emailVerifications.email, email))
+    .orderBy(desc(emailVerifications.createdAt))
+    .limit(1);
+  return result.length > 0 ? result[0] : undefined;
+}
+
+export async function markVerificationUsed(id: number) {
+  const db = await getDb();
+  if (!db) return;
+  await db
+    .update(emailVerifications)
+    .set({ verified: 1 })
+    .where(eq(emailVerifications.id, id));
+}
+
+export async function incrementVerificationAttempts(id: number) {
+  const db = await getDb();
+  if (!db) return;
+  const record = await db.select().from(emailVerifications).where(eq(emailVerifications.id, id)).limit(1);
+  if (record.length > 0) {
+    await db
+      .update(emailVerifications)
+      .set({ attempts: record[0].attempts + 1 })
+      .where(eq(emailVerifications.id, id));
+  }
+}
+
+export async function getDiscountLead(email: string) {
+  const db = await getDb();
+  if (!db) return undefined;
+  const result = await db
+    .select()
+    .from(discountLeads)
+    .where(eq(discountLeads.email, email))
+    .limit(1);
+  return result.length > 0 ? result[0] : undefined;
+}
+
+export async function createDiscountLead(email: string, discountCode: string) {
+  const db = await getDb();
+  if (!db) throw new Error("Database not available");
+  await db.insert(discountLeads).values({ email, discountCode });
+}

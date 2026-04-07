@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useLocation } from "wouter";
 import { Button } from "@/components/ui/button";
-import { Heart, Share2, Users, Instagram, Facebook, Youtube, Mail } from "lucide-react";
+import { Heart, Share2, Users, Instagram, Facebook, Youtube, Mail, Linkedin } from "lucide-react";
 
 export default function ThankYou() {
   const [location, setLocation] = useLocation();
@@ -44,6 +44,12 @@ export default function ThankYou() {
       icon: Youtube,
       url: "https://youtube.com/@optimalhealthsummit",
       color: "hover:text-red-600",
+    },
+    {
+      name: "LinkedIn",
+      icon: Linkedin,
+      url: "https://www.linkedin.com/company/optimalhealthsummit/",
+      color: "hover:text-blue-500",
     },
     {
       name: "Email",

@@ -33,6 +33,7 @@ import {
   Send,
   Phone,
   MessageSquare,
+  Linkedin,
 } from "lucide-react";
 
 const LOGO_IMG = "https://d2xsxph8kpxj0f.cloudfront.net/310519663486084134/3RPVjQxNXJ7EgGkKFJaBsJ/logo_8918fb42.png";
@@ -1018,6 +1019,7 @@ function Footer() {
               { icon: Instagram, href: "https://instagram.com/OptimalHealthSummit" },
               { icon: Facebook, href: "https://facebook.com/events/s/optimal-health-summit-2nd-annu/1257572565745799/" },
               { icon: Youtube, href: "https://youtube.com/@EnablingTransformations" },
+              { icon: Linkedin, href: "https://www.linkedin.com/company/optimalhealthsummit/" },
             ].map((social, i) => (
               <a
                 key={i}

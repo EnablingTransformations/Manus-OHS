@@ -54,7 +54,7 @@ function TicketModal({ open, onClose }: { open: boolean; onClose: () => void }) 
       features: ["Live stream and recordings", "Ask questions during sessions via chat"],
     },
     {
-      name: "General Admission",
+      name: "Advanced Access General",
       id: "general" as const,
       price: "$97",
       badge: "5 Left",
@@ -63,13 +63,13 @@ function TicketModal({ open, onClose }: { open: boolean; onClose: () => void }) 
       features: ["Nutritious breakfast, lunch & snacks", "All keynote presentations & panels", "Expo hall access", "Networking with 120+ attendees", "After-event networking social"],
     },
     {
-      name: "VIP Admission",
+      name: "Advanced Access VIP",
       id: "vip" as const,
       price: "$247",
       badge: "2 Left",
       highlight: false,
       note: "Early access pricing until Apr 24",
-      features: ["Everything in General Admission", "Reserved front-row seating", "Private lunch with speakers", "PCM blood test (valued at $200)", "Microbiome assessment kit (save $90)", "Complimentary premium supplement"],
+      features: ["Everything in Advanced Access General", "Reserved front-row seating", "Private lunch with speakers", "PCM blood test (valued at $200)", "Microbiome assessment kit (save $90)", "Complimentary premium supplement"],
     },
   ];
 
@@ -161,8 +161,8 @@ function TicketModal({ open, onClose }: { open: boolean; onClose: () => void }) 
 
 const TICKET_ID_MAP: Record<string, "virtual" | "general" | "vip"> = {
   "Virtual Ticket": "virtual",
-  "General Admission": "general",
-  "VIP Admission": "vip",
+  "Advanced Access General": "general",
+  "Advanced Access VIP": "vip",
 };
 
 /* ─── Ticket Buy Button with Stripe Checkout ─── */
@@ -577,7 +577,7 @@ function Speakers() {
 function Tickets() {
   const tiers = [
     {
-      name: "General Admission",
+      name: "Advanced Access General",
       price: "$97",
       badge: "5 Left",
       highlight: true,
@@ -591,12 +591,12 @@ function Tickets() {
       available: "Early access pricing until Apr 24",
     },
     {
-      name: "VIP Admission",
+      name: "Advanced Access VIP",
       price: "$247",
       badge: "2 Left",
       highlight: false,
       features: [
-        "Everything in General Admission",
+        "Everything in Advanced Access General",
         "Reserved front-row seating",
         "Private lunch with speakers",
         "PCM blood test (valued at $200)",

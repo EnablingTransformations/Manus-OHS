@@ -1,7 +1,7 @@
 import { COOKIE_NAME } from "@shared/const";
 import { getSessionCookieOptions } from "./_core/cookies";
 import { systemRouter } from "./_core/systemRouter";
-import { publicProcedure, router } from "./_core/trpc";
+import { publicProcedure, router, adminProcedure } from "./_core/trpc";
 import { stripeRouter } from "./stripeRouter";
 import { z } from "zod";
 import * as db from "./db";
@@ -37,6 +37,23 @@ export const appRouter = router({
         await db.createDiscountLead(email, discountCode);
         return { success: true, code: discountCode };
       }),
+  }),
+
+  admin: router({
+    getLeads: adminProcedure.query(async () => {
+      const leads = await db.getAllDiscountLeads();
+      return leads;
+    }),
+
+    getStats: adminProcedure.query(async () => {
+      const totalLeads = await db.getDiscountLeadsCount();
+      const leadsToday = await db.getDiscountLeadsCountToday();
+      return {
+        totalLeads,
+        leadsToday,
+        discountCode: "HEALTH10",
+      };
+    }),
   }),
 });
 

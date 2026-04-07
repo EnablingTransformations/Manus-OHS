@@ -26,3 +26,6 @@
 - [ ] FAQ section
 - [ ] Testimonials section
 - [ ] Referral system backend
+- [x] Admin dashboard - view email leads
+- [x] Admin dashboard - track ticket sales stats
+- [x] Admin dashboard - manage discount codes

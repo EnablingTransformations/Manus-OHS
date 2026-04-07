@@ -146,3 +146,36 @@ export async function createDiscountLead(email: string, discountCode: string) {
   if (!db) throw new Error("Database not available");
   await db.insert(discountLeads).values({ email, discountCode });
 }
+
+// ─── Admin Dashboard Queries ───
+
+export async function getAllDiscountLeads() {
+  const db = await getDb();
+  if (!db) return [];
+  const result = await db
+    .select()
+    .from(discountLeads)
+    .orderBy(desc(discountLeads.createdAt));
+  return result;
+}
+
+export async function getDiscountLeadsCount() {
+  const db = await getDb();
+  if (!db) return 0;
+  const result = await db
+    .select()
+    .from(discountLeads);
+  return result.length;
+}
+
+export async function getDiscountLeadsCountToday() {
+  const db = await getDb();
+  if (!db) return 0;
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+  const result = await db
+    .select()
+    .from(discountLeads)
+    .where(gt(discountLeads.createdAt, today));
+  return result.length;
+}

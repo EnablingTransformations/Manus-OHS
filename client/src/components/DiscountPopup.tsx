@@ -188,7 +188,7 @@ export default function DiscountPopup() {
                       onClick={handleDismiss}
                       className="w-full bg-gradient-to-r from-gold to-gold-dark hover:from-gold-dark hover:to-gold text-charcoal font-bold py-3 rounded-lg transition-all text-sm cursor-pointer"
                     >
-                      Start Shopping
+                      Get Tickets Now
                     </button>
                   </>
                 )}

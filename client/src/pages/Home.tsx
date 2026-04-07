@@ -1045,12 +1045,6 @@ function Footer() {
           <div className="flex flex-col items-center md:items-end gap-2 text-xs text-white/30">
             <div className="flex gap-4">
               <button
-                onClick={() => setShowRefundPolicy(true)}
-                className="hover:text-teal transition-colors cursor-pointer"
-              >
-                Refund and Cancellation Policy
-              </button>
-              <button
                 onClick={() => setShowPrivacyPolicy(true)}
                 className="hover:text-teal transition-colors cursor-pointer"
               >

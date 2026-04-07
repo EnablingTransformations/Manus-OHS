@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Heart, Share2, Users, Instagram, Facebook, Youtube, Mail, Linkedin } from "lucide-react";
 
 export default function ThankYou() {
-  const [location, setLocation] = useLocation();
+  const [, setLocationNav] = useLocation();
   const [sessionId, setSessionId] = useState<string | null>(null);
 
   useEffect(() => {
@@ -16,15 +16,10 @@ export default function ThankYou() {
     const session = params.get("session_id");
     setSessionId(session);
 
-    // If no session ID, redirect back to home after 3 seconds
-    if (!session) {
-      setTimeout(() => setLocation("/"), 3000);
-    }
-
     return () => {
       document.title = "Optimal Health Summit 2026 — San Diego Health & Wellness Conference";
     };
-  }, [setLocation]);
+  }, []);
 
   const socialLinks = [
     {
@@ -144,7 +139,7 @@ export default function ThankYou() {
             </Button>
 
             <Button
-              onClick={() => setLocation("/")}
+              onClick={() => setLocationNav("/")}
               variant="outline"
               className="w-full border-white/20 text-white hover:bg-white/10"
             >
@@ -165,7 +160,7 @@ export default function ThankYou() {
           Prepare for the summit by reviewing the speaker lineup and topics. We'll send you more details as the event approaches.
         </p>
         <Button
-          onClick={() => setLocation("/")}
+          onClick={() => setLocationNav("/")}
           className="bg-gradient-to-r from-gold to-gold-dark hover:from-gold-dark hover:to-gold text-charcoal font-bold"
         >
           Explore the Summit

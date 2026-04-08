@@ -157,12 +157,12 @@ function TicketModal({ open, onClose }: { open: boolean; onClose: () => void }) 
                 className="w-4 h-4 rounded border-white/20 bg-white/10 cursor-pointer accent-teal"
               />
               <span className="text-white/80 text-sm">
-                <span className="font-semibold text-teal">Get 5% off</span> — Opt in to SMS updates about the event
+                <span className="font-semibold text-teal">Get 10% off</span> — Opt in to SMS updates about the event
               </span>
             </label>
             {optInSms && phoneNumber && (
               <div className="bg-teal/10 border border-teal/30 rounded px-3 py-2 text-teal text-xs">
-                ✓ You'll save ${(optInSms ? 2.45 : 0).toFixed(2)} on your ticket
+                ✓ You'll save ${(optInSms ? (phoneNumber ? 'up to 10%' : '10%') : '0%')} on your ticket
               </div>
             )}
           </div>

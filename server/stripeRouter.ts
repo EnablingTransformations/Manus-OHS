@@ -32,8 +32,8 @@ export const stripeRouter = router({
         throw new Error("Invalid ticket type");
       }
 
-      // Apply 5% discount if user opts in to SMS marketing
-      const smsDiscount = input.optInSms ? Math.round(product.priceInCents * 0.05) : 0;
+      // Apply 10% discount if user opts in to SMS marketing
+      const smsDiscount = input.optInSms ? Math.round(product.priceInCents * 0.10) : 0;
       const finalPrice = product.priceInCents - smsDiscount;
 
       const session = await stripe.checkout.sessions.create({

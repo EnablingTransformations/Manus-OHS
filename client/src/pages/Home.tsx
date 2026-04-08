@@ -1218,12 +1218,12 @@ export default function Home() {
       <TicketModal open={ticketModalOpen} onClose={() => setTicketModalOpen(false)} />
       <Navbar onOpenTickets={() => setTicketModalOpen(true)} />
       <Hero />
-      <StatsBar />
       <About />
       <Speakers />
       <Topics />
       <VendorLounge />
       <WhyAttend />
+      <StatsBar />
       <Tickets />
       <Impact />
       <Venue />

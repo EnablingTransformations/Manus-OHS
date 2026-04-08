@@ -15,6 +15,13 @@
       "when": 1775530099746,
       "tag": "0001_certain_mantis",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "5",
+      "when": 1775670370909,
+      "tag": "0002_adorable_harry_osborn",
+      "breakpoints": true
     }
   ]
 }

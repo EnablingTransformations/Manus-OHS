@@ -54,3 +54,44 @@ export const discountLeads = mysqlTable("discountLeads", {
 
 export type DiscountLead = typeof discountLeads.$inferSelect;
 export type InsertDiscountLead = typeof discountLeads.$inferInsert;
+/**
+ * SMS opt-ins — stores phone numbers from customers who opted in to SMS marketing.
+ * Used for cart abandoner and last-minute availability campaigns.
+ * Phone numbers stored in E.164 format: +15551234567
+ */
+export const smsOptIns = mysqlTable("smsOptIns", {
+  id: int("id").autoincrement().primaryKey(),
+  /** Phone number in E.164 format: +15551234567 */
+  phoneNumber: varchar("phoneNumber", { length: 20 }).notNull(),
+  /** Customer email address */
+  email: varchar("email", { length: 320 }),
+  /** Stripe charge ID for reference */
+  stripeChargeId: varchar("stripeChargeId", { length: 100 }),
+  /** Stripe customer ID for reference */
+  stripeCustomerId: varchar("stripeCustomerId", { length: 100 }),
+  /** Ticket type purchased: virtual, general, or vip */
+  ticketType: mysqlEnum("ticketType", ["virtual", "general", "vip"]),
+  /** Ticket purchase amount in cents */
+  amountInCents: int("amountInCents"),
+  /** Status: active, unsubscribed, invalid, bounced */
+  status: mysqlEnum("status", ["active", "unsubscribed", "invalid", "bounced"]).default("active").notNull(),
+  /** Whether phone number has been verified */
+  verified: int("verified").default(0).notNull(),
+  /** Verification code sent to phone (for 2-way verification) */
+  verificationCode: varchar("verificationCode", { length: 10 }),
+  /** Number of SMS messages sent to this number */
+  smsSentCount: int("smsSentCount").default(0).notNull(),
+  /** Last SMS sent timestamp */
+  lastSmsSentAt: timestamp("lastSmsSentAt"),
+  /** Timestamp when opted in */
+  optedInAt: timestamp("optedInAt").defaultNow().notNull(),
+  /** Timestamp when unsubscribed (if applicable) */
+  unsubscribedAt: timestamp("unsubscribedAt"),
+  /** When record was created */
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+  /** When record was last updated */
+  updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
+});
+
+export type SmsOptIn = typeof smsOptIns.$inferSelect;
+export type InsertSmsOptIn = typeof smsOptIns.$inferInsert;

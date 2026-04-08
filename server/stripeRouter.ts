@@ -7,8 +7,10 @@ import type { Application, Request, Response } from "express";
 import express from "express";
 import Stripe from "stripe";
 import { z } from "zod";
+import { TRPCError } from "@trpc/server";
 import { publicProcedure, router } from "./_core/trpc";
 import { TICKET_PRODUCTS } from "./products";
+import { validateAndNormalizePhoneNumber } from "./phoneUtils";
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY || "");
 
@@ -29,7 +31,22 @@ export const stripeRouter = router({
     .mutation(async ({ input, ctx }) => {
       const product = TICKET_PRODUCTS.find((p) => p.id === input.ticketId);
       if (!product) {
-        throw new Error("Invalid ticket type");
+        throw new TRPCError({
+          code: "BAD_REQUEST",
+          message: "Invalid ticket type",
+        });
+      }
+
+      // Validate and normalize phone number if SMS opt-in
+      let normalizedPhone: string | null = null;
+      if (input.optInSms && input.phoneNumber) {
+        normalizedPhone = validateAndNormalizePhoneNumber(input.phoneNumber);
+        if (!normalizedPhone) {
+          throw new TRPCError({
+            code: "BAD_REQUEST",
+            message: "Invalid phone number format. Please enter a valid 10 or 11 digit US phone number.",
+          });
+        }
       }
 
       // Apply 10% discount if user opts in to SMS marketing
@@ -59,7 +76,7 @@ export const stripeRouter = router({
           ticket_id: product.id,
           ticket_name: product.name,
           event: "Optimal Health Summit 2026",
-          phone_number: input.phoneNumber ?? "",
+          phone_number: normalizedPhone ?? "",
           sms_opt_in: input.optInSms ? "true" : "false",
           sms_discount_applied: smsDiscount > 0 ? "true" : "false",
           ...(ctx.user

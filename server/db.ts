@@ -1,6 +1,6 @@
 import { eq, and, gt, desc } from "drizzle-orm";
 import { drizzle } from "drizzle-orm/mysql2";
-import { InsertUser, users, emailVerifications, discountLeads } from "../drizzle/schema";
+import { InsertUser, users, emailVerifications, discountLeads, smsOptIns, InsertSmsOptIn, SmsOptIn } from "../drizzle/schema";
 import { ENV } from './_core/env';
 
 let _db: ReturnType<typeof drizzle> | null = null;
@@ -178,4 +178,100 @@ export async function getDiscountLeadsCountToday() {
     .from(discountLeads)
     .where(gt(discountLeads.createdAt, today));
   return result.length;
+}
+
+// ─── SMS Opt-Ins ───
+
+export async function createSmsOptIn(data: InsertSmsOptIn): Promise<SmsOptIn | null> {
+  const db = await getDb();
+  if (!db) {
+    console.warn("[Database] Cannot create SMS opt-in: database not available");
+    return null;
+  }
+
+  try {
+    const result = await db.insert(smsOptIns).values(data);
+    // Return the inserted record
+    if (result[0].insertId) {
+      const inserted = await db
+        .select()
+        .from(smsOptIns)
+        .where(eq(smsOptIns.id, Number(result[0].insertId)))
+        .limit(1);
+      return inserted.length > 0 ? inserted[0] : null;
+    }
+    return null;
+  } catch (error) {
+    console.error("[Database] Failed to create SMS opt-in:", error);
+    throw error;
+  }
+}
+
+export async function getSmsOptInByPhoneNumber(phoneNumber: string): Promise<SmsOptIn | undefined> {
+  const db = await getDb();
+  if (!db) return undefined;
+
+  const result = await db
+    .select()
+    .from(smsOptIns)
+    .where(eq(smsOptIns.phoneNumber, phoneNumber))
+    .limit(1);
+
+  return result.length > 0 ? result[0] : undefined;
+}
+
+export async function getAllActiveSmsOptIns(): Promise<SmsOptIn[]> {
+  const db = await getDb();
+  if (!db) return [];
+
+  const result = await db
+    .select()
+    .from(smsOptIns)
+    .where(eq(smsOptIns.status, "active"))
+    .orderBy(desc(smsOptIns.optedInAt));
+
+  return result;
+}
+
+export async function getActiveSmsOptInsCount(): Promise<number> {
+  const db = await getDb();
+  if (!db) return 0;
+
+  const result = await db
+    .select()
+    .from(smsOptIns)
+    .where(eq(smsOptIns.status, "active"));
+
+  return result.length;
+}
+
+export async function unsubscribeSmsOptIn(phoneNumber: string): Promise<void> {
+  const db = await getDb();
+  if (!db) return;
+
+  await db
+    .update(smsOptIns)
+    .set({ status: "unsubscribed", unsubscribedAt: new Date() })
+    .where(eq(smsOptIns.phoneNumber, phoneNumber));
+}
+
+export async function updateSmsSentCount(phoneNumber: string): Promise<void> {
+  const db = await getDb();
+  if (!db) return;
+
+  const record = await db
+    .select()
+    .from(smsOptIns)
+    .where(eq(smsOptIns.phoneNumber, phoneNumber))
+    .limit(1);
+
+  if (record.length > 0) {
+    await db
+      .update(smsOptIns)
+      .set({
+        smsSentCount: record[0].smsSentCount + 1,
+        lastSmsSentAt: new Date(),
+      })
+      .where(eq(smsOptIns.phoneNumber, phoneNumber));
+  }
 }

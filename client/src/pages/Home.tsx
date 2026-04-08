@@ -273,6 +273,7 @@ function Navbar({ onOpenTickets }: { onOpenTickets: () => void }) {
           <a href="#speakers" className="hover:text-teal transition-colors">Speakers</a>
           <a href="#tickets" className="hover:text-teal transition-colors">Tickets</a>
           <a href="#venue" className="hover:text-teal transition-colors">Venue</a>
+          <a href="/referral" className="hover:text-teal transition-colors">Refer & Earn</a>
         </div>
         <button
           onClick={onOpenTickets}

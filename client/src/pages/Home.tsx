@@ -110,7 +110,10 @@ function TicketModal({ open, onClose }: { open: boolean; onClose: () => void }) 
             content_type: 'ticket'
           });
         }
-        window.location.href = result.url;
+        // Open Stripe checkout in a new tab
+        window.open(result.url, '_blank');
+        // Close the modal after opening checkout
+        onClose();
       }
     } catch (err) {
       console.error("Checkout error:", err);

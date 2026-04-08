@@ -8,7 +8,7 @@ import { useLocation } from "wouter";
 import { useAuth } from "@/_core/hooks/useAuth";
 import { trpc } from "@/lib/trpc";
 import { Button } from "@/components/ui/button";
-import { BarChart3, Mail, TrendingUp, Copy, Check } from "lucide-react";
+import { BarChart3, Mail, TrendingUp, Copy, Check, Phone } from "lucide-react";
 import { useState } from "react";
 
 export default function AdminDashboard() {
@@ -28,6 +28,9 @@ export default function AdminDashboard() {
     enabled: !!user && user.role === "admin",
   });
   const statsQuery = trpc.admin.getStats.useQuery(undefined, {
+    enabled: !!user && user.role === "admin",
+  });
+  const smsSubscribersQuery = trpc.admin.getSmsSubscribers.useQuery(undefined, {
     enabled: !!user && user.role === "admin",
   });
 
@@ -113,10 +116,22 @@ export default function AdminDashboard() {
             </div>
             <p className="text-white/40 text-xs mt-2">10% discount</p>
           </div>
+
+          {/* SMS Subscribers */}
+          <div className="bg-charcoal-light border border-white/10 rounded-xl p-6">
+            <div className="flex items-center justify-between mb-4">
+              <h3 className="text-white/70 text-sm font-medium">SMS Subscribers</h3>
+              <Phone className="w-5 h-5 text-teal" />
+            </div>
+            <div className="text-3xl font-bold text-white">
+              {statsQuery.isLoading ? "..." : statsQuery.data?.totalSmsSubscribers || 0}
+            </div>
+            <p className="text-white/40 text-xs mt-2">Active opt-ins</p>
+          </div>
         </div>
 
         {/* Leads Table */}
-        <div className="bg-charcoal-light border border-white/10 rounded-xl overflow-hidden">
+        <div className="bg-charcoal-light border border-white/10 rounded-xl overflow-hidden mb-8">
           <div className="px-6 py-4 border-b border-white/10">
             <h2 className="text-xl font-bold text-white">Email Leads</h2>
           </div>
@@ -148,6 +163,52 @@ export default function AdminDashboard() {
             </div>
           ) : (
             <div className="p-6 text-center text-white/60">No email leads yet</div>
+          )}
+        </div>
+
+        {/* SMS Subscribers Table */}
+        <div className="bg-charcoal-light border border-white/10 rounded-xl overflow-hidden">
+          <div className="px-6 py-4 border-b border-white/10">
+            <h2 className="text-xl font-bold text-white">SMS Subscribers</h2>
+          </div>
+
+          {smsSubscribersQuery.isLoading ? (
+            <div className="p-6 text-center text-white/60">Loading subscribers...</div>
+          ) : smsSubscribersQuery.data && smsSubscribersQuery.data.length > 0 ? (
+            <div className="overflow-x-auto">
+              <table className="w-full text-sm">
+                <thead className="border-b border-white/10 bg-white/5">
+                  <tr>
+                    <th className="px-6 py-3 text-left text-white/70 font-medium">Phone Number</th>
+                    <th className="px-6 py-3 text-left text-white/70 font-medium">Email</th>
+                    <th className="px-6 py-3 text-left text-white/70 font-medium">Ticket Type</th>
+                    <th className="px-6 py-3 text-left text-white/70 font-medium">Status</th>
+                    <th className="px-6 py-3 text-left text-white/70 font-medium">Joined</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {smsSubscribersQuery.data.map((sub: any) => (
+                    <tr key={sub.phoneNumber} className="border-b border-white/5 hover:bg-white/5 transition-colors">
+                      <td className="px-6 py-4 text-white font-mono">{sub.phoneNumber}</td>
+                      <td className="px-6 py-4 text-white/80">{sub.email || "—"}</td>
+                      <td className="px-6 py-4 text-white/80 capitalize">{sub.ticketType || "—"}</td>
+                      <td className="px-6 py-4">
+                        <span className={`px-2 py-1 rounded text-xs font-medium ${
+                          sub.status === 'active' ? 'bg-teal/20 text-teal' : 'bg-white/10 text-white/60'
+                        }`}>
+                          {sub.status}
+                        </span>
+                      </td>
+                      <td className="px-6 py-4 text-white/60 text-xs">
+                        {new Date(sub.optedInAt).toLocaleDateString()}
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          ) : (
+            <div className="p-6 text-center text-white/60">No SMS subscribers yet</div>
           )}
         </div>
 

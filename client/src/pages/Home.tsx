@@ -90,6 +90,20 @@ function TicketModal({ open, onClose }: { open: boolean; onClose: () => void }) 
   const handleBuy = async (ticketId: "virtual" | "general" | "vip") => {
     setLoadingId(ticketId);
     try {
+      // Validate phone number if SMS opt-in is selected
+      if (optInSms && phoneNumber) {
+        const digitsOnly = phoneNumber.replace(/\D/g, '');
+        if (digitsOnly.length < 10 || digitsOnly.length > 11) {
+          alert('Please enter a valid phone number (10 or 11 digits)');
+          setLoadingId(null);
+          return;
+        }
+      } else if (optInSms && !phoneNumber) {
+        alert('Please enter your phone number to receive the SMS discount');
+        setLoadingId(null);
+        return;
+      }
+
       // Track AddToCart event for Facebook
       if (window.fbq) {
         const priceMap = { virtual: 49, general: 97, vip: 247 };

@@ -48,11 +48,18 @@ export const appRouter = router({
     getStats: adminProcedure.query(async () => {
       const totalLeads = await db.getDiscountLeadsCount();
       const leadsToday = await db.getDiscountLeadsCountToday();
+      const totalSmsSubscribers = await db.getActiveSmsOptInsCount();
       return {
         totalLeads,
         leadsToday,
         discountCode: "HEALTH10",
+        totalSmsSubscribers,
       };
+    }),
+
+    getSmsSubscribers: adminProcedure.query(async () => {
+      const subscribers = await db.getAllActiveSmsOptIns();
+      return subscribers;
     }),
   }),
 });

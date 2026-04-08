@@ -22,6 +22,8 @@ export const stripeRouter = router({
       z.object({
         ticketId: z.enum(["virtual", "general", "vip"]),
         origin: z.string(),
+        phoneNumber: z.string().optional(),
+        optInSms: z.boolean().optional(),
       })
     )
     .mutation(async ({ input, ctx }) => {
@@ -29,6 +31,10 @@ export const stripeRouter = router({
       if (!product) {
         throw new Error("Invalid ticket type");
       }
+
+      // Apply 5% discount if user opts in to SMS marketing
+      const smsDiscount = input.optInSms ? Math.round(product.priceInCents * 0.05) : 0;
+      const finalPrice = product.priceInCents - smsDiscount;
 
       const session = await stripe.checkout.sessions.create({
         payment_method_types: ["card"],
@@ -41,7 +47,7 @@ export const stripeRouter = router({
                 name: `${product.name} — Optimal Health Summit 2026`,
                 description: product.description,
               },
-              unit_amount: product.priceInCents,
+              unit_amount: finalPrice,
             },
             quantity: 1,
           },
@@ -53,6 +59,9 @@ export const stripeRouter = router({
           ticket_id: product.id,
           ticket_name: product.name,
           event: "Optimal Health Summit 2026",
+          phone_number: input.phoneNumber ?? "",
+          sms_opt_in: input.optInSms ? "true" : "false",
+          sms_discount_applied: smsDiscount > 0 ? "true" : "false",
           ...(ctx.user
             ? {
                 user_id: ctx.user.id.toString(),

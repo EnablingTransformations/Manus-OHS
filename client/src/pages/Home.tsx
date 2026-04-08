@@ -83,6 +83,8 @@ function TicketModal({ open, onClose }: { open: boolean; onClose: () => void }) 
   ];
 
   const [loadingId, setLoadingId] = useState<string | null>(null);
+  const [phoneNumber, setPhoneNumber] = useState("");
+  const [optInSms, setOptInSms] = useState(false);
   const createCheckout = trpc.stripe.createCheckoutSession.useMutation();
 
   const handleBuy = async (ticketId: "virtual" | "general" | "vip") => {
@@ -99,7 +101,7 @@ function TicketModal({ open, onClose }: { open: boolean; onClose: () => void }) 
         });
       }
       
-      const result = await createCheckout.mutateAsync({ ticketId, origin: window.location.origin });
+      const result = await createCheckout.mutateAsync({ ticketId, origin: window.location.origin, phoneNumber, optInSms });
       if (result.url) {
         // Track InitiateCheckout event
         if (window.fbq) {
@@ -132,6 +134,38 @@ function TicketModal({ open, onClose }: { open: boolean; onClose: () => void }) 
             <p className="text-white/50 text-sm mt-1">Secure your seat — prices increase as the event approaches</p>
           </div>
           <button onClick={onClose} className="text-white/40 hover:text-white transition-colors text-2xl leading-none">&times;</button>
+        </div>
+
+        {/* SMS Opt-in Section */}
+        <div className="bg-white/5 border border-teal/30 rounded-lg p-4 mb-6">
+          <div className="space-y-4">
+            <div>
+              <label className="block text-white text-sm font-medium mb-2">Phone Number (Optional)</label>
+              <input
+                type="tel"
+                placeholder="+1 (555) 123-4567"
+                value={phoneNumber}
+                onChange={(e) => setPhoneNumber(e.target.value)}
+                className="w-full bg-white/10 border border-white/20 rounded-lg px-4 py-2.5 text-white placeholder-white/40 focus:outline-none focus:border-teal/50 focus:ring-1 focus:ring-teal/30"
+              />
+            </div>
+            <label className="flex items-center gap-3 cursor-pointer">
+              <input
+                type="checkbox"
+                checked={optInSms}
+                onChange={(e) => setOptInSms(e.target.checked)}
+                className="w-4 h-4 rounded border-white/20 bg-white/10 cursor-pointer accent-teal"
+              />
+              <span className="text-white/80 text-sm">
+                <span className="font-semibold text-teal">Get 5% off</span> — Opt in to SMS updates about the event
+              </span>
+            </label>
+            {optInSms && phoneNumber && (
+              <div className="bg-teal/10 border border-teal/30 rounded px-3 py-2 text-teal text-xs">
+                ✓ You'll save ${(optInSms ? 2.45 : 0).toFixed(2)} on your ticket
+              </div>
+            )}
+          </div>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">

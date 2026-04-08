@@ -1137,7 +1137,7 @@ function Footer() {
                 Terms of Service
               </button>
             </div>
-            <span>Enabling Transformations</span>
+            <span>&copy; Enabling Transformations</span>
           </div>
         </div>
       </div>

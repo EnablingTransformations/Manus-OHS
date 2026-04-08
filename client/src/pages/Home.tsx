@@ -101,19 +101,22 @@ function TicketModal({ open, onClose }: { open: boolean; onClose: () => void }) 
         });
       }
       
+      // Track InitiateCheckout event immediately
+      if (window.fbq) {
+        window.fbq('track', 'InitiateCheckout', {
+          content_name: `${ticketId.charAt(0).toUpperCase() + ticketId.slice(1)} Ticket`,
+          content_type: 'ticket'
+        });
+      }
+      
+      // Close modal immediately for faster UX
+      onClose();
+      
+      // Fetch checkout URL in background
       const result = await createCheckout.mutateAsync({ ticketId, origin: window.location.origin, phoneNumber, optInSms });
       if (result.url) {
-        // Track InitiateCheckout event
-        if (window.fbq) {
-          window.fbq('track', 'InitiateCheckout', {
-            content_name: `${ticketId.charAt(0).toUpperCase() + ticketId.slice(1)} Ticket`,
-            content_type: 'ticket'
-          });
-        }
         // Open Stripe checkout in a new tab
         window.open(result.url, '_blank');
-        // Close the modal after opening checkout
-        onClose();
       }
     } catch (err) {
       console.error("Checkout error:", err);
@@ -1084,7 +1087,6 @@ function Footer() {
               { icon: Instagram, href: "https://instagram.com/OptimalHealthSummit" },
               { icon: Facebook, href: "https://facebook.com/events/s/optimal-health-summit-2nd-annu/1257572565745799/" },
               { icon: Youtube, href: "https://youtube.com/@EnablingTransformations" },
-              { icon: X, href: "https://x.com/TheCerebrum2020" },
               { icon: Linkedin, href: "https://www.linkedin.com/company/optimalhealthsummit/" },
             ].map((social, i) => (
               <a
@@ -1097,6 +1099,18 @@ function Footer() {
                 <social.icon className="w-6 h-6" />
               </a>
             ))}
+            {/* X (Twitter) Icon */}
+            <a
+              href="https://x.com/TheCerebrum2020"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-white/30 hover:text-teal transition-colors"
+              title="Follow us on X"
+            >
+              <svg className="w-6 h-6" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24h-6.514l-5.106-6.694-5.857 6.694H2.562l7.746-8.868-8.176-10.632h6.506l4.759 6.278 5.328-6.278zM17.002 18.807h1.844L6.803 3.469H4.751l12.251 15.338z" />
+              </svg>
+            </a>
             <button
               onClick={() => setShowContactModal(true)}
               className="text-white/30 hover:text-teal transition-colors"

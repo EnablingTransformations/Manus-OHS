@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Copy, Check, Share2, Users, Gift, TrendingUp } from "lucide-react";
@@ -7,6 +7,14 @@ export default function Referral() {
   const [copied, setCopied] = useState(false);
   const [email, setEmail] = useState("");
   const [submitted, setSubmitted] = useState(false);
+
+  useEffect(() => {
+    document.title = "Refer & Earn $20 Credits | Optimal Health Summit";
+    const metaDescription = document.querySelector('meta[name="description"]');
+    if (metaDescription) {
+      metaDescription.setAttribute('content', 'Earn $20 in credits for each friend you refer to the Optimal Health Summit. Share your unique referral link and start earning today.');
+    }
+  }, []);
 
   const referralLink = `${window.location.origin}?ref=${btoa("user123")}`; // Replace with actual user ID
 

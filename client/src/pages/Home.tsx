@@ -94,7 +94,7 @@ function TicketModal({ open, onClose }: { open: boolean; onClose: () => void }) 
       if (optInSms && phoneNumber) {
         const digitsOnly = phoneNumber.replace(/\D/g, '');
         if (digitsOnly.length < 10 || digitsOnly.length > 11) {
-          alert('Please enter a valid phone number (10 or 11 digits)');
+          alert('Please enter a valid phone number');
           setLoadingId(null);
           return;
         }
@@ -1138,6 +1138,12 @@ function Footer() {
 
           <div className="flex flex-col items-center md:items-end gap-2 text-xs text-white/30">
             <div className="flex gap-4">
+              <button
+                onClick={() => setShowRefundPolicy(true)}
+                className="hover:text-teal transition-colors cursor-pointer"
+              >
+                Refund and Cancellation Policy
+              </button>
               <button
                 onClick={() => setShowPrivacyPolicy(true)}
                 className="hover:text-teal transition-colors cursor-pointer"

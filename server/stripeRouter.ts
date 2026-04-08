@@ -118,6 +118,19 @@ export function registerStripeWebhook(app: Application) {
             `| ticket: ${session.metadata?.ticket_id}`,
             `| customer: ${session.metadata?.customer_email ?? session.customer_email ?? "unknown"}`
           );
+          
+          // Log Facebook Purchase event for tracking
+          const ticketPrices: Record<string, number> = {
+            virtual: 49,
+            general: 97,
+            vip: 247,
+          };
+          const ticketId = session.metadata?.ticket_id || "unknown";
+          const price = ticketPrices[ticketId] || 0;
+          
+          console.log(
+            `[Facebook] Purchase event — ticket: ${ticketId}, price: $${price}, customer: ${session.metadata?.customer_email ?? session.customer_email}`
+          );
           break;
         }
         case "payment_intent.succeeded": {

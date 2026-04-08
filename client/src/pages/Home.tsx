@@ -8,6 +8,13 @@ import { useEffect, useRef, useState } from "react";
 import { useForm, ValidationError } from '@formspree/react';
 import { motion, useInView } from "framer-motion";
 import { trpc } from "@/lib/trpc";
+
+// Declare fbq for Facebook Pixel
+declare global {
+  interface Window {
+    fbq?: (event: string, action: string, data?: Record<string, any>) => void;
+  }
+}
 import {
   Calendar,
   Clock,
@@ -81,8 +88,26 @@ function TicketModal({ open, onClose }: { open: boolean; onClose: () => void }) 
   const handleBuy = async (ticketId: "virtual" | "general" | "vip") => {
     setLoadingId(ticketId);
     try {
+      // Track AddToCart event for Facebook
+      if (window.fbq) {
+        const priceMap = { virtual: 49, general: 97, vip: 247 };
+        window.fbq('track', 'AddToCart', {
+          content_name: `${ticketId.charAt(0).toUpperCase() + ticketId.slice(1)} Ticket`,
+          content_type: 'ticket',
+          value: priceMap[ticketId],
+          currency: 'USD'
+        });
+      }
+      
       const result = await createCheckout.mutateAsync({ ticketId, origin: window.location.origin });
       if (result.url) {
+        // Track InitiateCheckout event
+        if (window.fbq) {
+          window.fbq('track', 'InitiateCheckout', {
+            content_name: `${ticketId.charAt(0).toUpperCase() + ticketId.slice(1)} Ticket`,
+            content_type: 'ticket'
+          });
+        }
         window.location.href = result.url;
       }
     } catch (err) {
@@ -926,6 +951,15 @@ function ContactModal({ onClose }: { onClose: () => void }) {
       return;
     }
     setEmailError("");
+    
+    // Track Lead event for Facebook
+    if (window.fbq) {
+      window.fbq('track', 'Lead', {
+        content_name: 'Contact Form Submission',
+        content_type: 'lead'
+      });
+    }
+    
     await handleFormspreeSubmit(e);
   };
 

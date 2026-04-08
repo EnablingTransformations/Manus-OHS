@@ -1137,7 +1137,7 @@ function Footer() {
                 Terms of Service
               </button>
             </div>
-            <span>&copy; Enabling Transformations</span>
+            <a href="https://EnablingTransformations.com" target="_blank" rel="noopener noreferrer" className="hover:text-teal transition-colors">&copy; Enabling Transformations</a>
           </div>
         </div>
       </div>
@@ -1146,7 +1146,7 @@ function Footer() {
       {showRefundPolicy && (
         <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4">
           <div className="bg-charcoal border border-white/10 rounded-xl max-w-2xl max-h-[80vh] overflow-y-auto p-8">
-            <h3 className="text-2xl font-bold text-white mb-4">Refund and Cancellation Policy</h3>
+            <h3 className="text-4xl font-bold text-white mb-4">Refund and Cancellation Policy</h3>
             <div className="text-white/70 space-y-4 text-sm">
               <p><strong>Cancellation and refund policy:</strong></p>
               <p>All tickets are fully refundable up to 7 days before the event. However, if you have any concerns or need assistance, please contact us by responding to the ticket purchase confirmation email. Take advantage of the lower ticket prices now before they sell out or go up — completely risk free.</p>

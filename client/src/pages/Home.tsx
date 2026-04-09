@@ -370,7 +370,17 @@ function Hero() {
     <section className="relative min-h-screen flex items-end pb-20 md:pb-28 overflow-hidden">
       {/* Background image */}
       <div className="absolute inset-0">
-        <img src={HERO_IMG} alt="Optimal Health Summit" className="w-full h-full object-cover" loading="eager" fetchPriority="high" width="1920" height="1072" />
+        <img
+          srcSet="https://d2xsxph8kpxj0f.cloudfront.net/310519663486084134/3RPVjQxNXJ7EgGkKFJaBsJ/optimized_hero-indoor-event-KrrdMyWTYYS3XvJpxKsfmU-480w_7fc71e63.webp 480w, https://d2xsxph8kpxj0f.cloudfront.net/310519663486084134/3RPVjQxNXJ7EgGkKFJaBsJ/optimized_hero-indoor-event-KrrdMyWTYYS3XvJpxKsfmU-768w_1eff90a7.webp 768w, https://d2xsxph8kpxj0f.cloudfront.net/310519663486084134/3RPVjQxNXJ7EgGkKFJaBsJ/optimized_hero-indoor-event-KrrdMyWTYYS3XvJpxKsfmU_b437920b.webp 1200w"
+          sizes="(max-width: 480px) 100vw, (max-width: 768px) 100vw, 100vw"
+          src={HERO_IMG}
+          alt="Optimal Health Summit"
+          className="w-full h-full object-cover"
+          loading="eager"
+          fetchPriority="high"
+          width="1920"
+          height="1072"
+        />
         <div className="absolute inset-0 bg-gradient-to-t from-charcoal via-charcoal/60 to-transparent" />
         <div className="absolute inset-0 bg-gradient-to-r from-charcoal/50 to-transparent" />
       </div>
@@ -538,6 +548,8 @@ function About() {
           <AnimatedSection delay={0.2}>
             <div className="relative">
               <img
+                srcSet="https://d2xsxph8kpxj0f.cloudfront.net/310519663486084134/3RPVjQxNXJ7EgGkKFJaBsJ/optimized_about-section-FjfkLYDPAMLJEw2wv8icUB-480w_d3a4f620.webp 480w, https://d2xsxph8kpxj0f.cloudfront.net/310519663486084134/3RPVjQxNXJ7EgGkKFJaBsJ/optimized_about-section-FjfkLYDPAMLJEw2wv8icUB-768w_3d9691c5.webp 768w, https://d2xsxph8kpxj0f.cloudfront.net/310519663486084134/3RPVjQxNXJ7EgGkKFJaBsJ/optimized_about-section-FjfkLYDPAMLJEw2wv8icUB_1302a822.webp 1200w"
+                sizes="(max-width: 480px) 100vw, (max-width: 768px) 100vw, 100vw"
                 src={ABOUT_IMG}
                 loading="lazy"
                 alt="Keynote speaker on stage"

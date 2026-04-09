@@ -67,3 +67,4 @@
 - [x] Re-compress about image to WebP 70% quality (118 KB, 19% savings)
 - [x] Upload optimized images to CloudFront
 - [x] Update image URLs in Home.tsx and index.html
+- [x] Implement responsive images with srcset for mobile optimization (hero & about images with 480px/768px/1200px breakpoints)

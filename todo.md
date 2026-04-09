@@ -39,3 +39,6 @@
 - [x] Add loading="lazy" to all below-the-fold img tags
 - [x] Add width/height attributes to all img tags for CLS prevention
 - [x] Add fetchpriority="high" to hero img tag
+- [x] Add live countdown timer to hero section (days/hours/minutes/seconds to June 20, 2026)
+- [x] Add testimonials carousel above Tickets section
+- [x] Publish site to justdoitrightnow.com

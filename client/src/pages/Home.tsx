@@ -340,8 +340,32 @@ function Navbar({ onOpenTickets }: { onOpenTickets: () => void }) {
   );
 }
 
+/* ─── Countdown Timer Hook ─── */
+function useCountdown(targetDate: Date) {
+  const [timeLeft, setTimeLeft] = useState(() => {
+    const diff = targetDate.getTime() - Date.now();
+    return diff > 0 ? diff : 0;
+  });
+  useEffect(() => {
+    const tick = () => {
+      const diff = targetDate.getTime() - Date.now();
+      setTimeLeft(diff > 0 ? diff : 0);
+    };
+    tick();
+    const id = setInterval(tick, 1000);
+    return () => clearInterval(id);
+  }, [targetDate]);
+  const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
+  const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+  const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+  const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+  return { days, hours, minutes, seconds, expired: timeLeft === 0 };
+}
+
 /* ─── Hero Section ─── */
 function Hero() {
+  const [eventDate] = useState(() => new Date('2026-06-20T09:00:00-07:00'));
+  const { days, hours, minutes, seconds } = useCountdown(eventDate);
   return (
     <section className="relative min-h-screen flex items-end pb-20 md:pb-28 overflow-hidden">
       {/* Background image */}
@@ -384,6 +408,23 @@ function Hero() {
               <MapPin className="w-4 h-4 text-teal" />
               UC San Diego Park & Market, San Diego, CA
             </span>
+          </div>
+
+          {/* Countdown Timer */}
+          <div className="flex flex-wrap gap-3 mb-8">
+            {[
+              { value: days, label: 'Days' },
+              { value: hours, label: 'Hours' },
+              { value: minutes, label: 'Minutes' },
+              { value: seconds, label: 'Seconds' },
+            ].map(({ value, label }) => (
+              <div key={label} className="flex flex-col items-center justify-center w-16 h-16 md:w-20 md:h-20 bg-charcoal/70 border border-teal/30 rounded-xl backdrop-blur-sm">
+                <span className="text-2xl md:text-3xl font-bold text-teal font-[family-name:var(--font-display)] leading-none tabular-nums">
+                  {String(value).padStart(2, '0')}
+                </span>
+                <span className="text-[10px] md:text-xs text-white/50 uppercase tracking-widest mt-1">{label}</span>
+              </div>
+            ))}
           </div>
 
           <div className="border-l-2 border-teal/50 pl-5">
@@ -653,6 +694,128 @@ function Speakers() {
             </AnimatedSection>
           ))}
         </div>
+      </div>
+    </section>
+  );
+}
+
+/* ─── Testimonials Section ─── */
+function Testimonials() {
+  const testimonials = [
+    {
+      quote: "This was the most impactful health event I've attended. The speakers were world-class and the information was immediately actionable. I left with a completely new perspective on my health.",
+      name: "Sarah M.",
+      title: "Functional Medicine Patient",
+      stars: 5,
+    },
+    {
+      quote: "I've been to dozens of health conferences. This one stands out because every single speaker delivered real, science-backed strategies — not fluff. Worth every penny and more.",
+      name: "James T.",
+      title: "Biohacker & Entrepreneur",
+      stars: 5,
+    },
+    {
+      quote: "The networking alone was worth the ticket price. I connected with a neurologist and a longevity scientist in the same afternoon. My health journey changed that day.",
+      name: "Dr. Priya K.",
+      title: "Integrative Medicine Physician",
+      stars: 5,
+    },
+    {
+      quote: "I was skeptical at first, but the 100% satisfaction guarantee made it easy to say yes. I didn't need it — the event exceeded every expectation. Already bought my VIP ticket for next year.",
+      name: "Michael R.",
+      title: "VIP Attendee",
+      stars: 5,
+    },
+    {
+      quote: "Sid curated an incredible lineup. The combination of cutting-edge science and practical wellness strategies was exactly what I needed. My energy levels have been transformed.",
+      name: "Lisa W.",
+      title: "Health Coach",
+      stars: 5,
+    },
+  ];
+
+  const [current, setCurrent] = useState(0);
+  const total = testimonials.length;
+
+  useEffect(() => {
+    const id = setInterval(() => setCurrent(c => (c + 1) % total), 5000);
+    return () => clearInterval(id);
+  }, [total]);
+
+  const prev = () => setCurrent(c => (c - 1 + total) % total);
+  const next = () => setCurrent(c => (c + 1) % total);
+
+  const t = testimonials[current];
+
+  return (
+    <section className="py-20 md:py-28 bg-charcoal overflow-hidden">
+      <div className="container">
+        <AnimatedSection>
+          <div className="text-center mb-12">
+            <span className="text-teal text-sm font-semibold uppercase tracking-widest mb-4 block">What Attendees Say</span>
+            <h2 className="text-4xl md:text-5xl font-bold text-white leading-tight">
+              Real People. <span className="text-teal">Real Results.</span>
+            </h2>
+          </div>
+        </AnimatedSection>
+
+        <AnimatedSection delay={0.1}>
+          <div className="relative max-w-3xl mx-auto">
+            {/* Quote card */}
+            <motion.div
+              key={current}
+              initial={{ opacity: 0, x: 40 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: -40 }}
+              transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
+              className="bg-charcoal-light border border-white/8 rounded-2xl p-8 md:p-12 text-center"
+            >
+              {/* Stars */}
+              <div className="flex justify-center gap-1 mb-6">
+                {Array.from({ length: t.stars }).map((_, i) => (
+                  <Star key={i} className="w-5 h-5 fill-gold text-gold" />
+                ))}
+              </div>
+              <p className="text-lg md:text-xl text-white/85 font-[family-name:var(--font-display)] italic leading-relaxed mb-8">
+                &ldquo;{t.quote}&rdquo;
+              </p>
+              <div>
+                <p className="font-bold text-white text-sm">{t.name}</p>
+                <p className="text-teal text-xs mt-0.5">{t.title}</p>
+              </div>
+            </motion.div>
+
+            {/* Navigation */}
+            <div className="flex items-center justify-center gap-4 mt-8">
+              <button
+                onClick={prev}
+                aria-label="Previous testimonial"
+                className="w-9 h-9 rounded-full border border-white/20 hover:border-teal/60 text-white/50 hover:text-teal transition-all flex items-center justify-center"
+              >
+                <ChevronRight className="w-4 h-4 rotate-180" />
+              </button>
+              <div className="flex gap-2">
+                {testimonials.map((_, i) => (
+                  <button
+                    key={i}
+                    onClick={() => setCurrent(i)}
+                    aria-label={`Go to testimonial ${i + 1}`}
+                    className={`w-2 h-2 rounded-full transition-all ${
+                      i === current ? 'bg-teal w-6' : 'bg-white/20 hover:bg-white/40'
+                    }`}
+                  />
+                ))}
+              </div>
+              <button
+                onClick={next}
+                aria-label="Next testimonial"
+                className="w-9 h-9 rounded-full border border-white/20 hover:border-teal/60 text-white/50 hover:text-teal transition-all flex items-center justify-center"
+              >
+                <ChevronRight className="w-4 h-4" />
+              </button>
+            </div>
+          </div>
+        </AnimatedSection>
       </div>
     </section>
   );
@@ -1302,6 +1465,7 @@ export default function Home() {
       <VendorLounge />
       <WhyAttend />
       <StatsBar />
+      <Testimonials />
       <Tickets />
       <Impact />
       <Venue />

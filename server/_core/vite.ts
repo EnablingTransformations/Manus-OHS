@@ -9,7 +9,14 @@ import viteConfig from "../../vite.config";
 export async function setupVite(app: Express, server: Server) {
   const serverOptions = {
     middlewareMode: true,
-    hmr: { server },
+    hmr: {
+      server,
+      // Ensure the browser connects to the proxy host on port 443 (wss)
+      // This is required for the Manus proxy environment where the dev server
+      // is exposed via a reverse proxy at the standard HTTPS port.
+      clientPort: 443,
+      protocol: "wss",
+    },
     allowedHosts: true as const,
   };
 

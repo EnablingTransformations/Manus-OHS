@@ -1,7 +1,7 @@
 import "dotenv/config";
 import express from "express";
 import compression from "compression";
-import type { Request, Response } from "express";
+import type { Request, Response, NextFunction } from "express";
 import { createServer } from "http";
 import net from "net";
 import { createExpressMiddleware } from "@trpc/server/adapters/express";
@@ -33,6 +33,31 @@ async function findAvailablePort(startPort: number = 3000): Promise<number> {
 async function startServer() {
   const app = express();
   const server = createServer(app);
+  // Cache headers middleware for static assets
+  app.use((req: Request, res: Response, next: NextFunction) => {
+    // Cache versioned assets (with hash in filename) for 1 year
+    if (req.path.match(/\.(js|css|woff2?|ttf|eot|svg|png|jpg|jpeg|gif|webp)$/i)) {
+      // Check if file has hash (e.g., app.abc123.js)
+      if (req.path.match(/\.[a-f0-9]{8,}\./i)) {
+        res.set('Cache-Control', 'public, max-age=31536000, immutable');
+      } else {
+        // Cache non-versioned assets for 1 day
+        res.set('Cache-Control', 'public, max-age=86400');
+      }
+    }
+    // Cache HTML for 1 hour (allows updates without clearing cache)
+    else if (req.path.endsWith('.html') || !req.path.includes('.')) {
+      res.set('Cache-Control', 'public, max-age=3600, must-revalidate');
+    }
+    // Don't cache API responses
+    else if (req.path.startsWith('/api/')) {
+      res.set('Cache-Control', 'no-cache, no-store, must-revalidate');
+      res.set('Pragma', 'no-cache');
+      res.set('Expires', '0');
+    }
+    next();
+  });
+  
   // Enable Gzip compression for all responses
   app.use(compression({
     level: 6, // Balance between compression ratio and CPU usage (0-9, default 6)
@@ -68,8 +93,9 @@ async function startServer() {
     serveStatic(app);
   }
   
-  // Log compression status
+  // Log compression and caching status
   console.log("[Compression] Gzip compression enabled for responses > 1KB");
+  console.log("[Caching] Browser cache headers configured for static assets");
 
   const preferredPort = parseInt(process.env.PORT || "3000");
   const port = await findAvailablePort(preferredPort);
@@ -81,6 +107,7 @@ async function startServer() {
   server.listen(port, () => {
     console.log(`Server running on http://localhost:${port}/`);
     console.log(`[Server] Compression middleware active | Gzip enabled for responses > 1KB`);
+    console.log(`[Server] Browser caching enabled | Versioned assets: 1 year | HTML: 1 hour | API: no-cache`);
   });
 }
 
@@ -88,3 +115,9 @@ startServer().catch((error) => {
   console.error("[Server] Failed to start:", error);
   process.exit(1);
 });
+
+// Cache header strategy:
+// - Versioned assets (hash in filename): 1 year (immutable)
+// - Non-versioned assets: 1 day
+// - HTML: 1 hour (allows updates)
+// - API responses: no-cache (always fresh)

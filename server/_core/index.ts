@@ -33,21 +33,32 @@ async function findAvailablePort(startPort: number = 3000): Promise<number> {
 async function startServer() {
   const app = express();
   const server = createServer(app);
-  // Cache headers middleware for static assets
+  // Cache headers middleware for static assets (CDN-optimized)
   app.use((req: Request, res: Response, next: NextFunction) => {
+    // Vary header for proper CDN caching with compression
+    res.set('Vary', 'Accept-Encoding');
+
     // Cache versioned assets (with hash in filename) for 1 year
-    if (req.path.match(/\.(js|css|woff2?|ttf|eot|svg|png|jpg|jpeg|gif|webp)$/i)) {
-      // Check if file has hash (e.g., app.abc123.js)
+    if (req.path.match(/\.(js|css|woff2?|ttf|eot|svg|png|jpg|jpeg|gif|webp|ico)$/i)) {
       if (req.path.match(/\.[a-f0-9]{8,}\./i)) {
+        // Versioned assets: 1 year browser + CDN cache (immutable)
         res.set('Cache-Control', 'public, max-age=31536000, immutable');
+        res.set('Surrogate-Control', 'max-age=31536000'); // CDN edge cache
       } else {
-        // Cache non-versioned assets for 1 day
-        res.set('Cache-Control', 'public, max-age=86400');
+        // Non-versioned static assets: 1 day browser + CDN cache
+        res.set('Cache-Control', 'public, max-age=86400, stale-while-revalidate=3600');
+        res.set('Surrogate-Control', 'max-age=86400');
       }
     }
-    // Cache HTML for 1 hour (allows updates without clearing cache)
+    // Cache sitemap and robots.txt for 1 day
+    else if (req.path.match(/\.(xml|txt)$/i)) {
+      res.set('Cache-Control', 'public, max-age=86400');
+      res.set('Surrogate-Control', 'max-age=86400');
+    }
+    // Cache HTML for 5 minutes on CDN, 1 hour in browser (stale-while-revalidate for instant loads)
     else if (req.path.endsWith('.html') || !req.path.includes('.')) {
-      res.set('Cache-Control', 'public, max-age=3600, must-revalidate');
+      res.set('Cache-Control', 'public, max-age=300, stale-while-revalidate=3600, stale-if-error=86400');
+      res.set('Surrogate-Control', 'max-age=300'); // CDN refreshes every 5 min
     }
     // Don't cache API responses
     else if (req.path.startsWith('/api/')) {

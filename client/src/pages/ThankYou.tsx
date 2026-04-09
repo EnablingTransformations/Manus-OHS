@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react";
 import { useLocation } from "wouter";
 import { Button } from "@/components/ui/button";
-import { Heart, Share2, Users, Instagram, Facebook, Youtube, Mail, Linkedin } from "lucide-react";
+import { Share2, Users, Instagram, Facebook, Youtube, Linkedin } from "lucide-react";
+
+const LOGO_IMG = "https://d2xsxph8kpxj0f.cloudfront.net/310519663486084134/3RPVjQxNXJ7EgGkKFJaBsJ/logo_8918fb42.png";
 
 export default function ThankYou() {
   const [, setLocationNav] = useLocation();
@@ -46,12 +48,6 @@ export default function ThankYou() {
       url: "https://www.linkedin.com/company/optimalhealthsummit/",
       color: "hover:text-blue-500",
     },
-    {
-      name: "Email",
-      icon: Mail,
-      url: "mailto:info@optimalhealthsummit.com",
-      color: "hover:text-gold",
-    },
   ];
 
   const handleShare = () => {
@@ -83,8 +79,8 @@ export default function ThankYou() {
     <div className="min-h-screen bg-gradient-to-b from-charcoal via-charcoal-light to-charcoal pt-20 pb-12 px-4">
       {/* Success Message */}
       <div className="max-w-2xl mx-auto text-center mb-12">
-        <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gradient-to-br from-teal to-gold mb-6">
-          <Heart className="w-8 h-8 text-charcoal fill-charcoal" />
+        <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gradient-to-br from-teal to-gold mb-6 overflow-hidden">
+          <img src={LOGO_IMG} alt="Optimal Health Summit" className="w-12 h-12 object-contain" />
         </div>
 
         <h1 className="text-4xl md:text-5xl font-bold text-white mb-4 font-[family-name:var(--font-display)]">
@@ -130,6 +126,18 @@ export default function ThankYou() {
                 </a>
               );
             })}
+            {/* X (Twitter) */}
+            <a
+              href="https://x.com/TheCerebrum2020"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center justify-center gap-2 px-4 py-3 rounded-lg bg-white/5 border border-white/10 text-white transition-all hover:bg-white/10 hover:text-white"
+            >
+              <svg className="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24h-6.514l-5.106-6.694-5.857 6.694H2.562l7.746-8.868-8.176-10.632h6.506l4.759 6.278 5.328-6.278zM17.002 18.807h1.844L6.803 3.469H4.751l12.251 15.338z" />
+              </svg>
+              <span className="text-sm font-medium">X (Twitter)</span>
+            </a>
           </div>
         </div>
 

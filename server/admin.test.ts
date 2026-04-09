@@ -4,9 +4,11 @@ import * as db from "./db";
 describe("Admin Dashboard", () => {
 
   beforeAll(async () => {
-    // Setup: Create some test leads
-    await db.createDiscountLead("test1@example.com", "HEALTH10");
-    await db.createDiscountLead("test2@example.com", "HEALTH10");
+    // Setup: Create test leads (skip if they already exist from a previous run)
+    const existing1 = await db.getDiscountLead("test1@example.com");
+    if (!existing1) await db.createDiscountLead("test1@example.com", "HEALTH10");
+    const existing2 = await db.getDiscountLead("test2@example.com");
+    if (!existing2) await db.createDiscountLead("test2@example.com", "HEALTH10");
   });
 
   afterAll(async () => {

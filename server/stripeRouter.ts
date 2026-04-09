@@ -11,6 +11,8 @@ import { TRPCError } from "@trpc/server";
 import { publicProcedure, router } from "./_core/trpc";
 import { TICKET_PRODUCTS } from "./products";
 import { validateAndNormalizePhoneNumber } from "./phoneUtils";
+import { notifyOwner } from "./_core/notification";
+import * as db from "./db";
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY || "");
 
@@ -153,10 +155,70 @@ export function registerStripeWebhook(app: Application) {
           };
           const ticketId = session.metadata?.ticket_id || "unknown";
           const price = ticketPrices[ticketId] || 0;
-          
+
           console.log(
             `[Facebook] Purchase event — ticket: ${ticketId}, price: $${price}, customer: ${session.metadata?.customer_email ?? session.customer_email}`
           );
+
+          // Persist SMS opt-in and notify owner if subscriber opted in
+          const phoneNumber = session.metadata?.phone_number;
+          const smsOptIn = session.metadata?.sms_opt_in === "true";
+
+          if (smsOptIn && phoneNumber) {
+            const customerEmail =
+              session.metadata?.customer_email ||
+              (session.customer_email ?? "");
+            const amountInCents = session.amount_total ?? 0;
+
+            try {
+              // Check for duplicate before inserting
+              const existing = await db.getSmsOptInByPhoneNumber(phoneNumber);
+              if (!existing) {
+                await db.createSmsOptIn({
+                  phoneNumber,
+                  email: customerEmail || null,
+                  stripeChargeId: session.payment_intent as string | null,
+                  stripeCustomerId: session.customer as string | null,
+                  ticketType: ticketId as "virtual" | "general" | "vip",
+                  amountInCents,
+                  status: "active",
+                });
+                console.log(`[SMS] Opt-in saved for ${phoneNumber}`);
+              } else {
+                console.log(`[SMS] Duplicate opt-in skipped for ${phoneNumber}`);
+              }
+            } catch (dbErr) {
+              console.error("[SMS] Failed to save opt-in:", dbErr);
+            }
+
+            // Notify the site owner regardless of duplicate status
+            try {
+              const ticketLabel =
+                ticketId === "vip"
+                  ? "VIP"
+                  : ticketId === "general"
+                  ? "General Admission"
+                  : "Virtual";
+              const amountFormatted = `$${(amountInCents / 100).toFixed(2)}`;
+              const subscriberLine = customerEmail
+                ? `**Phone:** ${phoneNumber}\n**Email:** ${customerEmail}`
+                : `**Phone:** ${phoneNumber}`;
+
+              await notifyOwner({
+                title: `📱 New SMS Subscriber — ${ticketLabel} Ticket`,
+                content:
+                  `A new attendee opted in to SMS marketing after purchasing a ticket.\n\n` +
+                  `${subscriberLine}\n` +
+                  `**Ticket:** ${ticketLabel}\n` +
+                  `**Amount Paid:** ${amountFormatted}\n` +
+                  `**Stripe Session:** ${session.id}`,
+              });
+              console.log(`[Notification] Owner notified of new SMS subscriber: ${phoneNumber}`);
+            } catch (notifyErr) {
+              // Non-fatal — log and continue
+              console.warn("[Notification] Failed to notify owner:", notifyErr);
+            }
+          }
           break;
         }
         case "payment_intent.succeeded": {

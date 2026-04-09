@@ -1,26 +1,32 @@
+import { lazy, Suspense } from "react";
 import { Toaster } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
-import NotFound from "@/pages/NotFound";
-import ThankYou from "@/pages/ThankYou";
-import AdminDashboard from "@/pages/AdminDashboard";
 import { Route, Switch } from "wouter";
-import DiscountPopup from "./components/DiscountPopup";
 import ErrorBoundary from "./components/ErrorBoundary";
 import { ThemeProvider } from "./contexts/ThemeContext";
-import Home from "./pages/Home";
-import Referral from "./pages/Referral";
+
+// Lazy-load all pages — only the matched route's code is downloaded
+const Home = lazy(() => import("./pages/Home"));
+const ThankYou = lazy(() => import("./pages/ThankYou"));
+const Referral = lazy(() => import("./pages/Referral"));
+const AdminDashboard = lazy(() => import("./pages/AdminDashboard"));
+const NotFound = lazy(() => import("./pages/NotFound"));
+
+// Lazy-load the discount popup — it has an 8s delay anyway, no need to block initial render
+const DiscountPopup = lazy(() => import("./components/DiscountPopup"));
 
 function Router() {
-  // make sure to consider if you need authentication for certain routes
   return (
-    <Switch>
-      <Route path={"/"} component={Home} />
-      <Route path={"/thank-you"} component={ThankYou} />
-      <Route path={"/referral"} component={Referral} />
-      <Route path={"/admin"} component={AdminDashboard} />
-      <Route path={"/404"} component={NotFound} />
-      <Route component={NotFound} />
-    </Switch>
+    <Suspense fallback={null}>
+      <Switch>
+        <Route path={"/"} component={Home} />
+        <Route path={"/thank-you"} component={ThankYou} />
+        <Route path={"/referral"} component={Referral} />
+        <Route path={"/admin"} component={AdminDashboard} />
+        <Route path={"/404"} component={NotFound} />
+        <Route component={NotFound} />
+      </Switch>
+    </Suspense>
   );
 }
 
@@ -31,7 +37,9 @@ function App() {
         <TooltipProvider>
           <Toaster />
           <Router />
-          <DiscountPopup />
+          <Suspense fallback={null}>
+            <DiscountPopup />
+          </Suspense>
         </TooltipProvider>
       </ThemeProvider>
     </ErrorBoundary>

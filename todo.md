@@ -59,3 +59,6 @@
 - [x] Optimize Google Fonts loading: reduced weights + preload + font-display=swap (est. 750 ms savings)
 - [ ] Configure CloudFront cache headers for images (est. 759 KiB savings) — requires Manus dashboard
 - [ ] Implement responsive images with srcset for mobile (est. 421 KiB savings) — follow-up task
+- [ ] Configure CloudFront cache headers via Express middleware
+- [x] Defer tracking scripts with requestIdleCallback
+- [x] Fix Google Fonts URL to remove 404 italic weight

@@ -42,3 +42,5 @@
 - [x] Add live countdown timer to hero section (days/hours/minutes/seconds to June 20, 2026)
 - [x] Add testimonials carousel above Tickets section
 - [x] Publish site to justdoitrightnow.com
+- [x] Auto-copy discount code to clipboard on email submission with toast confirmation
+- [x] Open Stripe checkout in new tab instead of same-tab redirect

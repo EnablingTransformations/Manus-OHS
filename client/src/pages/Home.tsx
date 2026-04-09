@@ -257,7 +257,7 @@ function TicketButton({ tier }: { tier: { name: string; highlight: boolean } }) 
         origin: window.location.origin,
       });
       if (result.url) {
-        window.location.href = result.url;
+        window.open(result.url, '_blank');
       }
     } catch (err) {
       console.error("Checkout error:", err);
@@ -1168,11 +1168,47 @@ function FinalCTA() {
 
 
 /* ─── Footer ─── */
+/* ─── Toast Notification Hook ─── */
+function useToast() {
+  const [toast, setToast] = useState<{ message: string; type: 'success' | 'error' } | null>(null);
+  const showToast = (message: string, type: 'success' | 'error' = 'success', duration = 3000) => {
+    setToast({ message, type });
+    setTimeout(() => setToast(null), duration);
+  };
+  return { toast, showToast };
+}
+
+/* ─── Copy to Clipboard Helper ─── */
+function copyToClipboard(text: string): Promise<boolean> {
+  if (navigator.clipboard && window.isSecureContext) {
+    return navigator.clipboard.writeText(text)
+      .then(() => true)
+      .catch(() => false);
+  } else {
+    // Fallback for older browsers
+    const textArea = document.createElement('textarea');
+    textArea.value = text;
+    textArea.style.position = 'fixed';
+    textArea.style.left = '-999999px';
+    document.body.appendChild(textArea);
+    try {
+      document.execCommand('copy');
+      document.body.removeChild(textArea);
+      return Promise.resolve(true);
+    } catch {
+      document.body.removeChild(textArea);
+      return Promise.resolve(false);
+    }
+  }
+}
+
 function ContactModal({ onClose }: { onClose: () => void }) {
   const [state, handleFormspreeSubmit] = useForm('mzdkpgpw');
   const [emailConfirm, setEmailConfirm] = useState("");
   const [emailError, setEmailError] = useState("");
   const [email, setEmail] = useState("");
+  const { toast, showToast } = useToast();
+  const DISCOUNT_CODE = "OPTIMAL10";
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -1194,13 +1230,40 @@ function ContactModal({ onClose }: { onClose: () => void }) {
   };
 
   if (state.succeeded) {
+    const handleCopyCode = async () => {
+      const success = await copyToClipboard(DISCOUNT_CODE);
+      showToast(
+        success ? `Code "${DISCOUNT_CODE}" copied to clipboard!` : 'Failed to copy code',
+        success ? 'success' : 'error'
+      );
+    };
+
     return (
       <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4">
         <div className="bg-charcoal border border-white/10 rounded-xl max-w-md p-8 text-center">
+          {toast && (
+            <div className={`mb-4 p-3 rounded-lg text-sm font-medium ${
+              toast.type === 'success'
+                ? 'bg-teal/20 text-teal border border-teal/30'
+                : 'bg-red-500/20 text-red-400 border border-red-500/30'
+            }`}>
+              {toast.message}
+            </div>
+          )}
           <div className="text-teal text-5xl mb-4">✓</div>
-          <h3 className="text-2xl font-bold text-white mb-2">Message Sent!</h3>
-          <p className="text-white/60 mb-6">Thank you! We'll get back to you soon.</p>
-          <button onClick={onClose} className="w-full bg-teal hover:bg-teal-dark text-charcoal font-bold py-3 rounded-lg transition-all">Close</button>
+          <h3 className="text-2xl font-bold text-white mb-2">Thank You!</h3>
+          <p className="text-white/60 mb-6">We've received your email. Here's your exclusive discount code:</p>
+          <div className="bg-charcoal-light border border-teal/30 rounded-lg p-4 mb-6">
+            <p className="text-teal text-3xl font-bold font-mono tracking-widest">{DISCOUNT_CODE}</p>
+            <p className="text-white/40 text-xs mt-2">10% off any ticket</p>
+          </div>
+          <button
+            onClick={handleCopyCode}
+            className="w-full bg-teal hover:bg-teal-dark text-charcoal font-bold py-3 rounded-lg transition-all mb-3"
+          >
+            Copy Code
+          </button>
+          <button onClick={onClose} className="w-full bg-white/5 hover:bg-white/10 text-white font-bold py-3 rounded-lg transition-all">Close</button>
         </div>
       </div>
     );

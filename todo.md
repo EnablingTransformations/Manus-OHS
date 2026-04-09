@@ -54,3 +54,8 @@
 - [x] Add efficient cache headers (est. 759 KiB savings)
 - [x] Reduce unused JavaScript (est. 475 KiB savings) — vendor code splitting in place
 - [ ] Fix accessibility contrast issues
+
+## PageSpeed Mobile Score Optimization (46 → 70+ target)
+- [x] Optimize Google Fonts loading: reduced weights + preload + font-display=swap (est. 750 ms savings)
+- [ ] Configure CloudFront cache headers for images (est. 759 KiB savings) — requires Manus dashboard
+- [ ] Implement responsive images with srcset for mobile (est. 421 KiB savings) — follow-up task

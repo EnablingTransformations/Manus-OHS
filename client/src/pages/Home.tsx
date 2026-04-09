@@ -228,8 +228,8 @@ function TicketModal({ open, onClose }: { open: boolean; onClose: () => void }) 
           ))}
         </div>
 
-        <p className="text-center text-white/30 text-xs mt-5">
-          Standard pricing begins April 25 — General at $127 and VIP at $297. Group discounts available with code "group".
+        <p className="text-center text-white text-xs mt-5">
+          Standard pricing begins April 25 — General at $127 and VIP at $297.
         </p>
       </div>
     </div>
@@ -740,12 +740,12 @@ Secure your seat early for the best price.
                       {tier.price}
                     </span>
                   </div>
-                  <p className="text-white/30 text-xs mt-2">{tier.available}</p>
+                  <p className="text-white text-xs mt-2">{tier.available}</p>
                 </div>
 
                 <ul className="space-y-3 mb-8 flex-1">
                   {tier.features.map((feature, j) => (
-                    <li key={j} className="flex items-start gap-2.5 text-sm text-white/60">
+                    <li key={j} className="flex items-start gap-2.5 text-sm text-white">
                       <div className="w-4 h-4 rounded-full bg-teal/15 flex items-center justify-center shrink-0 mt-0.5">
                         <div className="w-1.5 h-1.5 rounded-full bg-teal" />
                       </div>
@@ -761,9 +761,8 @@ Secure your seat early for the best price.
         </div>
 
         <AnimatedSection delay={0.4}>
-          <p className="text-center text-white/40 text-sm mt-10 max-w-lg mx-auto">
-            Standard pricing begins April 25 — General at $127 and VIP at $297. 
-Contact us for group discounts.
+          <p className="text-center text-white text-sm mt-10 max-w-lg mx-auto">
+            Standard pricing begins April 25 — General at $127 and VIP at $297.
           </p>
         </AnimatedSection>
       </div>

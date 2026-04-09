@@ -44,3 +44,5 @@
 - [x] Publish site to justdoitrightnow.com
 - [x] Auto-copy discount code to clipboard on email submission with toast confirmation
 - [x] Open Stripe checkout in new tab instead of same-tab redirect
+- [x] Move 100% satisfaction guarantee above ticket types section
+- [x] Restore refund/cancellation policy at bottom of page

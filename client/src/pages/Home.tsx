@@ -821,6 +821,60 @@ function Testimonials() {
   );
 }
 
+/* ─── 100% Satisfaction Guarantee Section ─── */
+function SatisfactionGuaranteeSection() {
+  return (
+    <section className="py-16 md:py-24 bg-charcoal">
+      <div className="container">
+        <AnimatedSection>
+          <div className="max-w-3xl mx-auto bg-gradient-to-r from-teal/10 to-charcoal border border-teal/20 rounded-xl p-8 md:p-12 text-center">
+            <div className="text-teal text-4xl mb-4 font-[family-name:var(--font-display)]">✓</div>
+            <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">100% Satisfaction Guarantee</h2>
+            <p className="text-white/70 text-lg mb-6">
+              All tickets are refundable up to 7 days before the event. However, if you have any concerns or need assistance, please contact us by responding to the ticket purchase confirmation email.
+            </p>
+            <p className="text-white/70 text-lg mb-6">
+              <strong>Check in on time and attend at least the first 3 hours</strong> to experience enough of the event to fairly evaluate its value. If you feel the event isn't worth your time, speak with Sid (the host) in person before leaving and before the lunch break or 1pm, and you will receive a full refund.
+            </p>
+            <p className="text-teal font-semibold">
+              Take advantage of the lower ticket prices now before they sell out or go up — completely risk free.
+            </p>
+          </div>
+        </AnimatedSection>
+      </div>
+    </section>
+  );
+}
+
+/* ─── Refund Policy Section ─── */
+function RefundPolicySection() {
+  return (
+    <section className="py-16 md:py-24 bg-charcoal-light border-t border-white/5">
+      <div className="container">
+        <AnimatedSection>
+          <div className="max-w-3xl mx-auto">
+            <h2 className="text-3xl md:text-4xl font-bold text-white mb-8 text-center">Refund and Cancellation Policy</h2>
+            <div className="space-y-6 text-white/70">
+              <div>
+                <h3 className="text-lg font-bold text-white mb-3">Cancellation and Refund Policy</h3>
+                <p className="leading-relaxed">
+                  All tickets are fully refundable up to 7 days before the event. However, if you have any concerns or need assistance, please contact us by responding to the ticket purchase confirmation email. Take advantage of the lower ticket prices now before they sell out or go up — completely risk free.
+                </p>
+              </div>
+              <div>
+                <h3 className="text-lg font-bold text-white mb-3">100% Satisfaction Guarantee</h3>
+                <p className="leading-relaxed">
+                  Check in on time and attend at least the first 3 hours to experience enough of the event to fairly evaluate its value. And if you feel the event isn't worth your time, you must speak with Sid (the host) in person before leaving, and before the lunch break or 1pm, and you will receive a full refund.
+                </p>
+              </div>
+            </div>
+          </div>
+        </AnimatedSection>
+      </div>
+    </section>
+  );
+}
+
 /* ─── Tickets Section ─── */
 function Tickets() {
   const tiers = [
@@ -1529,10 +1583,12 @@ export default function Home() {
       <WhyAttend />
       <StatsBar />
       <Testimonials />
+      <SatisfactionGuaranteeSection />
       <Tickets />
       <Impact />
       <Venue />
       <FinalCTA />
+      <RefundPolicySection />
       <Footer />
     </div>
   );

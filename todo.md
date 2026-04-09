@@ -47,3 +47,10 @@
 - [x] Move 100% satisfaction guarantee above ticket types section
 - [x] Restore refund/cancellation policy at bottom of page
 - [x] Add dedicated attendee testimonials showcase section
+
+## Mobile Performance Optimization (PageSpeed Score: 44 → Target: 70+)
+- [x] Defer render-blocking CSS (est. 1,050 ms savings)
+- [x] Optimize image delivery for mobile (est. 421 KiB savings) — already WebP + lazy loading
+- [x] Add efficient cache headers (est. 759 KiB savings)
+- [x] Reduce unused JavaScript (est. 475 KiB savings) — vendor code splitting in place
+- [ ] Fix accessibility contrast issues

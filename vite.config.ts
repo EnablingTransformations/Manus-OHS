@@ -150,7 +150,34 @@ function vitePluginManusDebugCollector(): Plugin {
   };
 }
 
-const plugins = [react(), tailwindcss(), jsxLocPlugin(), vitePluginManusRuntime(), vitePluginManusDebugCollector()];
+// ============================================================================= 
+// Cache Headers Plugin - Set optimal cache lifetimes for static assets
+// =============================================================================
+function vitePluginCacheHeaders(): Plugin {
+  return {
+    name: 'cache-headers',
+    apply: 'serve',
+    configureServer(server: ViteDevServer) {
+      server.middlewares.use((req, res, next) => {
+        // Cache versioned assets for 1 year (they have content hash)
+        if (req.url?.match(/\/assets\/.*\.[a-f0-9]{8}\.(js|css)$/)) {
+          res.setHeader('Cache-Control', 'public, max-age=31536000, immutable');
+        }
+        // Cache images for 1 month
+        else if (req.url?.match(/\.(webp|png|jpg|jpeg|gif|svg)$/)) {
+          res.setHeader('Cache-Control', 'public, max-age=2592000');
+        }
+        // Don't cache HTML (check for updates frequently)
+        else if (req.url?.endsWith('.html') || req.url === '/') {
+          res.setHeader('Cache-Control', 'public, max-age=3600');
+        }
+        next();
+      });
+    },
+  };
+}
+
+const plugins = [react(), tailwindcss(), jsxLocPlugin(), vitePluginManusRuntime(), vitePluginManusDebugCollector(), vitePluginCacheHeaders()];
 
 export default defineConfig({
   plugins,

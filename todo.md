@@ -29,3 +29,7 @@
 - [x] Admin dashboard - view email leads
 - [x] Admin dashboard - track ticket sales stats
 - [x] Admin dashboard - manage discount codes
+- [ ] Fix Vite WebSocket HMR configuration error
+- [ ] Build CSV export endpoint for SMS subscribers (server)
+- [ ] Add CSV export button to admin dashboard
+- [ ] Convert speaker headshots to WebP format

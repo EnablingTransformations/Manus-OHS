@@ -8,7 +8,7 @@ import { useLocation } from "wouter";
 import { useAuth } from "@/_core/hooks/useAuth";
 import { trpc } from "@/lib/trpc";
 import { Button } from "@/components/ui/button";
-import { BarChart3, Mail, TrendingUp, Copy, Check, Phone } from "lucide-react";
+import { BarChart3, Mail, TrendingUp, Copy, Check, Phone, Download } from "lucide-react";
 import { useState } from "react";
 
 export default function AdminDashboard() {
@@ -33,6 +33,24 @@ export default function AdminDashboard() {
   const smsSubscribersQuery = trpc.admin.getSmsSubscribers.useQuery(undefined, {
     enabled: !!user && user.role === "admin",
   });
+  const exportCsvQuery = trpc.admin.exportSmsSubscribersCsv.useQuery(undefined, {
+    enabled: false, // Only fetch on demand
+  });
+
+  const handleExportCsv = async () => {
+    const result = await exportCsvQuery.refetch();
+    if (result.data?.csv) {
+      const blob = new Blob([result.data.csv], { type: "text/csv;charset=utf-8;" });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement("a");
+      link.href = url;
+      link.download = `sms-subscribers-${new Date().toISOString().slice(0, 10)}.csv`;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      URL.revokeObjectURL(url);
+    }
+  };
 
   const handleCopyCode = (code: string) => {
     navigator.clipboard.writeText(code);
@@ -168,8 +186,16 @@ export default function AdminDashboard() {
 
         {/* SMS Subscribers Table */}
         <div className="bg-charcoal-light border border-white/10 rounded-xl overflow-hidden">
-          <div className="px-6 py-4 border-b border-white/10">
+          <div className="px-6 py-4 border-b border-white/10 flex items-center justify-between">
             <h2 className="text-xl font-bold text-white">SMS Subscribers</h2>
+            <Button
+              onClick={handleExportCsv}
+              disabled={exportCsvQuery.isFetching}
+              className="bg-teal hover:bg-teal/80 text-white text-sm flex items-center gap-2"
+            >
+              <Download className="w-4 h-4" />
+              {exportCsvQuery.isFetching ? "Exporting..." : "Export CSV"}
+            </Button>
           </div>
 
           {smsSubscribersQuery.isLoading ? (

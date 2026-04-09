@@ -61,6 +61,23 @@ export const appRouter = router({
       const subscribers = await db.getAllActiveSmsOptIns();
       return subscribers;
     }),
+
+    exportSmsSubscribersCsv: adminProcedure.query(async () => {
+      const subscribers = await db.getAllActiveSmsOptIns();
+      // Build CSV content
+      const headers = ["Phone", "Email", "Ticket Type", "Status", "Opted In At"];
+      const rows = subscribers.map((s) => [
+        s.phoneNumber,
+        s.email || "",
+        s.ticketType || "",
+        s.status,
+        s.optedInAt ? new Date(s.optedInAt).toISOString() : "",
+      ]);
+      const csvLines = [headers, ...rows].map((row) =>
+        row.map((cell) => `"${String(cell).replace(/"/g, '""')}"`).join(",")
+      );
+      return { csv: csvLines.join("\n"), count: subscribers.length };
+    }),
   }),
 });
 

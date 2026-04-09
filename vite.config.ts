@@ -167,6 +167,17 @@ export default defineConfig({
   build: {
     outDir: path.resolve(import.meta.dirname, "dist/public"),
     emptyOutDir: true,
+    // ── Bundle optimization ──
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          // Split heavy vendor libraries into separate cached chunks
+          'vendor-react': ['react', 'react-dom'],
+          'vendor-motion': ['framer-motion'],
+          'vendor-trpc': ['@trpc/client', '@trpc/react-query', '@tanstack/react-query', 'superjson'],
+        },
+      },
+    },
   },
   server: {
     host: true,

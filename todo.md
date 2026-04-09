@@ -68,3 +68,7 @@
 - [x] Upload optimized images to CloudFront
 - [x] Update image URLs in Home.tsx and index.html
 - [x] Implement responsive images with srcset for mobile optimization (hero & about images with 480px/768px/1200px breakpoints)
+- [x] Revert Jill Wheaton speaker photo to original uncompressed version
+- [ ] Edit Chelsea speaker photo (looks bad, needs manual adjustment)
+- [ ] Edit Nick speaker photo (looks bad, needs manual adjustment)
+- [ ] Edit Elena speaker photo (looks bad, needs manual adjustment)

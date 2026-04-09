@@ -649,7 +649,7 @@ function Topics() {
 /* ─── Speakers Section ─── */
 function Speakers() {
   const speakers = [
-    { name: "Jill Wheaton", role: "Tony Robbins Director of Biz Solutions", description: "Bringing world-class business and peak performance strategies from the Tony Robbins organization.", photo: "https://d2xsxph8kpxj0f.cloudfront.net/310519663486084134/3RPVjQxNXJ7EgGkKFJaBsJ/optimized_jill_fe80a2a8_9bfb699e.webp" },
+    { name: "Jill Wheaton", role: "Tony Robbins Director of Biz Solutions", description: "Bringing world-class business and peak performance strategies from the Tony Robbins organization.", photo: "https://d2xsxph8kpxj0f.cloudfront.net/310519663486084134/3RPVjQxNXJ7EgGkKFJaBsJ/jill_original_ed3700fb.webp" },
     { name: "Dr. Neville Campbell", role: "MD, MBA, CEO, Philanthropist, Author, Professor & IFBB Pro Athlete", description: "A powerhouse at the intersection of medicine, business, and elite athletic performance.", photo: "https://d2xsxph8kpxj0f.cloudfront.net/310519663486084134/3RPVjQxNXJ7EgGkKFJaBsJ/optimized_neville_63270edc_722d3dc4.webp" },
     { name: "Dr. Nick Delgado", role: "Bestselling Author & Performance Expert", description: "Pioneering expert in hormones, longevity, and peak human performance with decades of research.", photo: "https://d2xsxph8kpxj0f.cloudfront.net/310519663486084134/3RPVjQxNXJ7EgGkKFJaBsJ/optimized_nick_463447a1_a7ead39c.webp" },
     { name: "Dr. Chelsea Grow", role: "Board Certified Neurologist", description: "Specializing in brain health, cognitive performance, and neurological wellness strategies.", photo: "https://d2xsxph8kpxj0f.cloudfront.net/310519663486084134/3RPVjQxNXJ7EgGkKFJaBsJ/optimized_chelsea_66e66b08_9dd60fbd.webp" },

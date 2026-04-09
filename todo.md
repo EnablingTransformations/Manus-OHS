@@ -62,3 +62,8 @@
 - [ ] Configure CloudFront cache headers via Express middleware
 - [x] Defer tracking scripts with requestIdleCallback
 - [x] Fix Google Fonts URL to remove 404 italic weight
+- [x] Resize 8 speaker photos to 200x200px, WebP 80% quality (avg 78% savings)
+- [x] Re-compress hero image to WebP 70% quality (169 KB, 20% savings)
+- [x] Re-compress about image to WebP 70% quality (118 KB, 19% savings)
+- [x] Upload optimized images to CloudFront
+- [x] Update image URLs in Home.tsx and index.html

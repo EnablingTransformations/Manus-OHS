@@ -45,8 +45,8 @@ import {
 } from "lucide-react";
 
 const LOGO_IMG = "https://d2xsxph8kpxj0f.cloudfront.net/310519663486084134/3RPVjQxNXJ7EgGkKFJaBsJ/logo_8918fb42.png";
-const HERO_IMG = "https://d2xsxph8kpxj0f.cloudfront.net/310519663486084134/3RPVjQxNXJ7EgGkKFJaBsJ/hero-indoor-event-KrrdMyWTYYS3XvJpxKsfmU.webp";
-const ABOUT_IMG = "https://d2xsxph8kpxj0f.cloudfront.net/310519663486084134/3RPVjQxNXJ7EgGkKFJaBsJ/about-section-FjfkLYDPAMLJEw2wv8icUB.webp";
+const HERO_IMG = "https://d2xsxph8kpxj0f.cloudfront.net/310519663486084134/3RPVjQxNXJ7EgGkKFJaBsJ/optimized_hero-indoor-event-KrrdMyWTYYS3XvJpxKsfmU_b437920b.webp";
+const ABOUT_IMG = "https://d2xsxph8kpxj0f.cloudfront.net/310519663486084134/3RPVjQxNXJ7EgGkKFJaBsJ/optimized_about-section-FjfkLYDPAMLJEw2wv8icUB_1302a822.webp";
 const VENDOR_IMG = "https://d2xsxph8kpxj0f.cloudfront.net/310519663486084134/3RPVjQxNXJ7EgGkKFJaBsJ/vendor-lounge-Lnf3VgZrMeCcZntU8h3i6k.webp";
 const NETWORK_IMG = "https://d2xsxph8kpxj0f.cloudfront.net/310519663486084134/3RPVjQxNXJ7EgGkKFJaBsJ/networking-U9Kbfvkn9i5po8BrKMyg9L.webp";
 
@@ -637,14 +637,14 @@ function Topics() {
 /* ─── Speakers Section ─── */
 function Speakers() {
   const speakers = [
-    { name: "Jill Wheaton", role: "Tony Robbins Director of Biz Solutions", description: "Bringing world-class business and peak performance strategies from the Tony Robbins organization.", photo: "https://d2xsxph8kpxj0f.cloudfront.net/310519663486084134/3RPVjQxNXJ7EgGkKFJaBsJ/jill_fe80a2a8.webp" },
-    { name: "Dr. Neville Campbell", role: "MD, MBA, CEO, Philanthropist, Author, Professor & IFBB Pro Athlete", description: "A powerhouse at the intersection of medicine, business, and elite athletic performance.", photo: "https://d2xsxph8kpxj0f.cloudfront.net/310519663486084134/3RPVjQxNXJ7EgGkKFJaBsJ/neville_63270edc.webp" },
-    { name: "Dr. Nick Delgado", role: "Bestselling Author & Performance Expert", description: "Pioneering expert in hormones, longevity, and peak human performance with decades of research.", photo: "https://d2xsxph8kpxj0f.cloudfront.net/310519663486084134/3RPVjQxNXJ7EgGkKFJaBsJ/nick_463447a1.webp" },
-    { name: "Dr. Chelsea Grow", role: "Board Certified Neurologist", description: "Specializing in brain health, cognitive performance, and neurological wellness strategies.", photo: "https://d2xsxph8kpxj0f.cloudfront.net/310519663486084134/3RPVjQxNXJ7EgGkKFJaBsJ/chelsea_66e66b08.webp" },
-    { name: "Joel Huizenga", role: "CEO at EgaCeutical & Longevity Scientist", description: "Cutting-edge longevity science and breakthrough pharmaceutical solutions for age reversal.", photo: "https://d2xsxph8kpxj0f.cloudfront.net/310519663486084134/3RPVjQxNXJ7EgGkKFJaBsJ/joel_40df6173.webp" },
-    { name: "Dr. Elena Eustache", role: "Love Doctor, Global Matchmaker, TV Host & Bestselling Author", description: "World-renowned expert in relationships, love, and the mind-body-soul connection.", photo: "https://d2xsxph8kpxj0f.cloudfront.net/310519663486084134/3RPVjQxNXJ7EgGkKFJaBsJ/elena_77df9d4f.webp" },
-    { name: "Dr. Karolina Pras", role: "Root-Cause Medicine", description: "Functional medicine physician uncovering the root causes of chronic illness for lasting health transformation.", photo: "https://d2xsxph8kpxj0f.cloudfront.net/310519663486084134/3RPVjQxNXJ7EgGkKFJaBsJ/karolina_008f9417.webp" },
-    { name: "Surprise Speaker", role: "To Be Announced", description: "A very special guest will be revealed at the event — you won't want to miss it!", photo: "https://d2xsxph8kpxj0f.cloudfront.net/310519663486084134/3RPVjQxNXJ7EgGkKFJaBsJ/surprise_f5b6e4df.webp" },
+    { name: "Jill Wheaton", role: "Tony Robbins Director of Biz Solutions", description: "Bringing world-class business and peak performance strategies from the Tony Robbins organization.", photo: "https://d2xsxph8kpxj0f.cloudfront.net/310519663486084134/3RPVjQxNXJ7EgGkKFJaBsJ/optimized_jill_fe80a2a8_9bfb699e.webp" },
+    { name: "Dr. Neville Campbell", role: "MD, MBA, CEO, Philanthropist, Author, Professor & IFBB Pro Athlete", description: "A powerhouse at the intersection of medicine, business, and elite athletic performance.", photo: "https://d2xsxph8kpxj0f.cloudfront.net/310519663486084134/3RPVjQxNXJ7EgGkKFJaBsJ/optimized_neville_63270edc_722d3dc4.webp" },
+    { name: "Dr. Nick Delgado", role: "Bestselling Author & Performance Expert", description: "Pioneering expert in hormones, longevity, and peak human performance with decades of research.", photo: "https://d2xsxph8kpxj0f.cloudfront.net/310519663486084134/3RPVjQxNXJ7EgGkKFJaBsJ/optimized_nick_463447a1_a7ead39c.webp" },
+    { name: "Dr. Chelsea Grow", role: "Board Certified Neurologist", description: "Specializing in brain health, cognitive performance, and neurological wellness strategies.", photo: "https://d2xsxph8kpxj0f.cloudfront.net/310519663486084134/3RPVjQxNXJ7EgGkKFJaBsJ/optimized_chelsea_66e66b08_9dd60fbd.webp" },
+    { name: "Joel Huizenga", role: "CEO at EgaCeutical & Longevity Scientist", description: "Cutting-edge longevity science and breakthrough pharmaceutical solutions for age reversal.", photo: "https://d2xsxph8kpxj0f.cloudfront.net/310519663486084134/3RPVjQxNXJ7EgGkKFJaBsJ/optimized_joel_40df6173_696d7490.webp" },
+    { name: "Dr. Elena Eustache", role: "Love Doctor, Global Matchmaker, TV Host & Bestselling Author", description: "World-renowned expert in relationships, love, and the mind-body-soul connection.", photo: "https://d2xsxph8kpxj0f.cloudfront.net/310519663486084134/3RPVjQxNXJ7EgGkKFJaBsJ/optimized_elena_77df9d4f_87ef3eb3.webp" },
+    { name: "Dr. Karolina Pras", role: "Root-Cause Medicine", description: "Functional medicine physician uncovering the root causes of chronic illness for lasting health transformation.", photo: "https://d2xsxph8kpxj0f.cloudfront.net/310519663486084134/3RPVjQxNXJ7EgGkKFJaBsJ/optimized_karolina_008f9417_d50db3b0.webp" },
+    { name: "Surprise Speaker", role: "To Be Announced", description: "A very special guest will be revealed at the event — you won't want to miss it!", photo: "https://d2xsxph8kpxj0f.cloudfront.net/310519663486084134/3RPVjQxNXJ7EgGkKFJaBsJ/optimized_surprise_f5b6e4df_2739b841.webp" },
   ];
 
   return (

@@ -182,6 +182,7 @@ export default defineConfig({
     hmr: {
       clientPort: 443,
       protocol: "wss",
+      host: process.env.VITE_HMR_HOST || undefined,
     },
     fs: {
       strict: true,

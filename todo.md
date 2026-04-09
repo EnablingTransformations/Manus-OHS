@@ -46,3 +46,4 @@
 - [x] Open Stripe checkout in new tab instead of same-tab redirect
 - [x] Move 100% satisfaction guarantee above ticket types section
 - [x] Restore refund/cancellation policy at bottom of page
+- [x] Add dedicated attendee testimonials showcase section

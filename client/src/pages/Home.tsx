@@ -821,6 +821,94 @@ function Testimonials() {
   );
 }
 
+/* ─── Attendee Testimonials Grid Section ─── */
+function AttendeeTestimonials() {
+  const testimonials = [
+    {
+      quote: "This was the most impactful health event I've attended. The speakers were world-class and the information was immediately actionable. I left with a completely new perspective on my health.",
+      name: "Sarah M.",
+      title: "Functional Medicine Patient",
+      stars: 5,
+    },
+    {
+      quote: "I've been to dozens of health conferences. This one stands out because every single speaker delivered real, science-backed strategies — not fluff. Worth every penny and more.",
+      name: "James T.",
+      title: "Biohacker & Entrepreneur",
+      stars: 5,
+    },
+    {
+      quote: "The networking alone was worth the ticket price. I connected with a neurologist and a longevity scientist in the same afternoon. My health journey changed that day.",
+      name: "Dr. Priya K.",
+      title: "Integrative Medicine Physician",
+      stars: 5,
+    },
+    {
+      quote: "I was skeptical at first, but the 100% satisfaction guarantee made it easy to say yes. I didn't need it — the event exceeded every expectation. Already bought my VIP ticket for next year.",
+      name: "Michael R.",
+      title: "VIP Attendee",
+      stars: 5,
+    },
+    {
+      quote: "Sid curated an incredible lineup. The combination of cutting-edge science and practical wellness strategies was exactly what I needed. My energy levels have been transformed.",
+      name: "Lisa W.",
+      title: "Health Coach",
+      stars: 5,
+    },
+    {
+      quote: "The venue was perfect, the food was delicious, and the energy was electric. I made connections that will last a lifetime. Can't wait for next year!",
+      name: "David K.",
+      title: "Entrepreneur",
+      stars: 5,
+    },
+  ];
+
+  return (
+    <section className="py-20 md:py-28 bg-charcoal-light">
+      <div className="container">
+        <AnimatedSection>
+          <div className="text-center max-w-2xl mx-auto mb-16">
+            <span className="text-teal text-sm font-semibold uppercase tracking-widest mb-4 block">
+              Attendee Success Stories
+            </span>
+            <h2 className="text-4xl md:text-5xl font-bold text-white leading-tight mb-4">
+              What <span className="text-teal">Previous Attendees</span> Experienced
+            </h2>
+            <p className="text-white/60 text-lg">
+              Real testimonials from people who transformed their health at the Optimal Health Summit.
+            </p>
+          </div>
+        </AnimatedSection>
+
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {testimonials.map((testimonial, i) => (
+            <AnimatedSection key={i} delay={i * 0.08}>
+              <div className="bg-charcoal border border-white/8 rounded-xl p-6 h-full flex flex-col hover:border-teal/30 transition-all duration-300 hover:-translate-y-1">
+                {/* Stars */}
+                <div className="flex gap-1 mb-4">
+                  {Array.from({ length: testimonial.stars }).map((_, j) => (
+                    <Star key={j} className="w-4 h-4 fill-gold text-gold" />
+                  ))}
+                </div>
+
+                {/* Quote */}
+                <p className="text-white/80 text-sm leading-relaxed mb-6 flex-grow">
+                  &ldquo;{testimonial.quote}&rdquo;
+                </p>
+
+                {/* Author */}
+                <div className="border-t border-white/5 pt-4">
+                  <p className="font-bold text-white text-sm">{testimonial.name}</p>
+                  <p className="text-teal text-xs mt-1">{testimonial.title}</p>
+                </div>
+              </div>
+            </AnimatedSection>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
 /* ─── 100% Satisfaction Guarantee Section ─── */
 function SatisfactionGuaranteeSection() {
   return (
@@ -1554,6 +1642,7 @@ export default function Home() {
       <WhyAttend />
       <StatsBar />
       <Testimonials />
+      <AttendeeTestimonials />
       <SatisfactionGuaranteeSection />
       <Tickets />
       <Impact />

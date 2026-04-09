@@ -316,7 +316,7 @@ function Navbar({ onOpenTickets }: { onOpenTickets: () => void }) {
     >
       <div className="container flex items-center justify-between py-4">
         <a href="#" className="flex items-center gap-2">
-          <img src={LOGO_IMG} alt="Optimal Health Summit" className="h-8 w-auto rounded-lg" />
+          <img src={LOGO_IMG} alt="Optimal Health Summit" className="h-8 w-auto rounded-lg" loading="lazy" />
           <span className="font-[family-name:var(--font-display)] text-lg font-bold tracking-tight text-white">
             Optimal Health <span className="text-teal">Summit</span>
           </span>
@@ -346,7 +346,7 @@ function Hero() {
     <section className="relative min-h-screen flex items-end pb-20 md:pb-28 overflow-hidden">
       {/* Background image */}
       <div className="absolute inset-0">
-        <img src={HERO_IMG} alt="Optimal Health Summit" className="w-full h-full object-cover" />
+        <img src={HERO_IMG} alt="Optimal Health Summit" className="w-full h-full object-cover" loading="eager" />
         <div className="absolute inset-0 bg-gradient-to-t from-charcoal via-charcoal/60 to-transparent" />
         <div className="absolute inset-0 bg-gradient-to-r from-charcoal/50 to-transparent" />
       </div>
@@ -498,6 +498,7 @@ function About() {
             <div className="relative">
               <img
                 src={ABOUT_IMG}
+                loading="lazy"
                 alt="Keynote speaker on stage"
                 className="rounded-xl w-full aspect-[16/10] object-cover shadow-2xl" style={{width: '485px', height: '300px'}}
               />
@@ -813,6 +814,7 @@ function WhyAttend() {
             <div className="relative">
               <img
                 src={NETWORK_IMG}
+                loading="lazy"
                 alt="Networking at the summit"
                 className="rounded-xl w-full aspect-[3/2] object-cover shadow-2xl"
               />
@@ -861,8 +863,9 @@ function VendorLounge() {
           </AnimatedSection>
 
           <AnimatedSection delay={0.2}>
-            <img
-              src={VENDOR_IMG}
+                  <img
+                    src={VENDOR_IMG}
+                    loading="lazy"
               alt="Vendor Experience Lounge"
               className="rounded-xl w-full aspect-[16/10] object-cover shadow-2xl"
             />
@@ -1089,7 +1092,7 @@ function Footer() {
               Refund and Cancellation Policy
             </button>
             <div className="flex items-center gap-2">
-              <img src={LOGO_IMG} alt="Optimal Health Summit" className="h-6 w-auto rounded-lg" />
+              <img src={LOGO_IMG} alt="Optimal Health Summit" className="h-6 w-auto rounded-lg" loading="lazy" />
               <span className="font-[family-name:var(--font-display)] text-sm font-bold text-white/60">
                 Optimal Health Summit
               </span>

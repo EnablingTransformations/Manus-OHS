@@ -35,3 +35,7 @@
 - [ ] Convert speaker headshots to WebP format
 - [x] Owner notification on new SMS subscriber opt-in
 - [x] Fix Vite HMR WebSocket error in Manus proxy dev environment
+- [x] Convert speaker photos to WebP and re-upload to CDN (already WebP, no action needed)
+- [x] Add loading="lazy" to all below-the-fold img tags
+- [x] Add width/height attributes to all img tags for CLS prevention
+- [x] Add fetchpriority="high" to hero img tag

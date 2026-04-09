@@ -316,7 +316,7 @@ function Navbar({ onOpenTickets }: { onOpenTickets: () => void }) {
     >
       <div className="container flex items-center justify-between py-4">
         <a href="#" className="flex items-center gap-2">
-          <img src={LOGO_IMG} alt="Optimal Health Summit" className="h-8 w-auto rounded-lg" loading="lazy" />
+          <img src={LOGO_IMG} alt="Optimal Health Summit" className="h-8 w-auto rounded-lg" loading="lazy" width="32" height="32" />
           <span className="font-[family-name:var(--font-display)] text-lg font-bold tracking-tight text-white">
             Optimal Health <span className="text-teal">Summit</span>
           </span>
@@ -346,7 +346,7 @@ function Hero() {
     <section className="relative min-h-screen flex items-end pb-20 md:pb-28 overflow-hidden">
       {/* Background image */}
       <div className="absolute inset-0">
-        <img src={HERO_IMG} alt="Optimal Health Summit" className="w-full h-full object-cover" loading="eager" />
+        <img src={HERO_IMG} alt="Optimal Health Summit" className="w-full h-full object-cover" loading="eager" fetchPriority="high" width="1920" height="1072" />
         <div className="absolute inset-0 bg-gradient-to-t from-charcoal via-charcoal/60 to-transparent" />
         <div className="absolute inset-0 bg-gradient-to-r from-charcoal/50 to-transparent" />
       </div>
@@ -500,7 +500,10 @@ function About() {
                 src={ABOUT_IMG}
                 loading="lazy"
                 alt="Keynote speaker on stage"
-                className="rounded-xl w-full aspect-[16/10] object-cover shadow-2xl" style={{width: '485px', height: '300px'}}
+                className="rounded-xl w-full aspect-[16/10] object-cover shadow-2xl"
+                width="1920"
+                height="1072"
+                style={{width: '485px', height: '300px'}}
               />
               <button onClick={() => setShowSatisfactionGuarantee(true)} className="absolute top-0 left-0 right-0 bg-charcoal-light/95 border-b border-teal/20 px-6 py-3 hover:border-teal/40 transition-colors cursor-pointer text-left" style={{width: '484px', height: '57px'}}>
                 <div className="text-gold font-bold text-sm font-[family-name:var(--font-display)]">
@@ -629,6 +632,9 @@ function Speakers() {
                     src={speaker.photo}
                     alt={speaker.name}
                     className="w-full h-full object-cover"
+                    loading="lazy"
+                    width="96"
+                    height="96"
                     style={{ objectPosition: (speaker as any).objectPosition || 'center', transform: (speaker as any).scale ? `scale(${ (speaker as any).scale})` : 'scale(1)' }}
                     onError={(e) => {
                       const target = e.currentTarget as HTMLImageElement;
@@ -816,6 +822,8 @@ function WhyAttend() {
                 loading="lazy"
                 alt="Networking at the summit"
                 className="rounded-xl w-full aspect-[3/2] object-cover shadow-2xl"
+                width="1920"
+                height="1288"
               />
             </div>
           </AnimatedSection>
@@ -867,6 +875,8 @@ function VendorLounge() {
                     loading="lazy"
               alt="Vendor Experience Lounge"
               className="rounded-xl w-full aspect-[16/10] object-cover shadow-2xl"
+              width="1920"
+              height="1072"
             />
           </AnimatedSection>
           </div>
@@ -1091,7 +1101,7 @@ function Footer() {
               Refund and Cancellation Policy
             </button>
             <div className="flex items-center gap-2">
-              <img src={LOGO_IMG} alt="Optimal Health Summit" className="h-6 w-auto rounded-lg" loading="lazy" />
+              <img src={LOGO_IMG} alt="Optimal Health Summit" className="h-6 w-auto rounded-lg" loading="lazy" width="24" height="24" />
               <span className="font-[family-name:var(--font-display)] text-sm font-bold text-white/60">
                 Optimal Health Summit
               </span>

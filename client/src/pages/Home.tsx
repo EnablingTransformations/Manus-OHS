@@ -634,6 +634,144 @@ function SocialProofSection() {
   );
 }
 
+/* ─── SCHEDULE SECTION (Event Timeline) ─── */
+function ScheduleSection() {
+  const scheduleItems = [
+    {
+      time: "8:00 AM",
+      title: "Registration & Breakfast",
+      description: "Check-in, network with attendees, enjoy a nutritious breakfast",
+      speaker: "",
+      icon: "☕",
+    },
+    {
+      time: "9:00 AM",
+      title: "Opening Keynote: The Biology of Aging",
+      description: "Discover the 3 biological switches that control aging and what you can do about them today",
+      speaker: "Jewel Huizinga",
+      icon: "🧬",
+    },
+    {
+      time: "10:00 AM",
+      title: "Optimize Your Hormones for Peak Performance",
+      description: "Learn how to naturally balance your hormones to boost energy, metabolism, and vitality",
+      speaker: "Dr. Nick Delgado",
+      icon: "⚡",
+    },
+    {
+      time: "11:00 AM",
+      title: "Break & Networking",
+      description: "Connect with speakers and fellow attendees in the expo hall",
+      speaker: "",
+      icon: "🤝",
+    },
+    {
+      time: "11:30 AM",
+      title: "Nutrition Secrets from the World's Healthiest Cultures",
+      description: "Practical dietary strategies that have kept populations healthy for generations",
+      speaker: "Dr. Mark Hyman",
+      icon: "🥗",
+    },
+    {
+      time: "12:30 PM",
+      title: "Lunch & Expo Hall",
+      description: "Enjoy lunch while exploring cutting-edge health vendors and products",
+      speaker: "",
+      icon: "🍽️",
+    },
+    {
+      time: "1:30 PM",
+      title: "Biohacking Your Sleep for Recovery & Longevity",
+      description: "Science-backed strategies to improve sleep quality and accelerate cellular repair",
+      speaker: "Jewel Huizinga",
+      icon: "😴",
+    },
+    {
+      time: "2:30 PM",
+      title: "Exercise & Movement for Longevity",
+      description: "The most effective exercise protocols for building strength, flexibility, and living longer",
+      speaker: "Dr. Nick Delgado",
+      icon: "💪",
+    },
+    {
+      time: "3:30 PM",
+      title: "Break & Expo",
+      description: "Recharge and explore vendor booths",
+      speaker: "",
+      icon: "🔄",
+    },
+    {
+      time: "4:00 PM",
+      title: "Mental Health & Stress Mastery",
+      description: "Proven techniques to reduce stress, improve mental clarity, and build emotional resilience",
+      speaker: "Jill Wheaton",
+      icon: "🧠",
+    },
+    {
+      time: "5:00 PM",
+      title: "Panel Discussion: Your Questions Answered",
+      description: "Direct Q&A with all speakers about health, aging, and your personal wellness journey",
+      speaker: "All Speakers",
+      icon: "🎤",
+    },
+    {
+      time: "6:00 PM",
+      title: "After-Event Networking Social",
+      description: "Connect with speakers, vendors, and fellow health enthusiasts in a relaxed setting",
+      speaker: "",
+      icon: "🎉",
+    },
+  ];
+
+  return (
+    <section className="py-20 bg-charcoal-light">
+      <div className="container mx-auto px-4">
+        <AnimatedSection className="max-w-3xl mx-auto text-center mb-16">
+          <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
+            Event Schedule
+          </h2>
+          <p className="text-xl text-white/70">
+            A full day of transformative learning, networking, and health breakthroughs.
+          </p>
+          <p className="text-teal font-semibold mt-4">Saturday, June 20, 2026 • UC San Diego Park & Market</p>
+        </AnimatedSection>
+
+        <div className="max-w-4xl mx-auto">
+          <div className="space-y-4">
+            {scheduleItems.map((item, i) => (
+              <AnimatedSection key={i} delay={i * 0.03}>
+                <div className="bg-charcoal border border-white/10 rounded-xl p-6 hover:border-teal/30 transition-all">
+                  <div className="flex gap-6">
+                    <div className="flex-shrink-0">
+                      <div className="text-3xl">{item.icon}</div>
+                      <div className="text-teal font-bold text-sm mt-2 whitespace-nowrap">{item.time}</div>
+                    </div>
+                    <div className="flex-grow">
+                      <h3 className="text-lg font-bold text-white mb-2">{item.title}</h3>
+                      <p className="text-white/70 mb-2">{item.description}</p>
+                      {item.speaker && (
+                        <p className="text-teal text-sm font-semibold">Speaker: {item.speaker}</p>
+                      )}
+                    </div>
+                  </div>
+                </div>
+              </AnimatedSection>
+            ))}
+          </div>
+        </div>
+
+        <AnimatedSection className="max-w-3xl mx-auto text-center mt-12">
+          <div className="bg-gradient-to-r from-teal/10 to-gold/10 border border-teal/30 rounded-xl p-8">
+            <p className="text-white/80 mb-4">
+              <span className="font-bold text-teal">Note:</span> This is a full-day event with breaks built in for networking, meals, and vendor exploration. Virtual attendees will receive live streaming of all sessions and lifetime access to recordings.
+            </p>
+          </div>
+        </AnimatedSection>
+      </div>
+    </section>
+  );
+}
+
 /* ─── FAQ SECTION (Address Objections) ─── */
 function FAQSection() {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
@@ -767,6 +905,7 @@ export default function Home() {
       <GuideSection />
       <PlanSection />
       <IrresistibleOfferSection onGetStarted={() => setTicketModalOpen(true)} />
+      <ScheduleSection />
       <FAQSection />
       <FinalCTASection onGetStarted={() => setTicketModalOpen(true)} />
 

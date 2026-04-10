@@ -23,8 +23,8 @@
 - [ ] Facebook Pixel integration
 - [ ] Google Analytics integration
 - [ ] Countdown timer in hero section
-- [ ] FAQ section
-- [ ] Testimonials section
+- [x] FAQ section
+- [x] Testimonials section
 - [ ] Referral system backend
 - [x] Admin dashboard - view email leads
 - [x] Admin dashboard - track ticket sales stats
@@ -72,3 +72,4 @@
 - [ ] Edit Chelsea speaker photo (looks bad, needs manual adjustment)
 - [ ] Edit Nick speaker photo (looks bad, needs manual adjustment)
 - [ ] Edit Elena speaker photo (looks bad, needs manual adjustment)
+- [x] Restore original images (about, vendor, networking, speaker headshots) into StoryBrand redesign sections

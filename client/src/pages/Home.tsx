@@ -376,7 +376,7 @@ function GuideSection() {
                 </div>
                 <div>
                   <h3 className="text-lg font-bold text-white mb-2">Jill Wheaton</h3>
-                  <p className="text-teal text-sm font-semibold mb-2">Tony Robbins Director of Winning Strategies</p>
+                  <p className="text-teal text-sm font-semibold mb-2">Tony Robbins Director of Proven Winning Mind Programming Tools</p>
                   <p className="text-white/60 text-sm">Bringing world-class winning strategies and peak performance strategies from the Tony Robbins organization.</p>
                 </div>
               </div>
@@ -390,7 +390,7 @@ function GuideSection() {
                   <Heart className="w-8 h-8 text-gold" />
                 </div>
                 <div>
-      <h3 className="text-lg font-bold text-white mb-2">Jewel Huizinga</h3>
+                  <h3 className="text-lg font-bold text-white mb-2">Joel Huizinga</h3>
               <p className="text-teal text-sm font-semibold mb-2">Expert in Aging Biology</p>
               <p className="text-white/60 text-sm">Pioneering research and practical strategies for reversing aging at the cellular level.</p>
                 </div>
@@ -445,7 +445,7 @@ function PlanSection() {
     {
       num: "1",
       title: "The Biology of Aging",
-      speaker: "Jewel Huizinga",
+      speaker: "Joel Huizinga",
       outcomes: ["Understand why you age faster than you should", "Discover the 3 biological switches that control aging", "Learn the science-backed interventions that work"],
     },
     {
@@ -638,84 +638,84 @@ function SocialProofSection() {
 function ScheduleSection() {
   const scheduleItems = [
     {
-      time: "8:00 AM",
+      time: "8:30 AM",
       title: "Registration & Breakfast",
       description: "Check-in, network with attendees, enjoy a nutritious breakfast",
       speaker: "",
       icon: "☕",
     },
     {
-      time: "9:00 AM",
+      time: "9:30 AM",
       title: "Opening Keynote: The Biology of Aging",
       description: "Discover the 3 biological switches that control aging and what you can do about them today",
-      speaker: "Jewel Huizinga",
+      speaker: "Joel Huizinga",
       icon: "🧬",
     },
     {
-      time: "10:00 AM",
+      time: "10:30 AM",
       title: "Optimize Your Hormones for Peak Performance",
       description: "Learn how to naturally balance your hormones to boost energy, metabolism, and vitality",
       speaker: "Dr. Nick Delgado",
       icon: "⚡",
     },
     {
-      time: "11:00 AM",
+      time: "11:30 AM",
       title: "Break & Networking",
       description: "Connect with speakers and fellow attendees in the expo hall",
       speaker: "",
       icon: "🤝",
     },
     {
-      time: "11:30 AM",
+      time: "12:00 PM",
       title: "Nutrition Secrets from the World's Healthiest Cultures",
       description: "Practical dietary strategies that have kept populations healthy for generations",
       speaker: "Dr. Mark Hyman",
       icon: "🥗",
     },
     {
-      time: "12:30 PM",
+      time: "1:00 PM",
       title: "Lunch & Expo Hall",
       description: "Enjoy lunch while exploring cutting-edge health vendors and products",
       speaker: "",
       icon: "🍽️",
     },
     {
-      time: "1:30 PM",
+      time: "2:00 PM",
       title: "Biohacking Your Sleep for Recovery & Longevity",
       description: "Science-backed strategies to improve sleep quality and accelerate cellular repair",
-      speaker: "Jewel Huizinga",
+      speaker: "Joel Huizinga",
       icon: "😴",
     },
     {
-      time: "2:30 PM",
+      time: "3:00 PM",
       title: "Exercise & Movement for Longevity",
       description: "The most effective exercise protocols for building strength, flexibility, and living longer",
       speaker: "Dr. Nick Delgado",
       icon: "💪",
     },
     {
-      time: "3:30 PM",
+      time: "4:00 PM",
       title: "Break & Expo",
       description: "Recharge and explore vendor booths",
       speaker: "",
       icon: "🔄",
     },
     {
-      time: "4:00 PM",
+      time: "4:30 PM",
       title: "Mental Health & Stress Mastery",
       description: "Proven techniques to reduce stress, improve mental clarity, and build emotional resilience",
       speaker: "Jill Wheaton",
       icon: "🧠",
     },
     {
-      time: "5:00 PM",
+      time: "5:30 PM",
       title: "Panel Discussion: Your Questions Answered",
       description: "Direct Q&A with all speakers about health, aging, and your personal wellness journey",
       speaker: "All Speakers",
       icon: "🎤",
     },
     {
-      time: "6:00 PM",
+      time: "6:30 PM",
       title: "After-Event Networking Social",
       description: "Connect with speakers, vendors, and fellow health enthusiasts in a relaxed setting",
       speaker: "",
@@ -734,6 +734,7 @@ function ScheduleSection() {
             A full day of transformative learning, networking, and health breakthroughs.
           </p>
           <p className="text-teal font-semibold mt-4">Saturday, June 20, 2026 • UC San Diego Park & Market</p>
+          <p className="text-white/50 text-sm mt-2">*Schedule subject to change</p>
         </AnimatedSection>
 
         <div className="max-w-4xl mx-auto">
@@ -850,7 +851,7 @@ function FinalCTASection({ onGetStarted }: { onGetStarted: () => void }) {
             Don't Let Another Day Go By Feeling Tired & Stuck
           </h2>
           <p className="text-xl text-white/80 mb-8">
-            Join 150 people transforming their health this June. Early bird pricing ends April 24.
+            Join 120+ people transforming their health this June. Early bird pricing ends April 24.
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center mb-8">
@@ -869,7 +870,7 @@ function FinalCTASection({ onGetStarted }: { onGetStarted: () => void }) {
           </div>
 
           <p className="text-white/60 text-sm">
-            100% Satisfaction Guarantee
+            <span className="font-bold text-teal">100% Satisfaction Guarantee:</span> Attend the entire summit. If you don't feel like it was worth your investment, we'll refund 100% of your ticket price within 7 days. No questions asked.
           </p>
         </AnimatedSection>
       </div>

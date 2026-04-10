@@ -376,8 +376,8 @@ function GuideSection() {
                 </div>
                 <div>
                   <h3 className="text-lg font-bold text-white mb-2">Jill Wheaton</h3>
-                  <p className="text-teal text-sm font-semibold mb-2">Tony Robbins Director of Biz Solutions</p>
-                  <p className="text-white/60 text-sm">Bringing world-class business and peak performance strategies from the Tony Robbins organization.</p>
+                  <p className="text-teal text-sm font-semibold mb-2">Tony Robbins Director of Winning Strategies</p>
+                  <p className="text-white/60 text-sm">Bringing world-class winning strategies and peak performance strategies from the Tony Robbins organization.</p>
                 </div>
               </div>
             </div>

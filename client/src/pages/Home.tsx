@@ -878,6 +878,158 @@ function FinalCTASection({ onGetStarted }: { onGetStarted: () => void }) {
   );
 }
 
+/* ─── FOOTER WITH SOCIAL MEDIA ─── */
+function Footer() {
+  const [showRefundPolicy, setShowRefundPolicy] = useState(false);
+  const [showContactModal, setShowContactModal] = useState(false);
+  const [showPrivacyPolicy, setShowPrivacyPolicy] = useState(false);
+  const [showTermsOfService, setShowTermsOfService] = useState(false);
+
+  return (
+    <>
+      <footer className="bg-charcoal-light border-t border-white/10 py-12">
+        <div className="container mx-auto px-4">
+          <div className="flex flex-col md:flex-row items-center justify-between gap-8 mb-8">
+            <div className="flex items-center gap-2">
+              <img src={LOGO_IMG} alt="Optimal Health Summit" className="h-6 w-auto rounded-lg" loading="lazy" width="24" height="24" />
+              <span className="font-[family-name:var(--font-display)] text-sm font-bold text-white/60">
+                Optimal Health Summit 2026
+              </span>
+            </div>
+
+            <div className="flex items-center gap-8">
+              {[
+                { icon: Instagram, href: "https://instagram.com/OptimalHealthSummit" },
+                { icon: Facebook, href: "https://facebook.com/events/s/optimal-health-summit-2nd-annu/1257572565745799/" },
+                { icon: Youtube, href: "https://youtube.com/@EnablingTransformations" },
+                { icon: Linkedin, href: "https://www.linkedin.com/company/optimalhealthsummit/" },
+              ].map((social, i) => (
+                <a
+                  key={i}
+                  href={social.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-white/30 hover:text-teal transition-colors"
+                >
+                  <social.icon className="w-6 h-6" />
+                </a>
+              ))}
+              {/* X (Twitter) Icon */}
+              <a
+                href="https://x.com/TheCerebrum2020"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-white/30 hover:text-teal transition-colors"
+                title="Follow us on X"
+              >
+                <svg className="w-6 h-6" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24h-6.514l-5.106-6.694-5.857 6.694H2.562l7.746-8.868-8.176-10.632h6.506l4.759 6.278 5.328-6.278zM17.002 18.807h1.844L6.803 3.469H4.751l12.251 15.338z" />
+                </svg>
+              </a>
+              <button
+                onClick={() => setShowContactModal(true)}
+                className="text-white/30 hover:text-teal transition-colors"
+                title="Send us an email"
+              >
+                <Mail className="w-6 h-6" />
+              </button>
+            </div>
+          </div>
+
+          <div className="border-t border-white/10 pt-8 flex flex-col md:flex-row items-center justify-between gap-4">
+            <div className="flex flex-col items-center md:items-start gap-2 text-xs text-white/30">
+              <div className="flex gap-4">
+                <button
+                  onClick={() => setShowRefundPolicy(true)}
+                  className="hover:text-teal transition-colors cursor-pointer"
+                >
+                  Refund and Cancellation Policy
+                </button>
+                <button
+                  onClick={() => setShowPrivacyPolicy(true)}
+                  className="hover:text-teal transition-colors cursor-pointer"
+                >
+                  Privacy Policy
+                </button>
+                <button
+                  onClick={() => setShowTermsOfService(true)}
+                  className="hover:text-teal transition-colors cursor-pointer"
+                >
+                  Terms of Service
+                </button>
+              </div>
+              <a href="https://EnablingTransformations.com" target="_blank" rel="noopener noreferrer" className="hover:text-teal transition-colors">&copy; Enabling Transformations</a>
+            </div>
+          </div>
+        </div>
+      </footer>
+
+      {/* Refund Policy Modal */}
+      {showRefundPolicy && (
+        <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+          <div className="bg-charcoal border border-white/10 rounded-xl max-w-2xl max-h-[80vh] overflow-y-auto p-8">
+            <h3 className="text-4xl font-bold text-white mb-4">Refund and Cancellation Policy</h3>
+            <div className="text-white/70 space-y-4 text-sm">
+              <p><strong>Cancellation and refund policy:</strong></p>
+              <p>All tickets are fully refundable up to 7 days before the event. However, if you have any concerns or need assistance, please contact us by responding to the ticket purchase confirmation email. Take advantage of the lower ticket prices now before they sell out or go up — completely risk free.</p>
+              <p><strong>All tickets include a 100% satisfaction guarantee:</strong></p>
+              <p>Attend the entire summit. If you don't feel like it was worth your investment, we'll refund 100% of your ticket price within 7 days. No questions asked.</p>
+            </div>
+            <button
+              onClick={() => setShowRefundPolicy(false)}
+              className="mt-6 w-full bg-teal hover:bg-teal-dark text-charcoal font-bold py-2 rounded-lg transition-all"
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      )}
+
+      {/* Privacy Policy Modal */}
+      {showPrivacyPolicy && (
+        <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+          <div className="bg-charcoal border border-white/10 rounded-xl max-w-2xl max-h-[80vh] overflow-y-auto p-8">
+            <h3 className="text-4xl font-bold text-white mb-4">Privacy Policy</h3>
+            <div className="text-white/70 space-y-4 text-sm">
+              <p><strong>Information We Collect</strong></p>
+              <p>We collect information you provide directly to us, such as when you purchase tickets or contact us. This may include your name, email address, phone number, and payment information.</p>
+              <p><strong>How We Use Your Information</strong></p>
+              <p>We use the information we collect to process your ticket purchase, send you event updates, and improve our services. We do not share your personal information with third parties without your consent.</p>
+            </div>
+            <button
+              onClick={() => setShowPrivacyPolicy(false)}
+              className="mt-6 w-full bg-teal hover:bg-teal-dark text-charcoal font-bold py-2 rounded-lg transition-all"
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      )}
+
+      {/* Terms of Service Modal */}
+      {showTermsOfService && (
+        <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+          <div className="bg-charcoal border border-white/10 rounded-xl max-w-2xl max-h-[80vh] overflow-y-auto p-8">
+            <h3 className="text-4xl font-bold text-white mb-4">Terms of Service</h3>
+            <div className="text-white/70 space-y-4 text-sm">
+              <p><strong>Acceptance of Terms</strong></p>
+              <p>By accessing and using this website and purchasing tickets to the Optimal Health Summit 2026, you accept and agree to be bound by the terms and provision of this agreement.</p>
+              <p><strong>Use License</strong></p>
+              <p>Permission is granted to temporarily download one copy of the materials (information or software) on our website for personal, non-commercial transitory viewing only. This is the grant of a license, not a transfer of title, and under this license you may not: modify or copy the materials; use the materials for any commercial purpose or for any public display.</p>
+            </div>
+            <button
+              onClick={() => setShowTermsOfService(false)}
+              className="mt-6 w-full bg-teal hover:bg-teal-dark text-charcoal font-bold py-2 rounded-lg transition-all"
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      )}
+    </>
+  );
+}
+
 /* ─── MAIN HOME COMPONENT ─── */
 export default function Home() {
   const [ticketModalOpen, setTicketModalOpen] = useState(false);
@@ -911,16 +1063,7 @@ export default function Home() {
       <FinalCTASection onGetStarted={() => setTicketModalOpen(true)} />
 
       {/* Footer */}
-      <footer className="bg-charcoal-light border-t border-white/10 py-12">
-        <div className="container mx-auto px-4 text-center text-white/60">
-          <p>© 2026 Optimal Health Summit. All rights reserved.</p>
-          <p className="mt-2 text-sm">
-            <a href="#" className="hover:text-white transition">Privacy Policy</a> • 
-            <a href="#" className="hover:text-white transition"> Terms of Service</a> • 
-            <a href="#" className="hover:text-white transition"> Contact</a>
-          </p>
-        </div>
-      </footer>
+      <Footer />
 
       {/* Ticket Modal */}
       <TicketModal open={ticketModalOpen} onClose={() => setTicketModalOpen(false)} />

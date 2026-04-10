@@ -318,7 +318,7 @@ function Navbar({ onOpenTickets }: { onOpenTickets: () => void }) {
         <a href="#" className="flex items-center gap-2">
           <img src={LOGO_IMG} alt="Optimal Health Summit" className="h-8 w-auto rounded-lg" loading="lazy" width="32" height="32" />
           <span className="font-[family-name:var(--font-display)] text-lg font-bold tracking-tight text-white">
-            Optimal Health <span className="text-teal">Summit</span>
+            Optimal Health <span className="text-teal">Summit 2026</span>
           </span>
         </a>
         <div className="hidden md:flex items-center gap-8 text-sm font-medium text-white/70">
@@ -1454,7 +1454,7 @@ function Footer() {
             <div className="flex items-center gap-2">
               <img src={LOGO_IMG} alt="Optimal Health Summit" className="h-6 w-auto rounded-lg" loading="lazy" width="24" height="24" />
               <span className="font-[family-name:var(--font-display)] text-sm font-bold text-white/60">
-                Optimal Health Summit
+                Optimal Health Summit 2026
               </span>
             </div>
           </div>

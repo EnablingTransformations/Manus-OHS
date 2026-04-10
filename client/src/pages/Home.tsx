@@ -688,7 +688,7 @@ function Speakers() {
                     loading="lazy"
                     width="96"
                     height="96"
-                    style={{ objectPosition: (speaker as any).objectPosition || 'center', transform: (speaker as any).scale ? `scale(${ (speaker as any).scale})` : 'scale(1)', height: '139px', marginTop: '-30px', marginBottom: '-1px', marginLeft: '-2px', width: '105px' }}
+                    style={{ objectPosition: (speaker as any).objectPosition || 'center', transform: (speaker as any).scale ? `scale(${ (speaker as any).scale})` : 'scale(1)', height: '113px', marginTop: '2px', marginRight: '11px', marginBottom: '7px', marginLeft: '21px', width: '117px', paddingTop: '29px' }}
                     onError={(e) => {
                       const target = e.currentTarget as HTMLImageElement;
                       target.style.display = 'none';

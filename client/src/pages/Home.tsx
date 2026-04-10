@@ -131,7 +131,7 @@ function TicketModal({ open, onClose }: { open: boolean; onClose: () => void }) 
       
       const result = await createCheckout.mutateAsync({ ticketId, origin: window.location.origin, phoneNumber, optInSms });
       if (result.url) {
-        window.open(result.url, '_blank');
+        window.open(result.url, '_blank', 'width=600,height=700,resizable=yes,scrollbars=yes');
       }
     } catch (err) {
       console.error("Checkout error:", err);
@@ -281,25 +281,7 @@ function Hero({ onGetStarted }: { onGetStarted: () => void }) {
             Discover the science-backed strategies that 500+ people have used to break free from fatigue, reclaim their vitality, and build the life they've always wanted.
           </motion.p>
 
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.4 }}
-            className="flex flex-col sm:flex-row gap-4 mb-8"
-          >
-            <button
-              onClick={onGetStarted}
-              className="px-8 py-4 bg-gold text-charcoal font-bold rounded-lg hover:bg-gold/90 transition-all text-lg shadow-lg"
-            >
-              Claim Your Spot Now
-            </button>
-            <button
-              onClick={() => document.getElementById('problem')?.scrollIntoView({ behavior: 'smooth' })}
-              className="px-8 py-4 bg-teal/30 text-teal font-bold rounded-lg hover:bg-teal/40 border border-teal/50 transition-all text-lg"
-            >
-              See How It Works
-            </button>
-          </motion.div>
+
 
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -408,9 +390,9 @@ function GuideSection() {
                   <Heart className="w-8 h-8 text-gold" />
                 </div>
                 <div>
-                  <h3 className="text-lg font-bold text-white mb-2">Dr. Neville Campbell</h3>
-                  <p className="text-teal text-sm font-semibold mb-2">MD, MBA, CEO, Philanthropist, Author, Professor & IFBB Pro Athlete</p>
-                  <p className="text-white/60 text-sm">A powerhouse at the intersection of medicine, business, and elite athletic performance.</p>
+      <h3 className="text-lg font-bold text-white mb-2">Jewel Huizinga</h3>
+              <p className="text-teal text-sm font-semibold mb-2">Expert in Aging Biology</p>
+              <p className="text-white/60 text-sm">Pioneering research and practical strategies for reversing aging at the cellular level.</p>
                 </div>
               </div>
             </div>
@@ -463,7 +445,7 @@ function PlanSection() {
     {
       num: "1",
       title: "The Biology of Aging",
-      speaker: "Dr. Neville Campbell",
+      speaker: "Jewel Huizinga",
       outcomes: ["Understand why you age faster than you should", "Discover the 3 biological switches that control aging", "Learn the science-backed interventions that work"],
     },
     {
@@ -531,14 +513,14 @@ function PlanSection() {
 /* ─── IRRESISTIBLE OFFER SECTION (Russell Brunson Framework) ─── */
 function IrresistibleOfferSection({ onGetStarted }: { onGetStarted: () => void }) {
   const includes = [
-    "10+ hours of live expert training (recorded for lifetime access)",
+    "9+ hours of live expert training",
     "Networking with 120+ like-minded health-conscious attendees",
     "Exclusive speaker resources (downloadable guides, checklists, protocols)",
     "30-day post-summit email sequence with daily action steps",
-    "Private community access for 3 months (General & VIP only)",
-    "Breakfast, lunch & snacks (General & VIP only)",
-    "Expo hall access with cutting-edge health vendors (General & VIP only)",
-    "After-event networking social (General & VIP only)",
+    "Private community access for 3 months",
+    "Breakfast, lunch & snacks",
+    "Expo hall access with cutting-edge health vendors",
+    "After-event networking social",
   ];
 
   return (
@@ -730,7 +712,7 @@ function FinalCTASection({ onGetStarted }: { onGetStarted: () => void }) {
             Don't Let Another Day Go By Feeling Tired & Stuck
           </h2>
           <p className="text-xl text-white/80 mb-8">
-            Join 150 people transforming their health this June. Early bird pricing ends April 24. Only 47 seats remaining.
+            Join 150 people transforming their health this June. Early bird pricing ends April 24.
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center mb-8">
@@ -749,7 +731,7 @@ function FinalCTASection({ onGetStarted }: { onGetStarted: () => void }) {
           </div>
 
           <p className="text-white/60 text-sm">
-            100% Satisfaction Guarantee • 7-Day Money-Back Guarantee • Lifetime Access to Recordings
+            100% Satisfaction Guarantee
           </p>
         </AnimatedSection>
       </div>
@@ -766,7 +748,10 @@ export default function Home() {
       {/* Navigation */}
       <nav className="fixed top-0 left-0 right-0 z-50 bg-charcoal/95 backdrop-blur border-b border-white/10">
         <div className="container mx-auto px-4 py-4 flex items-center justify-between">
-          <img src={LOGO_IMG} alt="Logo" className="h-8" />
+          <div className="flex items-center gap-3">
+            <img src={LOGO_IMG} alt="Logo" className="h-8" />
+            <span className="text-white font-bold text-lg">Optimal Health Summit 2026</span>
+          </div>
           <button
             onClick={() => setTicketModalOpen(true)}
             className="px-6 py-2 bg-gold text-charcoal font-bold rounded-lg hover:bg-gold/90 transition-all"
@@ -782,7 +767,6 @@ export default function Home() {
       <GuideSection />
       <PlanSection />
       <IrresistibleOfferSection onGetStarted={() => setTicketModalOpen(true)} />
-      <SocialProofSection />
       <FAQSection />
       <FinalCTASection onGetStarted={() => setTicketModalOpen(true)} />
 

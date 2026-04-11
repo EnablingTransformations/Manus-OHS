@@ -1051,9 +1051,7 @@ function Footer() {
           <div className="bg-charcoal border border-white/10 rounded-xl max-w-2xl max-h-[80vh] overflow-y-auto p-8">
             <h3 className="text-4xl font-bold text-white mb-4">Refund and Cancellation Policy</h3>
             <div className="text-white/70 space-y-4 text-sm">
-              <p><strong>Cancellation and refund policy:</strong></p>
-              <p>All tickets are fully refundable up to 7 days before the event. However, if you have any concerns or need assistance, please contact us by responding to the ticket purchase confirmation email. Take advantage of the lower ticket prices now before they sell out or go up — completely risk-free.</p>
-              <p><strong>All tickets include a 100% satisfaction guarantee:</strong></p>
+              <p><strong>100% Satisfaction Guarantee</strong></p>
               <p>Attend the entire summit. If you don't feel like it was worth your investment, we'll refund 100% of your ticket price within 7 days. No questions asked.</p>
             </div>
             <button onClick={() => setShowRefundPolicy(false)} className="mt-6 w-full bg-teal hover:bg-teal-dark text-charcoal font-bold py-2 rounded-lg transition-all">

@@ -78,3 +78,4 @@
 - [x] Fix all identified grammar/spelling/performance issues
 - [x] Convert speakers grid to horizontal carousel
 - [x] Fix grammar/spelling/content inconsistencies found in audit
+- [x] Update refund/cancellation policy popup to match accurate text: 100% Satisfaction Guarantee

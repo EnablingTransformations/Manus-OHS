@@ -53,7 +53,7 @@ export default function ThankYou() {
   const handleShare = () => {
     const shareData = {
       title: "Optimal Health Summit 2026",
-      text: "Join me at the Optimal Health Summit 2026! Transform your health in one day. Limited to 150 seats only.",
+      text: "Join me at the Optimal Health Summit 2026! Transform your health in one day. Limited to 120+ seats only.",
       url: window.location.origin,
     };
 

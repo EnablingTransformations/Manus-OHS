@@ -73,3 +73,8 @@
 - [ ] Edit Nick speaker photo (looks bad, needs manual adjustment)
 - [ ] Edit Elena speaker photo (looks bad, needs manual adjustment)
 - [x] Restore original images (about, vendor, networking, speaker headshots) into StoryBrand redesign sections
+- [x] Audit website for grammar, spelling, and dictation errors
+- [x] Audit website for performance and loading speed issues
+- [x] Fix all identified grammar/spelling/performance issues
+- [x] Convert speakers grid to horizontal carousel
+- [x] Fix grammar/spelling/content inconsistencies found in audit

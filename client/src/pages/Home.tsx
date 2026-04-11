@@ -9,6 +9,8 @@ import { useEffect, useRef, useState } from "react";
 import { useForm, ValidationError } from '@formspree/react';
 import { motion, useInView } from "framer-motion";
 import { trpc } from "@/lib/trpc";
+import { Carousel, CarouselContent, CarouselItem, CarouselPrevious, CarouselNext } from "@/components/ui/carousel";
+import Autoplay from "embla-carousel-autoplay";
 
 // Declare fbq for Facebook Pixel
 declare global {
@@ -348,7 +350,7 @@ function Hero({ onGetStarted }: { onGetStarted: () => void }) {
             </div>
             <div className="flex items-center gap-2">
               <Clock className="w-5 h-5 text-teal" />
-              <span>9:00 AM – 6:00 PM PDT</span>
+              <span>8:30 AM – 6:30 PM PDT</span>
             </div>
             <div className="flex items-center gap-2">
               <MapPin className="w-5 h-5 text-teal" />
@@ -424,7 +426,7 @@ function ProblemSection() {
 }
 
 /* ═══════════════════════════════════════════════════════════════
-   SECTION 3: GUIDE (StoryBrand: The Guide — Speakers with Photos)
+   SECTION 3: GUIDE (StoryBrand: The Guide — Speakers Horizontal Carousel)
    ═══════════════════════════════════════════════════════════════ */
 function GuideSection() {
   return (
@@ -440,29 +442,41 @@ function GuideSection() {
           </p>
         </AnimatedSection>
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
-          {SPEAKERS.map((speaker, i) => (
-            <AnimatedSection key={i} delay={i * 0.06}>
-              <div className="bg-charcoal-light border border-white/8 rounded-xl overflow-hidden hover:border-teal/30 transition-all duration-300 hover:-translate-y-1 group h-full flex flex-col">
-                <div className="relative w-full aspect-square overflow-hidden bg-charcoal">
-                  <img
-                    src={speaker.photo}
-                    alt={speaker.name}
-                    className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500"
-                    loading="lazy"
-                    width="200"
-                    height="200"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-charcoal-light via-transparent to-transparent"></div>
-                </div>
-                <div className="p-5 flex flex-col flex-grow">
-                  <h3 className="text-lg font-bold text-white mb-1">{speaker.name}</h3>
-                  <p className="text-teal text-xs font-semibold mb-2 leading-snug">{speaker.role}</p>
-                  <p className="text-white/60 text-sm leading-relaxed flex-grow">{speaker.description}</p>
-                </div>
-              </div>
-            </AnimatedSection>
-          ))}
+        <div className="max-w-6xl mx-auto">
+          <Carousel
+            opts={{ align: "start", loop: true }}
+            plugins={[Autoplay({ delay: 3500, stopOnInteraction: true })]}
+            className="w-full"
+          >
+            <CarouselContent className="-ml-4">
+              {SPEAKERS.map((speaker, i) => (
+                <CarouselItem key={i} className="pl-4 basis-full sm:basis-1/2 lg:basis-1/4">
+                  <div className="bg-charcoal-light border border-white/8 rounded-xl overflow-hidden hover:border-teal/30 transition-all duration-300 hover:-translate-y-1 group h-full flex flex-col">
+                    <div className="relative w-full aspect-square overflow-hidden bg-charcoal">
+                      <img
+                        src={speaker.photo}
+                        alt={speaker.name}
+                        className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500"
+                        loading="lazy"
+                        width="200"
+                        height="200"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-charcoal-light via-transparent to-transparent"></div>
+                    </div>
+                    <div className="p-5 flex flex-col flex-grow">
+                      <h3 className="text-lg font-bold text-white mb-1">{speaker.name}</h3>
+                      <p className="text-teal text-xs font-semibold mb-2 leading-snug">{speaker.role}</p>
+                      <p className="text-white/60 text-sm leading-relaxed flex-grow">{speaker.description}</p>
+                    </div>
+                  </div>
+                </CarouselItem>
+              ))}
+            </CarouselContent>
+            <div className="flex justify-center gap-4 mt-8">
+              <CarouselPrevious className="static translate-y-0 bg-charcoal-light border-white/20 text-white hover:bg-teal/20 hover:border-teal/50 hover:text-teal" />
+              <CarouselNext className="static translate-y-0 bg-charcoal-light border-white/20 text-white hover:bg-teal/20 hover:border-teal/50 hover:text-teal" />
+            </div>
+          </Carousel>
         </div>
       </div>
     </section>
@@ -839,7 +853,7 @@ function ScheduleSection() {
         <AnimatedSection className="max-w-3xl mx-auto text-center mt-12">
           <div className="bg-gradient-to-r from-teal/10 to-gold/10 border border-teal/30 rounded-xl p-8">
             <p className="text-white/80 mb-4">
-              <span className="font-bold text-teal">Note:</span> This is a full-day event with breaks built in for networking, meals, and vendor exploration. Virtual attendees will receive live streaming of all sessions and lifetime access to recordings.
+              <span className="font-bold text-teal">Note:</span> This is a full-day event with breaks built in for networking, meals, and vendor exploration. Virtual attendees will receive live streaming of all sessions.
             </p>
           </div>
         </AnimatedSection>
@@ -860,7 +874,7 @@ function FAQSection() {
     { q: "How do I know this will actually work for me?", a: "We offer a 100% Satisfaction Guarantee. Attend the entire summit, and if you don't feel it was worth your investment, we'll refund your ticket price within 7 days. We're confident in the value we deliver." },
     { q: "What's the refund policy?", a: "You have 7 days after the summit to request a full refund if you're not satisfied. We also offer a 100% satisfaction guarantee—if you don't see value, you get your money back." },
     { q: "Can I access the recordings after the summit?", a: "Yes! All attendees get lifetime access to the recordings. You can watch them as many times as you want, share them with friends, and refer back to them whenever you need." },
-    { q: "Will I get support after the summit?", a: "Yes! All ticket holders receive a 30-day email sequence with daily action steps. General and VIP attendees also get 3 months of private community access where you can ask questions and connect with other attendees." },
+    { q: "Will I get support after the summit?", a: "Yes! All ticket holders receive a 30-day email sequence with daily action steps. Attendees also get 3 months of private community access where you can ask questions and connect with other attendees." },
   ];
 
   return (
@@ -1038,7 +1052,7 @@ function Footer() {
             <h3 className="text-4xl font-bold text-white mb-4">Refund and Cancellation Policy</h3>
             <div className="text-white/70 space-y-4 text-sm">
               <p><strong>Cancellation and refund policy:</strong></p>
-              <p>All tickets are fully refundable up to 7 days before the event. However, if you have any concerns or need assistance, please contact us by responding to the ticket purchase confirmation email. Take advantage of the lower ticket prices now before they sell out or go up — completely risk free.</p>
+              <p>All tickets are fully refundable up to 7 days before the event. However, if you have any concerns or need assistance, please contact us by responding to the ticket purchase confirmation email. Take advantage of the lower ticket prices now before they sell out or go up — completely risk-free.</p>
               <p><strong>All tickets include a 100% satisfaction guarantee:</strong></p>
               <p>Attend the entire summit. If you don't feel like it was worth your investment, we'll refund 100% of your ticket price within 7 days. No questions asked.</p>
             </div>

@@ -798,18 +798,18 @@ function AttendeeTestimonials() {
    ═══════════════════════════════════════════════════════════════ */
 function ScheduleSection() {
   const scheduleItems = [
-    { time: "8:30 AM", title: "Registration & Breakfast", description: "Check-in, network with attendees, enjoy a nutritious breakfast", speaker: "", icon: "☕" },
-    { time: "9:30 AM", title: "Opening Keynote: The Biology of Aging", description: "Discover the 3 biological switches that control aging and what you can do about them today", speaker: "Joel Huizinga", icon: "🧬" },
-    { time: "10:30 AM", title: "Optimize Your Hormones for Peak Performance", description: "Learn how to naturally balance your hormones to boost energy, metabolism, and vitality", speaker: "Dr. Nick Delgado", icon: "⚡" },
-    { time: "11:30 AM", title: "Break & Networking", description: "Connect with speakers and fellow attendees in the expo hall", speaker: "", icon: "🤝" },
-    { time: "12:00 PM", title: "Nutrition Secrets from the World's Healthiest Cultures", description: "Practical dietary strategies that have kept populations healthy for generations", speaker: "Dr. Mark Hyman", icon: "🥗" },
-    { time: "1:00 PM", title: "Lunch & Expo Hall", description: "Enjoy lunch while exploring cutting-edge health vendors and products", speaker: "", icon: "🍽️" },
-    { time: "2:00 PM", title: "Biohacking Your Sleep for Recovery & Longevity", description: "Science-backed strategies to improve sleep quality and accelerate cellular repair", speaker: "Joel Huizinga", icon: "😴" },
-    { time: "3:00 PM", title: "Exercise & Movement for Longevity", description: "The most effective exercise protocols for building strength, flexibility, and living longer", speaker: "Dr. Nick Delgado", icon: "💪" },
-    { time: "4:00 PM", title: "Break & Expo", description: "Recharge and explore vendor booths", speaker: "", icon: "🔄" },
-    { time: "4:30 PM", title: "Mental Health & Stress Mastery", description: "Proven techniques to reduce stress, improve mental clarity, and build emotional resilience", speaker: "Jill Wheaton", icon: "🧠" },
-    { time: "5:30 PM", title: "Panel Discussion: Your Questions Answered", description: "Direct Q&A with all speakers about health, aging, and your personal wellness journey", speaker: "All Speakers", icon: "🎤" },
-    { time: "6:30 PM", title: "After-Event Networking Social", description: "Connect with speakers, vendors, and fellow health enthusiasts in a relaxed setting", speaker: "", icon: "🎉" },
+    { time: "8:30 AM", title: "Registration & Breakfast", description: "Check-in, network with attendees, enjoy a nutritious breakfast", icon: "☕" },
+    { time: "9:30 AM", title: "Opening Keynote: The Biology of Aging", description: "Discover the 3 biological switches that control aging and what you can do about them today", icon: "🧬" },
+    { time: "10:30 AM", title: "Optimize Your Hormones for Peak Performance", description: "Learn how to naturally balance your hormones to boost energy, metabolism, and vitality", icon: "⚡" },
+    { time: "11:30 AM", title: "Break & Networking", description: "Connect with speakers and fellow attendees in the expo hall", icon: "🤝" },
+    { time: "12:00 PM", title: "Nutrition Secrets from the World's Healthiest Cultures", description: "Practical dietary strategies that have kept populations healthy for generations", icon: "🥗" },
+    { time: "1:00 PM", title: "Lunch & Expo Hall", description: "Enjoy lunch while exploring cutting-edge health vendors and products", icon: "🍽️" },
+    { time: "2:00 PM", title: "Biohacking Your Sleep for Recovery & Longevity", description: "Science-backed strategies to improve sleep quality and accelerate cellular repair", icon: "😴" },
+    { time: "3:00 PM", title: "Exercise & Movement for Longevity", description: "The most effective exercise protocols for building strength, flexibility, and living longer", icon: "💪" },
+    { time: "4:00 PM", title: "Break & Expo", description: "Recharge and explore vendor booths", icon: "🔄" },
+    { time: "4:30 PM", title: "Mental Health & Stress Mastery", description: "Proven techniques to reduce stress, improve mental clarity, and build emotional resilience", icon: "🧠" },
+    { time: "5:30 PM", title: "Panel Discussion: Your Questions Answered", description: "Direct Q&A with all speakers about health, aging, and your personal wellness journey", icon: "🎤" },
+    { time: "6:30 PM", title: "After-Event Networking Social", description: "Connect with speakers, vendors, and fellow health enthusiasts in a relaxed setting", icon: "🎉" },
   ];
 
   return (
@@ -839,9 +839,7 @@ function ScheduleSection() {
                     <div className="flex-grow">
                       <h3 className="text-lg font-bold text-white mb-2">{item.title}</h3>
                       <p className="text-white/70 mb-2">{item.description}</p>
-                      {item.speaker && (
-                        <p className="text-teal text-sm font-semibold">Speaker: {item.speaker}</p>
-                      )}
+
                     </div>
                   </div>
                 </div>
@@ -1051,7 +1049,9 @@ function Footer() {
           <div className="bg-charcoal border border-white/10 rounded-xl max-w-2xl max-h-[80vh] overflow-y-auto p-8">
             <h3 className="text-4xl font-bold text-white mb-4">Refund and Cancellation Policy</h3>
             <div className="text-white/70 space-y-4 text-sm">
-              <p><strong>100% Satisfaction Guarantee</strong></p>
+              <p><strong>Cancellation and refund policy:</strong></p>
+              <p>All tickets are fully refundable up to 7 days before the event. However, if you have any concerns or need assistance, please contact us by responding to the ticket purchase confirmation email. Take advantage of the lower ticket prices now before they sell out or go up — completely risk-free.</p>
+              <p><strong>All tickets include a 100% satisfaction guarantee:</strong></p>
               <p>Attend the entire summit. If you don't feel like it was worth your investment, we'll refund 100% of your ticket price within 7 days. No questions asked.</p>
             </div>
             <button onClick={() => setShowRefundPolicy(false)} className="mt-6 w-full bg-teal hover:bg-teal-dark text-charcoal font-bold py-2 rounded-lg transition-all">
@@ -1147,7 +1147,7 @@ export default function Home() {
       <PlanSection />
       <IrresistibleOfferSection onGetStarted={() => setTicketModalOpen(true)} />
       <Testimonials />
-      <AttendeeTestimonials />
+
       <ScheduleSection />
       <FAQSection />
       <FinalCTASection onGetStarted={() => setTicketModalOpen(true)} />

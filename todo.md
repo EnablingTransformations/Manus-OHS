@@ -79,3 +79,6 @@
 - [x] Convert speakers grid to horizontal carousel
 - [x] Fix grammar/spelling/content inconsistencies found in audit
 - [x] Update refund/cancellation policy popup to match accurate text: 100% Satisfaction Guarantee
+- [x] Remove speaker names from the agenda/schedule section
+- [x] Remove Attendee Success Stories section entirely
+- [x] Fix refund and cancellation policy to be accurate

@@ -644,10 +644,7 @@ function IrresistibleOfferSection({ onGetStarted }: { onGetStarted: () => void }
               <Shield className="w-12 h-12 text-gold mx-auto mb-4" />
               <h3 className="text-2xl font-bold text-white mb-2">100% Satisfaction Guarantee</h3>
               <p className="text-white/80 mb-4">
-                Attend the entire summit. If you don't feel like it was worth your investment, we'll refund 100% of your ticket price within 7 days. No questions asked.
-              </p>
-              <p className="text-white/60 text-sm">
-                That's how confident we are that this will transform your life.
+                Check in on time and attend at least the first 3 hours to experience enough of the event to fairly evaluate its value. And if you feel the event isn't worth your time, you must speak with Sid (the host) in person before leaving, and before the lunch break or 1pm, and you will receive a full refund.
               </p>
             </div>
 
@@ -869,8 +866,8 @@ function FAQSection() {
   const faqs = [
     { q: "Is this for me if I'm not a health expert?", a: "Absolutely! This summit is designed for anyone who wants to feel better, have more energy, and live a healthier life. You don't need any prior knowledge. The speakers will explain everything in practical, easy-to-understand terms." },
     { q: "What if I can't attend in person?", a: "No problem! We offer a Virtual Ticket that includes live streaming of all sessions plus lifetime access to recordings. You'll get everything except the in-person networking and meals." },
-    { q: "How do I know this will actually work for me?", a: "We offer a 100% Satisfaction Guarantee. Attend the entire summit, and if you don't feel it was worth your investment, we'll refund your ticket price within 7 days. We're confident in the value we deliver." },
-    { q: "What's the refund policy?", a: "You have 7 days after the summit to request a full refund if you're not satisfied. We also offer a 100% satisfaction guarantee—if you don't see value, you get your money back." },
+    { q: "How do I know this will actually work for me?", a: "We offer a 100% Satisfaction Guarantee. Check in on time and attend at least the first 3 hours. If you feel the event isn't worth your time, speak with Sid (the host) in person before the lunch break or 1pm and you will receive a full refund." },
+    { q: "What's the refund policy?", a: "All tickets are fully refundable up to 7 days before the event. After that, tickets can be transferred to a different person. We also offer a 100% Satisfaction Guarantee — check in on time, attend at least the first 3 hours, and if you feel it isn't worth your time, speak with Sid (the host) before 1pm for a full refund." },
     { q: "Can I access the recordings after the summit?", a: "Yes! All attendees get lifetime access to the recordings. You can watch them as many times as you want, share them with friends, and refer back to them whenever you need." },
     { q: "Will I get support after the summit?", a: "Yes! All ticket holders receive a 30-day email sequence with daily action steps. Attendees also get 3 months of private community access where you can ask questions and connect with other attendees." },
   ];
@@ -956,7 +953,7 @@ function FinalCTASection({ onGetStarted }: { onGetStarted: () => void }) {
           </div>
 
           <p className="text-white/60 text-sm">
-            <span className="font-bold text-teal">100% Satisfaction Guarantee:</span> Attend the entire summit. If you don't feel like it was worth your investment, we'll refund 100% of your ticket price within 7 days. No questions asked.
+            <span className="font-bold text-teal">100% Satisfaction Guarantee:</span> Check in on time and attend at least the first 3 hours. If you feel the event isn't worth your time, speak with Sid (the host) before 1pm and you will receive a full refund.
           </p>
         </AnimatedSection>
       </div>
@@ -1049,10 +1046,12 @@ function Footer() {
           <div className="bg-charcoal border border-white/10 rounded-xl max-w-2xl max-h-[80vh] overflow-y-auto p-8">
             <h3 className="text-4xl font-bold text-white mb-4">Refund and Cancellation Policy</h3>
             <div className="text-white/70 space-y-4 text-sm">
-              <p><strong>Cancellation and refund policy:</strong></p>
-              <p>All tickets are fully refundable up to 7 days before the event. However, if you have any concerns or need assistance, please contact us by responding to the ticket purchase confirmation email. Take advantage of the lower ticket prices now before they sell out or go up — completely risk-free.</p>
-              <p><strong>All tickets include a 100% satisfaction guarantee:</strong></p>
-              <p>Attend the entire summit. If you don't feel like it was worth your investment, we'll refund 100% of your ticket price within 7 days. No questions asked.</p>
+              <p><strong>Refund and Cancellation Policy</strong></p>
+              <p>All tickets are fully refundable up to 7 days before the event. However, if you have any concerns or need assistance, please contact us by responding to the ticket purchase confirmation email. Take advantage of the lower ticket prices now before they sell out or go up — completely risk free.</p>
+              <p><strong>Ticket Transfers</strong></p>
+              <p>After the 7 days before the event, tickets can be transferred to a different person.</p>
+              <p><strong>100% Satisfaction Guarantee</strong></p>
+              <p>Check in on time and attend at least the first 3 hours to experience enough of the event to fairly evaluate its value. And if you feel the event isn't worth your time, you must speak with Sid (the host) in person before leaving, and before the lunch break or 1pm, and you will receive a full refund.</p>
             </div>
             <button onClick={() => setShowRefundPolicy(false)} className="mt-6 w-full bg-teal hover:bg-teal-dark text-charcoal font-bold py-2 rounded-lg transition-all">
               Close

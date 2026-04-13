@@ -85,3 +85,4 @@
 - [x] Update refund policy popup with exact user-provided wording (3 sections: Refund, Transfers, Guarantee)
 - [x] Remove all old satisfaction guarantee text from other sections on the page
 - [x] Ensure speaker names are removed from agenda
+- [x] Remove SMS discount popup from the website

@@ -145,26 +145,11 @@ function TicketModal({ open, onClose }: { open: boolean; onClose: () => void }) 
   ];
 
   const [loadingId, setLoadingId] = useState<string | null>(null);
-  const [phoneNumber, setPhoneNumber] = useState("");
-  const [optInSms, setOptInSms] = useState(false);
   const createCheckout = trpc.stripe.createCheckoutSession.useMutation();
 
   const handleBuy = async (ticketId: "virtual" | "general" | "vip") => {
     setLoadingId(ticketId);
     try {
-      if (optInSms && phoneNumber) {
-        const digitsOnly = phoneNumber.replace(/\D/g, '');
-        if (digitsOnly.length < 10 || digitsOnly.length > 11) {
-          alert('Please enter a valid phone number');
-          setLoadingId(null);
-          return;
-        }
-      } else if (optInSms && !phoneNumber) {
-        alert('Please enter your phone number to receive the SMS discount');
-        setLoadingId(null);
-        return;
-      }
-
       if (window.fbq) {
         const priceMap = { virtual: 49, general: 97, vip: 247 };
         window.fbq('track', 'AddToCart', {
@@ -184,7 +169,7 @@ function TicketModal({ open, onClose }: { open: boolean; onClose: () => void }) 
       
       onClose();
       
-      const result = await createCheckout.mutateAsync({ ticketId, origin: window.location.origin, phoneNumber, optInSms });
+      const result = await createCheckout.mutateAsync({ ticketId, origin: window.location.origin });
       if (result.url) {
         window.open(result.url, '_blank', 'width=600,height=700,resizable=yes,scrollbars=yes');
       }
@@ -255,27 +240,7 @@ function TicketModal({ open, onClose }: { open: boolean; onClose: () => void }) 
           ))}
         </div>
 
-        <div className="bg-charcoal-light border border-white/10 rounded-xl p-6">
-          <h3 className="text-white font-bold mb-4">Get 10% Off with SMS</h3>
-          <div className="space-y-3">
-            <input
-              type="tel"
-              placeholder="Enter your phone number"
-              value={phoneNumber}
-              onChange={(e) => setPhoneNumber(e.target.value)}
-              className="w-full px-4 py-2 bg-charcoal border border-white/10 rounded-lg text-white placeholder-white/30 focus:outline-none focus:border-teal"
-            />
-            <label className="flex items-center gap-2 cursor-pointer">
-              <input
-                type="checkbox"
-                checked={optInSms}
-                onChange={(e) => setOptInSms(e.target.checked)}
-                className="w-4 h-4 rounded border-white/30"
-              />
-              <span className="text-white/70 text-sm">Yes, send me the 10% discount code via SMS</span>
-            </label>
-          </div>
-        </div>
+
       </div>
     </div>
   );

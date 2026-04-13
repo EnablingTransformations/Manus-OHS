@@ -12,8 +12,6 @@ const Referral = lazy(() => import("./pages/Referral"));
 const AdminDashboard = lazy(() => import("./pages/AdminDashboard"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 
-// Lazy-load the discount popup — it has an 8s delay anyway, no need to block initial render
-const DiscountPopup = lazy(() => import("./components/DiscountPopup"));
 
 function Router() {
   return (
@@ -37,9 +35,6 @@ function App() {
         <TooltipProvider>
           <Toaster />
           <Router />
-          <Suspense fallback={null}>
-            <DiscountPopup />
-          </Suspense>
         </TooltipProvider>
       </ThemeProvider>
     </ErrorBoundary>

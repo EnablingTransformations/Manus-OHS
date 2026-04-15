@@ -125,7 +125,7 @@ function TicketModal({ open, onClose }: { open: boolean; onClose: () => void }) 
     {
       name: "Full Immersion",
       id: "general" as const,
-      price: "$97",
+      price: "$149",
       badge: "5 Left",
       highlight: true,
       note: "Early access pricing until Apr 24",
@@ -135,7 +135,7 @@ function TicketModal({ open, onClose }: { open: boolean; onClose: () => void }) 
     {
       name: "Complete Transformation",
       id: "vip" as const,
-      price: "$247",
+      price: "$349",
       badge: "2 Left",
       highlight: false,
       note: "Early access pricing until Apr 24",
@@ -151,7 +151,7 @@ function TicketModal({ open, onClose }: { open: boolean; onClose: () => void }) 
     setLoadingId(ticketId);
     try {
       if (window.fbq) {
-        const priceMap = { virtual: 49, general: 97, vip: 247 };
+        const priceMap = { virtual: 49, general: 149, vip: 349 };
         window.fbq('track', 'AddToCart', {
           content_name: `${ticketId.charAt(0).toUpperCase() + ticketId.slice(1)} Ticket`,
           content_type: 'ticket',
@@ -604,14 +604,7 @@ function IrresistibleOfferSection({ onGetStarted }: { onGetStarted: () => void }
               </div>
             </div>
 
-            {/* Satisfaction Guarantee */}
-            <div className="bg-charcoal/50 border-2 border-gold/50 rounded-xl p-8 mb-8 text-center">
-              <Shield className="w-12 h-12 text-gold mx-auto mb-4" />
-              <h3 className="text-2xl font-bold text-white mb-2">100% Satisfaction Guarantee</h3>
-              <p className="text-white/80 mb-4">
-                Check in on time and attend at least the first 3 hours to experience enough of the event to fairly evaluate its value. And if you feel the event isn't worth your time, you must speak with Sid (the host) in person before leaving, and before the lunch break or 1pm, and you will receive a full refund.
-              </p>
-            </div>
+
 
             <div className="text-center">
               <button
@@ -917,9 +910,7 @@ function FinalCTASection({ onGetStarted }: { onGetStarted: () => void }) {
             </button>
           </div>
 
-          <p className="text-white/60 text-sm">
-            <span className="font-bold text-teal">100% Satisfaction Guarantee:</span> Check in on time and attend at least the first 3 hours. If you feel the event isn't worth your time, speak with Sid (the host) before 1pm and you will receive a full refund.
-          </p>
+
         </AnimatedSection>
       </div>
     </section>

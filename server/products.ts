@@ -28,7 +28,7 @@ export const TICKET_PRODUCTS: TicketProduct[] = [
     id: "general",
     name: "Advanced Access General",
     description: "Full in-person access to the Optimal Health Summit 2026",
-    priceInCents: 9700,
+    priceInCents: 14900,
     badge: "5 Left",
     features: [
       "Nutritious breakfast, lunch & snacks",
@@ -42,7 +42,7 @@ export const TICKET_PRODUCTS: TicketProduct[] = [
     id: "vip",
     name: "Advanced Access VIP",
     description: "Premium VIP experience at the Optimal Health Summit 2026",
-    priceInCents: 24700,
+    priceInCents: 34900,
     badge: "2 Left",
     features: [
       "Everything in Advanced Access General",

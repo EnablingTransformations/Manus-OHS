@@ -89,3 +89,4 @@
 - [x] Update General Admission price to $149 and VIP to $349 everywhere including Stripe
 - [x] Remove old "100% Satisfaction Guarantee... Attend the entire summit..." text from page sections
 - [x] Update Referral.tsx price from $97 to $149
+- [x] Update VIP price from $349 to $397 everywhere (Home.tsx, products.ts, stripeRouter.ts, index.html)

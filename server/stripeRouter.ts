@@ -151,7 +151,7 @@ export function registerStripeWebhook(app: Application) {
           const ticketPrices: Record<string, number> = {
             virtual: 49,
             general: 149,
-            vip: 349,
+            vip: 397,
           };
           const ticketId = session.metadata?.ticket_id || "unknown";
           const price = ticketPrices[ticketId] || 0;

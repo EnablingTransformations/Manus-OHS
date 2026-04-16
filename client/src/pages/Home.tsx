@@ -135,7 +135,7 @@ function TicketModal({ open, onClose }: { open: boolean; onClose: () => void }) 
     {
       name: "Complete Transformation",
       id: "vip" as const,
-      price: "$349",
+      price: "$397",
       badge: "2 Left",
       highlight: false,
       note: "Early access pricing until Apr 24",
@@ -151,7 +151,7 @@ function TicketModal({ open, onClose }: { open: boolean; onClose: () => void }) 
     setLoadingId(ticketId);
     try {
       if (window.fbq) {
-        const priceMap = { virtual: 49, general: 149, vip: 349 };
+        const priceMap = { virtual: 49, general: 149, vip: 397 };
         window.fbq('track', 'AddToCart', {
           content_name: `${ticketId.charAt(0).toUpperCase() + ticketId.slice(1)} Ticket`,
           content_type: 'ticket',

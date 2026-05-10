@@ -150,8 +150,8 @@ export function registerStripeWebhook(app: Application) {
           // Log Facebook Purchase event for tracking
           const ticketPrices: Record<string, number> = {
             virtual: 49,
-            general: 149,
-            vip: 397,
+            general: 197,
+            vip: 497,
           };
           const ticketId = session.metadata?.ticket_id || "unknown";
           const price = ticketPrices[ticketId] || 0;

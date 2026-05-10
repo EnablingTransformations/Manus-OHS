@@ -125,7 +125,7 @@ function TicketModal({ open, onClose }: { open: boolean; onClose: () => void }) 
     {
       name: "Full Immersion",
       id: "general" as const,
-      price: "$149",
+      price: "$197",
       badge: "5 Left",
       highlight: true,
       note: "Early access pricing until Apr 24",
@@ -135,7 +135,7 @@ function TicketModal({ open, onClose }: { open: boolean; onClose: () => void }) 
     {
       name: "Complete Transformation",
       id: "vip" as const,
-      price: "$397",
+      price: "$497",
       badge: "2 Left",
       highlight: false,
       note: "Early access pricing until Apr 24",
@@ -151,7 +151,7 @@ function TicketModal({ open, onClose }: { open: boolean; onClose: () => void }) 
     setLoadingId(ticketId);
     try {
       if (window.fbq) {
-        const priceMap = { virtual: 49, general: 149, vip: 397 };
+        const priceMap = { virtual: 49, general: 197, vip: 497 };
         window.fbq('track', 'AddToCart', {
           content_name: `${ticketId.charAt(0).toUpperCase() + ticketId.slice(1)} Ticket`,
           content_type: 'ticket',

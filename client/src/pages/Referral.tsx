@@ -227,7 +227,7 @@ export default function Referral() {
               How much do I earn per referral?
             </h3>
             <p className="text-white/60">
-              You earn 15% credit for every ticket purchased using your referral link. For example, a $149 ticket earns you $22.35 in credits.
+              You earn 15% credit for every ticket purchased using your referral link. For example, a $197 ticket earns you $29.55 in credits.
             </p>
           </div>
 
